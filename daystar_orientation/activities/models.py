@@ -7,7 +7,7 @@ class Activity(models.Model):
     start_time = models.TimeField()
     end_time = models.TimeField()
     venue = models.CharField(max_length=200)
-    photo = models.ImageField(upload_to='activity_photos/')
+    photo = models.ImageField(upload_to='activity_photos/', null=True, blank=True)
     video = models.FileField(upload_to='activity_videos/', null=True, blank=True)
 
     def __str__(self):
