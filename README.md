@@ -34,10 +34,10 @@ This repository contains the backend for the Daystar University's Orientation ap
 
 ## Usage
 
-- **View Events:** Access the events list at [http://localhost:8000/api/events/](http://localhost:8000/api/events/).
+- **View Events:** Access the events list at [http://localhost:8000/api/orientation/](http://localhost:8000/api/orientation/).
 - **View Activities:** Access the activities list at [http://localhost:8000/api/activities/](http://localhost:8000/api/activities/).
 - **View FAQs:** Access the FAQs list at [http://localhost:8000/api/faqs/](http://localhost:8000/api/faqs/).
-- **Add Events:** Use the POST method at [http://localhost:8000/api/events/](http://localhost:8000/api/events/) to add new events.
+- **Add Events:** Use the POST method at [http://localhost:8000/api/orientation/](http://localhost:8000/api/orientation/) to add new oreintation period.
 - **Add Activities:** Use the POST method at [http://localhost:8000/api/activities/](http://localhost:8000/api/activities/) to add new activities.
 - **Add FAQs:** Use the POST method at [http://localhost:8000/api/faqs/](http://localhost:8000/api/faqs/) to add new FAQs.
 - **Register Users:** Use the POST method at [http://localhost:8000/api/users/](http://localhost:8000/api/users/) to register new users.
