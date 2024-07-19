@@ -32,6 +32,11 @@ This repository contains the backend for the Daystar University's Orientation ap
     python manage.py runserver
     ```
 
+4. Create a superuser(admin) for the admin panel for a GUI on the CRUD operations(Optional):
+    ```bash
+    python manage.py createsuperuser
+    ```
+
 ## Usage
 
 - **Django Admin:** Access the admin panel at [http://localhost:8000/admin/](http://localhost:8000/admin/).
