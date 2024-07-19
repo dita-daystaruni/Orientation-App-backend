@@ -28,10 +28,11 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'orientation',
-    'users',
+    'account',
     'djoser',
     'faqs',
     'activities',
+    'events',
 ]
 
 MIDDLEWARE = [
@@ -65,8 +66,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'daystar_orientation.wsgi.application'
-
-AUTH_USER_MODEL = 'users.User'
 
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000',

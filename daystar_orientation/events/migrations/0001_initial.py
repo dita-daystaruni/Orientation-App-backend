@@ -12,12 +12,17 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Activity',
+            name='Event',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('title', models.CharField(max_length=200)),
                 ('description', models.TextField()),
-                ('time', models.TimeField()),
+                ('date', models.DateTimeField()),
+                ('start_time', models.TimeField()),
+                ('end_time', models.TimeField()),
+                ('venue', models.CharField(max_length=200)),
+                ('photo', models.ImageField(blank=True, null=True, upload_to='activity_photos/')),
+                ('video', models.FileField(blank=True, null=True, upload_to='activity_videos/')),
             ],
         ),
     ]
