@@ -13,7 +13,7 @@ class Account(AbstractUser):
     course = models.CharField(max_length=100, null=True, blank=True)
     phone_number = models.CharField(max_length=15, null=True, blank=True)
     email = models.EmailField(unique=True, null=True, blank=True)
-    #parent = models.ForeignKey('self', on_delete=models.SET_NULL, null=True, blank=True, related_name='children')
+    email_verified = models.BooleanField(default=False)
 
 
     groups = models.ManyToManyField(
