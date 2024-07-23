@@ -1,6 +1,7 @@
 from django.db import models
 
 class Orientation(models.Model):
+    '''Orientation model'''
     title = models.CharField(max_length=200)
     description = models.TextField()
     start_date = models.DateField()
@@ -11,3 +12,7 @@ class Orientation(models.Model):
 
     def __str__(self):
         return self.description
+    
+    class Meta:
+        '''Meta class for the model'''
+        pass

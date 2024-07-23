@@ -1,4 +1,4 @@
-# Daystar University Events and Activities Backend
+# Daystar University Orientation App Backend
 
 This repository contains the backend for the Daystar University's Orientation application. The application allows users to view events, activities, and FAQs, and also allows administrators to manage these resources.
 
