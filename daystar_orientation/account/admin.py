@@ -7,7 +7,7 @@ class AccountAdmin(UserAdmin):
     model = Account
     list_display = ['username', 'email', 'name', 'user_type']
     fieldsets = UserAdmin.fieldsets + (
-        (None, {'fields': ('user_type', 'parent')}),
+        (None, {'fields': ('user_type',)}),
     )
 
     def get_queryset(self, request):
