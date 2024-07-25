@@ -14,8 +14,8 @@ from django.core.mail import send_mail
 from django.conf import settings
 
 class PasswordResetRequestView(generics.GenericAPIView):
-    '''Send a password reset link to the user's email; anybody can access this view.'''
-    permission_classes = [AllowAny]
+    '''Send a password reset link to the user's email'''
+    permission_classes = [IsAuthenticated]
 
     def post(self, request):
         email = request.data.get('email')
@@ -39,7 +39,7 @@ class PasswordResetRequestView(generics.GenericAPIView):
 
 class PasswordResetConfirmView(generics.GenericAPIView):
     '''Reset the user's password using the token sent to their email for any user.'''
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
 
     def post(self, request, uidb64, token):
         try:
@@ -110,8 +110,9 @@ class AccountList(generics.ListCreateAPIView):
 
     #  send a confirmation email after account creation
     # def perform_create(self, serializer):
+    #     '''Saves the new user and sends a confirmation email.'''
     #     user = serializer.save()
-    #     send_confirmation_email(user)
+    #     #send_confirmation_email(user)
 
 class AccountDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Account.objects.all()

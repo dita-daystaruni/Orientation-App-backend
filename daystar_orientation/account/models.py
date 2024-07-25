@@ -4,14 +4,14 @@ from django.db import models
 class AccountManager(BaseUserManager):
     '''The user manager for the application'''
     
-    def create_user(self, email, name, admission_number, course, phone_number, user_type='regular', password=None):
+    def create_user(self, email, username, admission_number, course, phone_number, user_type='regular', password=None):
         '''Create a regular user'''
         if not admission_number:
             raise ValueError('Users must have an admission number')
         if not email:
             raise ValueError('Users must have an email address')
-        if not name:
-            raise ValueError('Users must have a name')
+        if not username:
+            raise ValueError('Users must have a user name')
         if not course:
             raise ValueError('Users must have a course')
 
@@ -21,7 +21,7 @@ class AccountManager(BaseUserManager):
 
         user = self.model(
             email=self.normalize_email(email),
-            name=name,
+            username=username,
             admission_number=admission_number,
             course=course,
             phone_number=phone_number,
@@ -30,6 +30,24 @@ class AccountManager(BaseUserManager):
         user.set_password(password)
         user.save(using=self._db)
         return user
+
+    def create_superuser(self, email, username, admission_number, course, phone_number, password=None):
+        '''Create a superuser for the application'''
+        user = self.create_user(
+            email=email,
+            username=username,
+            admission_number=admission_number,
+            course=course,
+            phone_number=phone_number,
+            user_type='admin',
+            password=password
+        )
+        user.is_admin = True
+        user.is_staff = True
+        user.is_superuser = True
+        user.save(using=self._db)
+        return user
+    
 
 class Account(AbstractUser):
     '''The user model for the application '''
@@ -43,12 +61,15 @@ class Account(AbstractUser):
     USER_TYPE_CHOICES_DICT = dict(USER_TYPE_CHOICES)
 
     user_type = models.CharField(max_length=10, choices=USER_TYPE_CHOICES, default='regular')
-    name = models.CharField(max_length=100)
+    username = models.CharField(max_length=100, unique=True)
     admission_number = models.CharField(max_length=20, unique=True)
     course = models.CharField(max_length=100, null=True, blank=True)
     phone_number = models.CharField(max_length=15, null=True, blank=True)
     email = models.EmailField(unique=True)
     email_verified = models.BooleanField(default=False)
+
+    USERNAME_FIELD = 'admission_number'
+    REQUIRED_FIELDS = ['username', 'email', 'course', 'phone_number']
 
     objects = AccountManager()
 
@@ -67,8 +88,6 @@ class Account(AbstractUser):
         help_text=('Specific permissions for this user.'),
         verbose_name=('user permissions'),
     )
-   
-    REQUIRED_FIELDS = ['name', 'email', 'admission_number', 'course']
 
     def __str__(self):
-        return self.name
+        return self.username
