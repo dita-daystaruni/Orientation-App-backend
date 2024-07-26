@@ -59,7 +59,7 @@ This repository contains the backend for the Daystar University's Orientation ap
 - **Register Users:** Use the POST method at [http://localhost:8000/api/accounts/](http://localhost:8000/api/accounts/) to register new users.
 - **Edit a user:** Edit a User use the PUT method [http://localhost:8000/api/accounts/<int:id>/](http://localhost:8000/api/accounts/<int:id>/).
 - **Delete a user:** Delete a user use DELETE method [http://localhost:8000/api/accounts/<int:id>/](http://localhost:8000/api/accounts/<int:id>/).
-- **Authenticate Users:** Use the POST method at [http://localhost:8000/api/auth/token/login/](http://localhost:8000/api/auth/token/login/) to authenticate users and obtain a token.
+- **Authenticate Users:** Use the POST method at [http://localhost:8000/api/login/](http://localhost:8000/api/auth/token/login/) to authenticate users and obtain a token.
 
 ## Contributing
 

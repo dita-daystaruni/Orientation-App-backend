@@ -4,3 +4,4 @@ django-cors-headers
 djoser
 drf-yasg
 Pillow
+drf_spectacular
