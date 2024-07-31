@@ -15,6 +15,7 @@ jobs:
     - name: Build Docker image
       uses: docker/build-push-action@v4
       with:
-        context: .
+        context: ./daystar_orientation
+        file: ./daystar_orientation/Dockerfile
         push: false
         tags: test:latest
