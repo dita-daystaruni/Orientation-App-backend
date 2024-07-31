@@ -1,7 +1,7 @@
 from django.urls import path
-from . import views
+from .views import OrientationList, OrientationDetail
 
 urlpatterns = [
-    path('orientation/', views.OrientationList.as_view(), name='orientation-list'),
-    path('orientation/<int:pk>/', views.OrientationDetail.as_view(), name='orientation-detail'),
+    path('orientation/', OrientationList.as_view(), name='orientation-list'),
+    path('orientation/<int:pk>/', OrientationDetail.as_view(), name='orientation-detail'),
 ]

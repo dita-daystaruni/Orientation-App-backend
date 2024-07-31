@@ -61,12 +61,11 @@ class CustomAuthToken(ObtainAuthToken):
     def post(self, request, *args, **kwargs):
         '''Authenticate a user using login fields and return a token to be used for future requests.'''
         admission_number = request.data.get('admission_number')
-        password = request.data.get('password')
 
-        if not admission_number or not password:
+        if not admission_number:
             return Response({'error': 'Admission number and password are required.'}, status=status.HTTP_400_BAD_REQUEST)
 
-        user = authenticate(request, admission_number=admission_number, password=password)
+        user = authenticate(request, admission_number=admission_number)
 
         if user is not None:
             token, created = Token.objects.get_or_create(user=user)
@@ -76,7 +75,7 @@ class CustomAuthToken(ObtainAuthToken):
                 'user_type': user.user_type,
             })
         else:
-            return Response({'error': 'Invalid admission number or password.'}, status=status.HTTP_401_UNAUTHORIZED)
+            return Response({'error': 'Admission number does not exist'}, status=status.HTTP_401_UNAUTHORIZED)
 
 class EmailConfirmationView(generics.GenericAPIView):
     '''Confirm the user's email address using the token sent to their email for any user.'''
@@ -103,7 +102,7 @@ class AccountList(generics.ListCreateAPIView):
     def get_permissions(self):
         '''Allow any user to create an account, but only authenticated users to view the list.'''
         if self.request.method == 'POST':
-            self.permission_classes = [AllowAny]
+            self.permission_classes = [IsAuthenticated]
         else:
             self.permission_classes = [IsAuthenticated]
         return super(AccountList, self).get_permissions()

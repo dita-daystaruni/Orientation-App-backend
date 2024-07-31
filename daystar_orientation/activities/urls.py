@@ -1,7 +1,7 @@
 from django.urls import path
-from . import views
+from .views import ActivityList, ActivityDetail
 
 urlpatterns = [
-    path('activities/', views.ActivityList.as_view(), name='activity-list'),
-    path('activities/<int:pk>/', views.ActivityDetail.as_view(), name='activity-detail'),
+    path('activities/', ActivityList.as_view(), name='activity-list'),
+    path('activities/<int:pk>/', ActivityDetail.as_view(), name='activity-detail'),
 ]
