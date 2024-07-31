@@ -18,4 +18,11 @@ jobs:
         context: ./daystar_orientation
         file: ./daystar_orientation/Dockerfile
         push: false
-        tags: test:latest
+        tags: myapp:latest
+        outputs: type=docker,dest=/tmp/myapp.tar
+
+    - name: Output image size
+      run: |
+        docker load < /tmp/myapp.tar
+        echo "Image size:"
+        docker image ls myapp:latest --format "{{.Size}}"
