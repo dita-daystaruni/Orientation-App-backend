@@ -1,31 +1,20 @@
-name: Build and Push Docker Image
+name: Build Docker Image
 
 on:
   push:
     branches: [ main ]
 
-env:
-  DOCKER_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-  DOCKER_REPOSITORY: dita-services
-  IMAGE_TAG: orientationapp
-
 jobs:
-  build-and-push:
+  build:
     runs-on: ubuntu-latest
-    
+
     steps:
     - name: Check out code
       uses: actions/checkout@v3
-      
-    - name: Log in to Docker Hub
-      uses: docker/login-action@v2
-      with:
-        username: ${{ secrets.DOCKERHUB_USERNAME }}
-        password: ${{ secrets.DOCKERHUB_TOKEN }}
-        
-    - name: Build and push Docker image
+
+    - name: Build Docker image
       uses: docker/build-push-action@v4
       with:
         context: .
-        push: true
-        tags: ${{ env.DOCKER_USERNAME }}/${{ env.DOCKER_REPOSITORY }}:${{ env.IMAGE_TAG }}
+        push: false
+        tags: test:latest
