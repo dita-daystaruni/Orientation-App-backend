@@ -7,7 +7,7 @@ on:
 env:
   DOCKER_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
   DOCKER_REPOSITORY: dita-services
-  IMAGE_TAG: busbooking
+  IMAGE_TAG: orientationapp
 
 jobs:
   build-and-push:
