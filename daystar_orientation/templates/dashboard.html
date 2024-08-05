@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2">
+                <div class="sidebar">
+                    <ul class="list-group">
+                        <li class="list-group-item active"><i class="fa fa-house"></i> Dashboard</li>
+                        <li class="list-group-item"><i class="bi-calendar3"></i> Schedule</li>
+                        <li class="list-group-item"><i class="bi-bell"></i> Notifications</li>
+                        <li class="list-group-item"><i class="bi-people"></i> Students</li>
+                        <li class="list-group-item"><i class="bi-question-square"></i> FAQ</li>
+                        <li class="list-group-item"><i class="bi-box-arrow-in-left"></i> Log out</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-7">
+                <div class="main-content">
+                    <div class="greetings">
+                        <h2>Greetings</h2>
+                    </div>
+                    <div class="first-row">
+                        <div class="stats">
+                            <div class="stats-card">
+                                <div class="card-body">
+                                    <div class="statscard-row">
+                                        <img src="ascendinggraph.png" alt="left image" class="graphimage">
+                                   <div class="statscard-title">
+                                    <h5>Statistics</h5></div> 
+                                </div>
+                                    <p class="card-textnum">327</p>
+                                    <p class="card-textdes">New students</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="notifications">
+                            <div class="notifications-card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Notifications</h5>
+                                    <p class="card-text">
+                                        <ul>
+                                            <li>Notification Title</li>
+                                            <li>Event Name</li>
+                                        </ul>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="new-students">
+                        <div class="prog-row"> 
+                            <div class="txt-prog">
+                                <h5>New students progress </h5> </div> 
+                                <div class="icon-prog">
+                                    <i class="bi-search"></i> <i class="bi-person-plus"></i>
+                                </div>
+                        </div>
+                        
+                                
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Admission Number</th>
+                                    <th>Full Name</th>
+                                    <th>Account Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>24-0001</td>
+                                    <td>First & Last name</td>
+                                    <td>Active</td>
+                                </tr>
+                                <tr>
+                                    <td>24-0857</td>
+                                    <td>First & Last name</td>
+                                    <td>Active</td>
+                                </tr>
+                                <tr>
+                                    <td>24-1748</td>
+                                    <td>First & Last name</td>
+                                    <td>Active</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-3">
+                <div class="calendar">
+                    <h5>Calendar</h5>
+                    <div class="month">
+                        <ul>
+                          <li class="prev">&#10094;</li>
+                          <li class="next">&#10095;</li>
+                          <li>August<br><span style="font-size:18px">2024</span></li>
+                        </ul>
+                      </div>
+                      
+                      <ul class="weekdays">
+                        <li>Mo</li>
+                        <li>Tu</li>
+                        <li>We</li>
+                        <li>Th</li>
+                        <li>Fr</li>
+                        <li>Sa</li>
+                        <li>Su</li>
+                      </ul>
+                      
+                      <ul class="days">
+                        <li>1</li>
+                        <li>2</li>
+                        <li>3</li>
+                        <li>4</li>
+                        <li>5</li>
+                        <li>6</li>
+                        <li>7</li>
+                        <li>8</li>
+                        <li>9</li>
+                        <li><span class="active">5</span></li>
+                        <li>11</li>
+                        ...etc
+                      </ul>
+                </div>
+                <div class="schedule">
+                    <h5>Today's schedule</h5>
+                    <ul>
+                        <li>8:00AM - Activity name</li>
+                        <li>10:00AM - Activity name</li>
+                        <li>1:00PM - Activity name</li>
+                        <li>4:00PM - Activity name</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Font Awesome CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <!-- bootstrap icons -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    </body>
+</html>
