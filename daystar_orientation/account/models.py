@@ -61,11 +61,11 @@ class Account(AbstractUser):
     USER_TYPE_CHOICES_DICT = dict(USER_TYPE_CHOICES)
 
     user_type = models.CharField(max_length=10, choices=USER_TYPE_CHOICES, default='regular')
-    username = models.CharField(max_length=100, unique=True)
+    username = models.CharField(max_length=100, unique=True, null=True, blank=True)
     admission_number = models.CharField(max_length=20, unique=True)
     course = models.CharField(max_length=100, null=True, blank=True)
     phone_number = models.CharField(max_length=15, null=True, blank=True)
-    email = models.EmailField(unique=True)
+    email = models.EmailField(unique=True, null=True, blank=True)
     email_verified = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'admission_number'
