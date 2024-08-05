@@ -61,11 +61,13 @@ class CustomAuthToken(ObtainAuthToken):
     def post(self, request, *args, **kwargs):
         '''Authenticate a user using login fields and return a token to be used for future requests.'''
         admission_number = request.data.get('admission_number')
+        password = request.data.get('password')
 
-        if not admission_number:
+        if not admission_number or not password:
             return Response({'error': 'Admission number and password are required.'}, status=status.HTTP_400_BAD_REQUEST)
 
-        user = authenticate(request, admission_number=admission_number)
+        user = authenticate(request, admission_number=admission_number, password=password)
+
 
         if user is not None:
             token, created = Token.objects.get_or_create(user=user)
@@ -73,6 +75,11 @@ class CustomAuthToken(ObtainAuthToken):
                 'token': token.key,
                 'user_id': user.pk,
                 'user_type': user.user_type,
+                'email': user.email,
+                'admission_number': user.admission_number,
+                'course': user.course,
+                'phone_number': user.phone_number,
+                'username': user.username
             })
         else:
             return Response({'error': 'Admission number does not exist'}, status=status.HTTP_401_UNAUTHORIZED)

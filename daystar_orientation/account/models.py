@@ -14,8 +14,9 @@ class AccountManager(BaseUserManager):
             raise ValueError('Users must have a user name')
         if not course:
             raise ValueError('Users must have a course')
+        if not password:
+            raise ValueError('Users must have a password')
 
-        # Validate user_type against USER_TYPE_CHOICES
         if user_type not in Account.USER_TYPE_CHOICES_DICT:
             raise ValueError(f'Invalid user type: {user_type}. Must be one of {list(Account.USER_TYPE_CHOICES_DICT.keys())}.')
 
