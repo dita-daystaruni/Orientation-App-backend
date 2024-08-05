@@ -9,6 +9,9 @@ ENV PYTHONUNBUFFERED = 1
 # Set the working directory in the container
 WORKDIR /app
 
+#Create a directory for sqlite3
+RUN mkdir -p /app/db
+
 # Copy the requirements file to the container
 COPY requirements.txt .
 
