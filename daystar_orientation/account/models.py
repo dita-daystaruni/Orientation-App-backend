@@ -34,8 +34,10 @@ class AccountManager(BaseUserManager):
             course=course,
             password=password,
             phone_number=phone_number,
-            user_type=user_type
+            user_type=user_type,
         )
+        if user_type == 'regular':
+            user.is_first_time_user = True
         user.set_password(password)
         user.save(using=self._db)
         return user
@@ -86,6 +88,7 @@ class Account(AbstractUser):
     course = models.CharField(max_length=100, null=True, blank=True)
     phone_number = models.CharField(max_length=15)
     email = models.EmailField(unique=True, null=True, blank=True)
+    is_first_time_user = models.BooleanField(default=True)
 
     USERNAME_FIELD = 'admission_number'
     REQUIRED_FIELDS = ['first_name', 'last_name', 'username', 'email', 'course', 'phone_number', 'password'] 

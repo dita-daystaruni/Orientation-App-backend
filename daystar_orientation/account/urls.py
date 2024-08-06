@@ -1,10 +1,9 @@
 from django.urls import path
-from . import views
+from .views import AccountList, AccountDetail, CustomAuthToken, FirstTimeUserPasswordChangeView
 
 urlpatterns = [
-    path('accounts/', views.AccountList.as_view(), name='account-list'),
-    path('accounts/<int:pk>/', views.AccountDetail.as_view(), name='account-detail'),
-    path('login/', views.CustomAuthToken.as_view(), name='login'),
-    path('password-reset/', views.PasswordResetRequestView.as_view(), name='password-reset-request'),
-    path('password-reset-confirm/<uidb64>/<token>/', views.PasswordResetConfirmView.as_view(), name='password-reset-confirm'),
+    path('accounts/', AccountList.as_view(), name='account-list'),
+    path('accounts/<int:pk>/', AccountDetail.as_view(), name='account-detail'),
+    path('login/', CustomAuthToken.as_view(), name='login'),
+    path('first-password-change/', FirstTimeUserPasswordChangeView.as_view(), name='first-password-change'),   
 ]

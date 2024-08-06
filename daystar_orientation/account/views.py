@@ -1,61 +1,39 @@
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from .models import Account
-from .serializers import AccountSerializer
+from .serializers import AccountSerializer, PasswordChangeSerializer
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
 from rest_framework import status
 from django.contrib.auth import authenticate
-from django.contrib.auth.tokens import default_token_generator
-from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.utils.encoding import force_bytes
-from django.core.mail import send_mail
-from django.conf import settings
 
-class PasswordResetRequestView(generics.GenericAPIView):
-    '''Send a password reset link to the user's email'''
-    permission_classes = [IsAuthenticated]
+class FirstTimeUserPasswordChangeView(generics.GenericAPIView):
+    serializer_class = PasswordChangeSerializer
+    permission_classes = [AllowAny]
 
-    def post(self, request):
-        email = request.data.get('email')
-        if not email:
-            return Response({'error': 'Email is required.'}, status=status.HTTP_400_BAD_REQUEST)
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
 
-        user = Account.objects.filter(email=email).first()
-        if user:
-            uid = urlsafe_base64_encode(force_bytes(user.pk))
-            token = default_token_generator.make_token(user)
-            reset_link = f"{request.scheme}://{request.get_host()}/api/password-reset-confirm/{uid}/{token}/"
-            send_mail(
-                'Password Reset Request',
-                f'Click the link to reset your password: {reset_link}',
-                settings.DEFAULT_FROM_EMAIL,
-                [user.email],
-                fail_silently=False,
-            )
-            return Response({'message': 'Password reset link sent.'}, status=status.HTTP_200_OK)
-        return Response({'error': 'User with this email does not exist.'}, status=status.HTTP_404_NOT_FOUND)
-
-class PasswordResetConfirmView(generics.GenericAPIView):
-    '''Reset the user's password using the token sent to their email for any user.'''
-    permission_classes = [IsAuthenticated]
-
-    def post(self, request, uidb64, token):
         try:
-            user_id = urlsafe_base64_decode(uidb64).decode()
-            user = Account.objects.get(pk=user_id)
-        except (TypeError, ValueError, OverflowError, Account.DoesNotExist):
-            return Response({'error': 'Invalid token or user ID.'}, status=status.HTTP_400_BAD_REQUEST)
+            user = Account.objects.get(
+                admission_number=serializer.validated_data['admission_number'],
+                is_first_time_user=True,
+                user_type='regular'
+            )
+        except Account.DoesNotExist:
+            return Response(
+                {'error': 'Invalid admission number or the user is not a first-time user.'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
 
-        if default_token_generator.check_token(user, token):
-            new_password = request.data.get('new_password')
-            if not new_password:
-                return Response({'error': 'New password is required.'}, status=status.HTTP_400_BAD_REQUEST)
-            user.set_password(new_password)
-            user.save()
-            return Response({'message': 'Password has been reset.'}, status=status.HTTP_200_OK)
-        return Response({'error': 'Invalid token or user ID.'}, status=status.HTTP_400_BAD_REQUEST)
+        user.set_password(serializer.validated_data['new_password'])
+        user.first_time_user = False
+        user.save()
+        return Response({'message': 'Password changed successfully.'}, status=status.HTTP_200_OK)
+
+
 
 class CustomAuthToken(ObtainAuthToken):
     def post(self, request, *args, **kwargs):
@@ -70,6 +48,9 @@ class CustomAuthToken(ObtainAuthToken):
 
 
         if user is not None:
+            if user.user_type == 'regular' and user.is_first_time_user:
+                return Response({'message': 'First time user, please change your password.'}, status=status.HTTP_200_OK)
+
             token, created = Token.objects.get_or_create(user=user)
             return Response({
                 'token': token.key,
@@ -84,7 +65,7 @@ class CustomAuthToken(ObtainAuthToken):
                 'phone_number': user.phone_number,
             })
         else:
-            return Response({'error': 'Admission number does not exist'}, status=status.HTTP_401_UNAUTHORIZED)
+            return Response({'error': 'Invalid admission number or password.'}, status=status.HTTP_401_UNAUTHORIZED)
 
 class AccountList(generics.ListCreateAPIView):
     queryset = Account.objects.all()

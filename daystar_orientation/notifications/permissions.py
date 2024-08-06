@@ -1,8 +1,10 @@
 from rest_framework.permissions import BasePermission, SAFE_METHODS
 
+from rest_framework.permissions import BasePermission, SAFE_METHODS
+
 class IsAdminOrReadOnly(BasePermission):
     """
-    Custom permission to only allow admins to edit or delete an object.
+    Custom permission to only allow admins or parents to edit or delete an object.
     """
 
     def has_permission(self, request, view):
@@ -10,8 +12,7 @@ class IsAdminOrReadOnly(BasePermission):
         if request.method in SAFE_METHODS:
             return True
         
-        # Only allow admins to create, update, or delete
-        return request.user.is_authenticated and request.user.user_type == 'admin'
+        return request.user.is_authenticated and (request.user.user_type == 'admin' or request.user.user_type == 'parent')
 
 class IsAuthenticatedReadOnly(BasePermission):
     """
