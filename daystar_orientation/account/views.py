@@ -74,51 +74,30 @@ class CustomAuthToken(ObtainAuthToken):
             return Response({
                 'token': token.key,
                 'user_id': user.pk,
+                'first_name': user.first_name,
+                'last_name': user.last_name,
                 'user_type': user.user_type,
+                'campus': user.campus,
                 'email': user.email,
                 'admission_number': user.admission_number,
                 'course': user.course,
                 'phone_number': user.phone_number,
-                'username': user.username
             })
         else:
             return Response({'error': 'Admission number does not exist'}, status=status.HTTP_401_UNAUTHORIZED)
-
-class EmailConfirmationView(generics.GenericAPIView):
-    '''Confirm the user's email address using the token sent to their email for any user.'''
-    permission_classes = [AllowAny]
-
-    def get(self, request, uidb64, token):
-        try:
-            uid = urlsafe_base64_decode(uidb64).decode()
-            user = Account.objects.get(pk=uid)
-        except (TypeError, ValueError, OverflowError, Account.DoesNotExist):
-            return Response({'error': 'Invalid token or user ID.'}, status=status.HTTP_400_BAD_REQUEST)
-
-        if default_token_generator.check_token(user, token):
-            user.email_verified = True  # Mark the email as verified
-            user.save()
-            return Response({'message': 'Email confirmed successfully!'}, status=status.HTTP_200_OK)
-        else:
-            return Response({'error': 'Invalid token or user ID.'}, status=status.HTTP_400_BAD_REQUEST)
 
 class AccountList(generics.ListCreateAPIView):
     queryset = Account.objects.all()
     serializer_class = AccountSerializer
     
     def get_permissions(self):
-        '''Allow any user to create an account, but only authenticated users to view the list.'''
+        '''Allow authenticated user to create and view an account.'''
         if self.request.method == 'POST':
             self.permission_classes = [IsAuthenticated]
         else:
             self.permission_classes = [IsAuthenticated]
         return super(AccountList, self).get_permissions()
 
-    #  send a confirmation email after account creation
-    # def perform_create(self, serializer):
-    #     '''Saves the new user and sends a confirmation email.'''
-    #     user = serializer.save()
-    #     #send_confirmation_email(user)
 
 class AccountDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Account.objects.all()

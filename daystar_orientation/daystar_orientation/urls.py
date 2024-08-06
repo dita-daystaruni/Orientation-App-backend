@@ -8,4 +8,5 @@ urlpatterns = [
     path('faqs/', include('faqs.urls')),
     path('activities/', include('activities.urls')),
     path('events/', include('events.urls')),
+    path('notifications/', include('notifications.urls')),
 ]
