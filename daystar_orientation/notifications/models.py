@@ -1,12 +1,9 @@
 from django.db import models
 
-class Activity(models.Model):
-    '''Model for the activities'''
+class Notification(models.Model):
+    '''Model for the notifications'''
     title = models.CharField(max_length=200)
     description = models.TextField()
-    location = models.CharField(max_length=200, null=True, blank=True)
-    time = models.TimeField()
-
 
     def __str__(self):
         '''String representation of the model'''

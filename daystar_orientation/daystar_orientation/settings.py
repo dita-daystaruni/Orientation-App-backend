@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'faqs',
     'activities',
     'events',
+    'notifications',
 ]
 
 MIDDLEWARE = [

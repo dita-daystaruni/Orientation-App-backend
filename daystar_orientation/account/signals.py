@@ -5,6 +5,13 @@ from .models import Account
 from rest_framework.authtoken.models import Token
 
 @receiver(post_save, sender=Account)
+def set_first_time_user_flag(sender, instance, created, **kwargs):
+    """Set the is_first_time_user flag to True for regular users."""
+    if created and instance.user_type == 'regular':
+        instance.is_first_time_user = True
+        instance.save()
+
+@receiver(post_save, sender=Account)
 def assign_permissions_based_on_user_type(sender, instance, created, **kwargs):
     """Assign permissions based on user type after saving the Account instance."""
     set_permissions(instance)
