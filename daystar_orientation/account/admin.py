@@ -6,7 +6,7 @@ class AccountAdmin(UserAdmin):
     '''Custom admin for the Account model'''
     model = Account
     
-    list_display = ['id', 'admission_number', 'email', 'first_name', 'last_name', 'campus', 'user_type', 'phone_number', 'is_first_time_user', 'parent']
+    list_display = ['id', 'admission_number', 'email', 'first_name', 'last_name', 'campus', 'user_type', 'phone_number', 'is_first_time_user', 'parent', 'username']
     fieldsets = UserAdmin.fieldsets + (
         (None, {'fields': ('user_type', 'phone_number', 'admission_number', 'course', 'campus')}),
     )

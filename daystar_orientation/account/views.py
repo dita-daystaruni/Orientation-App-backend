@@ -17,20 +17,16 @@ class FirstTimeUserPasswordChangeView(generics.GenericAPIView):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
-        try:
-            user = Account.objects.get(
-                admission_number=serializer.validated_data['admission_number'],
-                is_first_time_user=True,
-                user_type='regular'
-            )
-        except Account.DoesNotExist:
-            return Response(
-                {'error': 'Invalid admission number or the user is not a first-time user.'},
-                status=status.HTTP_400_BAD_REQUEST
-            )
+        admission_number = serializer.validated_data['admission_number']
+        new_password = serializer.validated_data['new_password']
 
-        user.set_password(serializer.validated_data['new_password'])
-        user.first_time_user = False
+        try:
+            user = Account.objects.get(admission_number=admission_number, is_first_time_user=True, user_type='regular')
+        except Account.DoesNotExist:
+            return Response({'error': 'Invalid admission number or the user is not a first-time user.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        user.set_password(new_password)
+        user.is_first_time_user = False
         user.save()
         return Response({'message': 'Password changed successfully.'}, status=status.HTTP_200_OK)
 
@@ -50,9 +46,20 @@ class CustomAuthToken(ObtainAuthToken):
 
         if user is not None:
             if user.user_type == 'regular' and user.is_first_time_user:
-                return Response({'message': 'First time user, please change your password.'}, status=status.HTTP_200_OK)
+                return Response({'message': 'First time user, please change your password.'}, status=status.HTTP_403_FORBIDDEN)
 
             token, created = Token.objects.get_or_create(user=user)
+
+            parent_details = None
+            if user.parent:
+                parent_details = {
+                    'id': user.parent.id,
+                    'first_name': user.parent.first_name,
+                    'last_name': user.parent.last_name,
+                    'admission_number': user.parent.admission_number,
+                    'campus': user.parent.campus
+                }
+            
             return Response({
                 'token': token.key,
                 'user_id': user.pk,
@@ -65,7 +72,7 @@ class CustomAuthToken(ObtainAuthToken):
                 'admission_number': user.admission_number,
                 'course': user.course,
                 'phone_number': user.phone_number,
-                'parent': user.parent
+                'parent': parent_details
             })
         else:
             return Response({'error': 'Invalid admission number or password.'}, status=status.HTTP_401_UNAUTHORIZED)
@@ -73,6 +80,11 @@ class CustomAuthToken(ObtainAuthToken):
 class AccountList(generics.ListCreateAPIView):
     queryset = Account.objects.all()
     serializer_class = AccountSerializer
+
+    def get_queryset(self):
+        if self.request.user.user_type == 'admin':
+            return Account.objects.all()
+        return Account.objects.filter(id=self.request.user.id)
     
     def get_permissions(self):
         '''Allow authenticated user to create and view an account.'''
@@ -87,6 +99,18 @@ class AccountDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Account.objects.all()
     serializer_class = AccountSerializer
     permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        if self.request.user.user_type == 'admin':
+            return Account.objects.all()
+        return Account.objects.filter(id=self.request.user.id)
+    
+    def get_permissions(self):
+        '''Allow authenticated users to view, update their accounts and only admins to delete their account.'''
+        if self.request.method in ['DELETE']:
+            self.permission_classes = [IsAdmin]
+        return super(AccountDetail, self).get_permissions()
+
 
 class ParentChildrenView(generics.ListAPIView):
     '''Parents see their children.'''

@@ -36,8 +36,6 @@ class AccountManager(BaseUserManager):
             phone_number=phone_number,
             user_type=user_type,
         )
-        if user_type == 'regular':
-            user.is_first_time_user = True
         user.set_password(password)
         user.save(using=self._db)
         return user
