@@ -88,7 +88,9 @@ class Account(AbstractUser):
     course = models.CharField(max_length=100, null=True, blank=True)
     phone_number = models.CharField(max_length=15)
     email = models.EmailField(unique=True, null=True, blank=True)
-    is_first_time_user = models.BooleanField(default=True)
+    is_first_time_user = models.BooleanField(default=False)
+    parent = models.ForeignKey('self', on_delete=models.SET_NULL, null=True, blank=True, related_name='children', limit_choices_to={'user_type': 'parent'})
+
 
     USERNAME_FIELD = 'admission_number'
     REQUIRED_FIELDS = ['first_name', 'last_name', 'username', 'email', 'course', 'phone_number', 'password'] 
