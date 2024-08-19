@@ -1,0 +1,118 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100%;
+    font-family: 'sans serif';
+    background-color: #ffffff;
+    color:  #032540;
+}
+
+.container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.image-class {
+    display: flex;
+   /* width: 100%;
+    top: 20%;
+    bottom: 20%;
+    justify-content: flex-end;*/
+    align-content: center;
+    object-fit: cover;
+  /*  background-color: #02AEEE;*/
+  }
+
+form {
+    
+    width: 100%;
+    max-width: 360px;
+    box-shadow: none;
+    margin-top: 20px;
+}
+
+form h3 {
+    font-size: 20px;
+    text-align: center;
+    color: #032540;
+    /* margin-top: 10px;  Reduce margin on top */
+    margin-bottom: 30px; /* Increase margin below */
+}
+
+.input-div {
+    display: grid;
+    grid-template-columns: 5% 95%;
+    left: 10%;
+}
+
+.input-div.one {
+    margin-top: 0;
+}
+
+.input-div.two {
+    margin-bottom: 4px;
+}
+
+.i {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.i i {
+    color: #000;
+}
+
+.input-div > div {
+    position: relative;
+    height: 50px;
+}
+
+.input-line, .Password input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #032540;
+    border-radius: 2px;
+    text-align: center; /* Center the placeholder horizontally */
+    font-size: 16px;
+    /*position: relative;
+    text-align: left;  Text input remains aligned to the left when typing */
+}
+
+input::placeholder {
+    text-align: center; /* Center the placeholder horizontally */
+}
+
+.Password {
+    position: relative;
+}
+
+.Password input {
+    padding-right: 40px; /* Space for the eye icon */
+}
+
+.toggle-password {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.btn-primary {
+    border-radius: 20px;
+    width: 50%;
+    background-color: #02AEEE;
+}
