@@ -1,0 +1,159 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+}
+
+.container{
+    display: flex;
+    margin: 0;
+    height: 100vh;
+    justify-content: space-between;
+}
+
+.sidebar{
+    background-color: #ffffff;
+    width: 20%;
+}
+
+.sidenav {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    margin-top: 10px;
+    height: 100vh;
+    overflow: hidden;
+    padding: 0;
+    border-radius: 8px;
+    gap: 10px;
+    box-shadow: 0 2px 4px rgba(204, 202, 202, 0.1);
+  }
+  .sidenav a {
+    padding: 8px;
+    font-size: small;
+    justify-content: space-between;
+    color: #032540;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: border-color 0.3s ease-in-out;
+  }
+  
+  .sidenav a:hover {
+    background-color: #f8f8f8;
+    border: 2px solid #02AEEE; /* Blue border */
+    border-radius: 5px; /* Curved border radius */
+  }
+
+  .active {
+    background-color: #f8f8f8;
+    border-radius: 5px;
+    border: 2px solid #02AEEE; /* Blue border for active state */
+  }
+
+  .avtr{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    color: #032540;
+  }
+  #user-avatar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    margin-top: 10px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
+
+.dashicon-class{
+    width: 15px;
+    height: 15px;
+  }
+
+  .notf-class{
+    width: 15px;
+    height: 15px;
+  }
+
+.FAQ-class{
+    width: 15px;
+    height: 15px;
+  }
+
+.notification-page-main {
+    width: 100%;
+    /*max-width: 400px;  Assuming mobile view */
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.notification-item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #ccc;
+}
+
+.notification-icon {
+    width: 40px; /* Example size */
+    height: auto;
+    margin-right: 10px;
+}
+
+.notification-content {
+    flex-grow: 1;
+}
+
+.notification-title {
+    font-size: 16px;
+    color: #000;
+    margin: 0;
+}
+
+.notification-description {
+    font-size: 14px;
+    color: #666;
+    margin: 5px 0;
+}
+
+.notification-time {
+    font-size: 12px;
+    color: #999;
+}
+  
+@media screen and (max-width: 500px) {
+    .sidenav a {
+      float: none;
+      display: block;
+    }
+  }
+
+.initials-icon {
+    background-color: #099bdd; /* Default color if JS doesn't work */
+    color: white;
+    opacity: 1;
+    display: inline-block;
+    font-weight: bold;
+    border-radius: 50%;
+    vertical-align: middle;
+    margin-right: 0.5em;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+}
+
+[data-initials]:before {
+    content: attr(data-initials); 
+}
+

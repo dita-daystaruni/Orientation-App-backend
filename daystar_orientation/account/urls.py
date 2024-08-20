@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import AccountList, AccountDetail, CustomAuthToken, FirstTimeUserPasswordChangeView, ParentChildrenView, ChildParentView, AdminParentChildrenView, AdminParentChildrenDetailView
+from .views import AccountList, AccountDetail, CustomAuthToken, FirstTimeUserPasswordChangeView, ParentChildrenView, ChildParentView, AdminParentChildrenView, AdminParentChildrenDetailView, login_view, dashboard_view
 
 
 urlpatterns = [
@@ -11,4 +11,6 @@ urlpatterns = [
     path('child-parent/', ChildParentView.as_view(), name='child-parent'),
     path('admin-parents/', AdminParentChildrenView.as_view(), name='admin-parents'),
     path('admin-parents/<str:admission_number>/', AdminParentChildrenDetailView.as_view(), name='parent-admission'),
+    path('signin/', login_view, name='signin'),
+    path('dashboard/', dashboard_view, name='dashboard'),
 ]

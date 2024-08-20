@@ -3,52 +3,258 @@ html, body {
     padding: 0;
     height: 100%;
     width: 100%;
-}
-
-.sidebar {
-    height: 100%;
-    /* Other sidebar styles */
-}
-
-
-.sidebar {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    font-size: 10x;
-}
-
-.sidebar-sticky {
-    position: -webkit-sticky;
-    position: sticky;
-    top: 0;
-    height: calc(100vh - 48px);
-    padding-top: .5rem;
-    overflow-x: hidden;
-    overflow-y: auto;
-}
-
-.sidebar .nav-link {
-    font-weight: 500;
-    color: #333;
-}
-
-.sidebar .nav-link.active {
-    color: #007bff;
-}
-
-.first-row {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between; /* Adjust as needed */
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: #032540;
   }
 
+  .container-fluid{
+    height: 100vh;
+  }
+
+  .col-md-2{
+    justify-content: space-between;
+  }
+
+  .avtr{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    color: #032540;
+  }
+  #user-avatar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    margin-top: 10px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
+
+  .dashicon-class{
+    width: 15px;
+    height: 15px;
+  }
+
+  .FAQ-class{
+    width: 15px;
+    height: 15px;
+  }
+  
+  .sidenav {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #ffffff;
+    height: 100vh;
+    overflow: hidden;
+    padding: 0;
+    border-radius: 8px;
+    gap: 10px;
+    box-shadow: 0 2px 4px rgba(204, 202, 202, 0.1);
+  }
+  
+  .sidenav a {
+    padding: 8px;
+    font-size: small;
+    justify-content: space-between;
+    color: #032540;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: border-color 0.3s ease-in-out;
+  }
+  
+  .sidenav a:hover {
+    background-color: #f8f8f8;
+    border: 2px solid #02AEEE; /* Blue border */
+    border-radius: 5px; /* Curved border radius */
+  }
+  
+  .active {
+    background-color: #f8f8f8;
+    border-radius: 5px;
+    border: 2px solid #02AEEE; /* Blue border for active state */
+  }
+  
+  @media screen and (max-width: 500px) {
+    .sidenav a {
+      float: none;
+      display: block;
+    }
+  }
+
+  .row{
+    height: 100%;
+  }
+
+  .col-md-2, .col-md-7, .col-md-3 {
+    height: 100%;
+    overflow: hidden;
+
+}
+  
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  font-family: Verdana, sans-serif;
+}
+
+.main-content{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin-top: 25px;
+  width: 100%;
+  height: 100vh;
+}
+
+/* First row - Stats and Notifications */
+.first-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  max-height: 50%;
+  gap: 20px;
+  width: 100%;
+}
+
+.stats, .notifications {
+  flex: 1;
+  margin-bottom: 10px;
+  padding: 0;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  /*overflow: hidden;*/
+}
+
+.stats-card, .notifications-card {
+  display: flex;
+  padding: 20px;
+  /* min-height: 150px; Shorter height for cards */
+}
+
+.notifications-card{
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  width: 100%;
+}
+
+.notification-item{
+  display: block;
+  width: 100%;
+  flex-direction: column;
+/*  justify-content: flex-start;
+  align-items: center;*/
+  height: 40px;
+  padding: 10px 15px;
+  margin-bottom: 2px;
+  box-sizing: border-box;
+  border-radius: 1px;
+  background-color: #f8f8f8;
+  /*height: 20%;*/
+}
+
+.megaphone-image{
+  width: 20px;
+  height: 20px;
+}
+
+/* Stats card content */
+.statscard-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.graphimage {
+  display: flex;
+  object-fit: contain; /* Adjusted image size */
+  width: 15px;
+  margin-right: 5px;
+}
+
+.statscard-title h5 {
+  margin: 0;
+  font-size: 15px;
+  object-fit: contain;
+  text-align: center;
+  color: #032540;
+}
+
+#card-textnum {
+  font-size: 36px; /* Adjusted text size */
+  color: #032540;
+  text-align: center;
+}
+
+/* Notifications card content */
+.notifications-card .card-body {
+  padding: 0;
+}
+
+.notifications-card .card-title {
+  font-size: small;
+  justify-content: flex-end;
+  color: #032540;
+  margin-bottom: 10px;
+}
+
+.card-text {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  font-size: 16px;
+  color: #555;
+}
+
+.notf-header{
+  display: flex;
+  flex-direction: row;
+  /*align-items: flex-start;*/
+  margin-bottom: 3px;
+  font-size: smaller;
+  align-items: center;
+}
+
+.notf-menu-ttl{
+  font-size: 5px;
+  flex: 1;
+  margin: 0;
+}
+
+.notf-menu-txt{
+  font-size: smaller;
+  margin: 0; /* Removes any default margin */
+  line-height: 1.4; /* Adjusts line height to reduce space between lines */
+}
+
+.card-body h5{
+float: inline-start;
+}
 
 .greetings{
+    font-size: x-small;
     display: flex;
-    font-family: inherit;
     justify-content: flex-start;
+   /* font-size: 40px;
+    margin-top: 10px;
+    width: 247px;
+    height: 87px;
+    top: 97px;
+    left: 343px;
+    gap: 0px;
+    opacity: 0px;
+*/
 }
 
 .dashboard-content {
@@ -71,54 +277,83 @@ html, body {
     margin-bottom: 10px;
 }
 
-.students-progress table {
-    width: 100%;
+
+.new-students {
+  font-size: small;
+  overflow-y: auto;
 }
+
+.active-dot {
+  height: 10px;
+  width: 10px;
+  background-color: #228822; /* Green color */
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 5px; /* Adjust spacing as needed */
+}
+
+.Inactive {
+  height: 10px;
+  width: 10px;
+  background-color: #ffffff; /* Green color */
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 5px; /* Adjust spacing as needed */
+}
+
 
 .txt-prog{
     display: flex;
     justify-content: flex-start;
-    text-transform: uppercase;
-    font-size: 25px;
-    font-weight: 100;
-}
-
-.graphimage{
-    display: flex;
-    width: 175px;
+    font-size: medium;
+    border-bottom-color: #032540;
 }
 
 .statscard-row{
 display: flex;
 flex-direction: row;
+width: 100%;
+height: 60%;
+/*object-fit: contain;*/
+
+}
+
+.graphimage{
+  display: flex;
+  justify-content: space-around;
+  width: 50%;
+  height: 100%;
+
 }
 
 .statscard-title{
     justify-content: center;
-    align-content: center;
-    font-style: inherit;
+    align-content: baseline;
     color: #032540;
     font-size: 30px;
+    font-weight: 300;
 }
 
 .card-textnum{
-    font-style: inherit;
-    
-    margin-top: 10px;
-    font-size: 70px;
+    display: flex;
+    justify-content: center;
+    font-size: xx-large;
+    align-content: center;
+    margin-top: 5px;
     color: #032540;
-    ;
 }
 
 .card-textdes{
-    font-size: 30px;
-    justify-content: center;
+    font-size: medium;
+    text-align: center;
+    color: #888;
 }
 
 .prog-row{
     display: flex;
     flex-direction: row;
 }
+
 
 .icon-prog{
     display: flex;
@@ -128,73 +363,82 @@ flex-direction: row;
 ul {list-style-type: none;}
 body {font-family: Verdana, sans-serif;}
 
-/* Month header */
-.month {
-  padding: 70px 25px;
+.col-md-3{
+  justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  margin-top: 25px;
+  gap: 10px;
+}
+#calendar {
+  max-height: 50%; /* Adjust to ensure it doesn't occupy the whole column */
   width: 100%;
-  background: #ffffff;
-  text-align: center;
+  /*overflow-y: auto;  Enable vertical scroll if necessary */
+  overflow-x: hidden; /* Prevent horizontal overflow */
+  padding: 25px;
+  background-color: #ffffff;
+  font-size: x-small;
 }
 
-/* Month list */
-.month ul {
-  margin: 0;
-  padding: 0;
-}
-
-.month ul li {
-  color: white;
-  font-size: 20px;
-  text-transform: uppercase;
-  letter-spacing: 3px;
-}
-
-/* Previous button inside month header */
-.month .prev {
-  float: left;
-  padding-top: 10px;
-}
-
-/* Next button */
-.month .next {
-  float: right;
-  padding-top: 10px;
-}
-
-/* Weekdays (Mon-Sun) */
-.weekdays {
-  margin: 0;
-  padding: 10px 0;
-  background-color:#ddd;
-}
-
-.weekdays li {
-  display: inline-block;
-  width: 13.6%;
-  color: #666;
-  text-align: center;
-}
-
-/* Days (1-31) */
-.days {
-  padding: 10px 0;
-  background: #eee;
-  margin: 0;
-}
-
-.days li {
-  list-style-type: none;
-  display: inline-block;
-  width: 13.6%;
-  text-align: center;
-  margin-bottom: 5px;
-  font-size:12px;
-  color: #777;
-}
-
-/* Highlight the "current" day */
-.days li .active {
+#calendar-header {
+  font-size: x-small;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 5px;
-  background: #ffffff;
-  color: white !important
+  background-color: #ffffff;
+  color: #0f0f0f;
 }
+
+#calendar-body {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1px;
+  background-color: #ffffff;
+  padding: 10px; /* Reduce padding to fit content better */
+  text-align: center;
+}
+/*
+#calendar-body div {
+  padding: 20px;
+  background-color: #fff;
+  text-align: center;
+}*/
+.change-month {
+  cursor: pointer;
+}
+
+.schedule, #calendar {
+  background-color: #ffffff;
+  background-color: transparent;
+  /*border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);*/
+  overflow: hidden; /* Prevent overflow */
+}
+
+/*.week-days{
+  color: #03254066;
+}*/
+
+.schedule{
+  font-size: small;
+  overflow-y: auto;
+  padding: 20px;
+  background-color: transparent;
+  margin-bottom: 0;
+  max-height: 50%;
+}
+
+.schedule h6 {
+  margin-bottom: 5px;
+  color: #032540;
+}
+
+.days li.active {
+  padding: 5px;
+  background: #007bff;
+  color: white !important;
+  border-radius: 50%; /* Add rounded border to active day */
+}
+
+

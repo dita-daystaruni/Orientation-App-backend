@@ -10,61 +10,82 @@
 <body>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-2">
-                <div class="sidebar">
-                    <ul class="list-group">
-                        <li class="list-group-item active"><i class="fa fa-house"></i> Dashboard</li>
-                        <li class="list-group-item"><i class="bi-calendar3"></i> Schedule</li>
-                        <li class="list-group-item"><i class="bi-bell"></i> Notifications</li>
-                        <li class="list-group-item"><i class="bi-people"></i> Students</li>
-                        <li class="list-group-item"><i class="bi-question-square"></i> FAQ</li>
-                        <li class="list-group-item"><i class="bi-box-arrow-in-left"></i> Log out</li>
-                    </ul>
+            <nav class="col-md-2">
+                <div class="avtr">
+                    <img src="images/avatar.png" alt="Avatar" id="user-avatar">
+                    <div id="name">Name</div>
                 </div>
-            </div>
+                <nav class="sidenav">
+                    <a class="active" href="#"><i><img src="images/dashicon.png" alt="dashicon" class="dashicon-class"></i> Dashboard</a> 
+                    <a href="schedule.html"><i class="bi bi-calendar2-week"></i> Schedule</a> 
+                    <a href="notifications.html"><i class="bi bi-bell"></i> Notifications</a> 
+                    <a href="students.html"><i class="bi bi-people"></i> Students</a> 
+                    <a href="faq.html"><i><img src="images/FAQ.png" alt="dashicon" class="FAQ-class"></i> FAQ</a>
+                    <br>
+                    <a href="#"><i class="bi bi-box-arrow-right"></i> Log out</a> 
+                </nav>
+            </nav>
+            
             <div class="col-md-7">
                 <div class="main-content">
                     <div class="greetings">
-                        <h2>Greetings</h2>
+                        <h3>Greetings</h3>
                     </div>
                     <div class="first-row">
                         <div class="stats">
-                            <div class="stats-card">
-                                <div class="card-body">
+                                <div class="statscard-body">
                                     <div class="statscard-row">
-                                        <img src="ascendinggraph.png" alt="left image" class="graphimage">
+                                        <img src="images/ascendinggraph.png" alt="left image" class="graphimage">
                                    <div class="statscard-title">
                                     <h5>Statistics</h5></div> 
                                 </div>
-                                    <p class="card-textnum">327</p>
+                                    <p id="card-textnum">327</p>
                                     <p class="card-textdes">New students</p>
                                 </div>
-                            </div>
                         </div>
                         <div class="notifications">
                             <div class="notifications-card">
                                 <div class="card-body">
-                                    <h5 class="card-title">Notifications</h5>
-                                    <p class="card-text">
-                                        <ul>
-                                            <li>Notification Title</li>
-                                            <li>Event Name</li>
-                                        </ul>
-                                    </p>
+                                    <h5 class="card-title">Recent Notifications</h5>
+                                </div>
+                                <div class="notification-item">
+                                    <div class="notf-header">
+                                        <img src="images/megaphone.png" alt="img" class="megaphone-image">
+                                        <div class="notf-menu-ttl">
+                                        <h6>notification one</h6>
+                                        </div>
+                                    </div>
+                                        <div class="notf-menu-txt">
+                                        <p>Lorem ipsum dolor sit repellat dolore?</p>
+                                        </div>
+                                    
+                                </div>
+                                <div class="notification-item">
+                                    <div class="notf-header">
+                                        <img src="images/megaphone.png" alt="img" class="megaphone-image">
+                                        <div class="notf-menu-ttl">
+                                        <h6>notification two</h6>
+                                        </div>
+                                    </div>
+                                        <div class="notf-menu-txt">
+                                        <p>Lorem ipsum dolor sit amet con</p>
+                                        </div>
+                                    
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="new-students">
-                        <div class="prog-row"> 
+                        <div class="prog-row">
                             <div class="txt-prog">
-                                <h5>New students progress </h5> </div> 
-                                <div class="icon-prog">
-                                    <i class="bi-search"></i> <i class="bi-person-plus"></i>
-                                </div>
+                                <h5>New students progress</h5>
+                            </div>
+                            <div class="icon-prog">
+                                <i class="bi-search"></i>
+                                <i class="bi-person-plus"></i>
+                            </div>
                         </div>
-                        
-                                
+                    
                         <table class="table">
                             <thead>
                                 <tr>
@@ -77,62 +98,79 @@
                                 <tr>
                                     <td>24-0001</td>
                                     <td>First & Last name</td>
-                                    <td>Active</td>
+                                    <td><span class="active-dot" data-is-active="true"></span> Active</td>
                                 </tr>
                                 <tr>
                                     <td>24-0857</td>
                                     <td>First & Last name</td>
-                                    <td>Active</td>
+                                    <td><span class="Inactive" data-is-active="false"></span> Inactive</td>
                                 </tr>
                                 <tr>
                                     <td>24-1748</td>
                                     <td>First & Last name</td>
-                                    <td>Active</td>
+                                    <td><span class="active-dot" data-is-active="true"></span> Active</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
+                    
+                    
                 </div>
             </div>
             
             <div class="col-md-3">
-                <div class="calendar">
-                    <h5>Calendar</h5>
-                    <div class="month">
-                        <ul>
-                          <li class="prev">&#10094;</li>
-                          <li class="next">&#10095;</li>
-                          <li>August<br><span style="font-size:18px">2024</span></li>
-                        </ul>
-                      </div>
-                      
-                      <ul class="weekdays">
-                        <li>Mo</li>
-                        <li>Tu</li>
-                        <li>We</li>
-                        <li>Th</li>
-                        <li>Fr</li>
-                        <li>Sa</li>
-                        <li>Su</li>
-                      </ul>
-                      
-                      <ul class="days">
-                        <li>1</li>
-                        <li>2</li>
-                        <li>3</li>
-                        <li>4</li>
-                        <li>5</li>
-                        <li>6</li>
-                        <li>7</li>
-                        <li>8</li>
-                        <li>9</li>
-                        <li><span class="active">5</span></li>
-                        <li>11</li>
-                        ...etc
-                      </ul>
-                </div>
+                <div id="calendar">
+                    <div id="calendar-header">
+                        <span id="month-prev"></span>
+                        <h6>September 2024</h6>
+                        <span id="month-next"></span>
+                    </div>
+                    <div id="calendar-body">
+                        <div>Sun</div>
+                        <div>Mon</div>
+                        <div>Tue</div>
+                        <div>Wed</div>
+                        <div>Thu</div>
+                        <div>Fri</div>
+                        <div>Sat</div>
+                        
+                        <!-- Days of the month will go here -->
+                        <div>1</div>
+                        <div>2</div>
+                        <div>3</div>
+                        <div>4</div>
+                        <div>5</div>
+                        <div>6</div>
+                        <div>7</div>
+                        <div>8</div>
+                        <div>9</div>
+                        <div>10</div>
+                        <div>11</div>
+                        <div>12</div>
+                        <div>13</div>
+                        <div>14</div>
+                        <div>15</div>
+                        <div>16</div>
+                        <div>17</div>
+                        <div>18</div>
+                        <div>19</div>
+                        <div>20</div>
+                        <div>21</div>
+                        <div>22</div>
+                        <div>23</div>
+                        <div>24</div>
+                        <div>25</div>
+                        <div>26</div>
+                        <div>27</div>
+                        <div>28</div>
+                        <div>29</div>
+                        <div>30</div>
+                        <div>31</div>
+            </div>
+            </div>
+            
                 <div class="schedule">
-                    <h5>Today's schedule</h5>
+                    <h6>Today's schedule</h6>
                     <ul>
                         <li>8:00AM - Activity name</li>
                         <li>10:00AM - Activity name</li>
@@ -141,6 +179,7 @@
                     </ul>
                 </div>
             </div>
+            
         </div>
     </div>
 
@@ -151,3 +190,4 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     </body>
 </html>
+
