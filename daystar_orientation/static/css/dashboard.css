@@ -165,8 +165,8 @@ html, body {
 }
 
 .megaphone-image{
-  width: 20px;
-  height: 20px;
+  width: 25px;
+  height: 25px;
 }
 
 /* Stats card content */
@@ -227,7 +227,7 @@ html, body {
 }
 
 .notf-menu-ttl{
-  font-size: 5px;
+  font-size: small;
   flex: 1;
   margin: 0;
 }
@@ -398,12 +398,16 @@ body {font-family: Verdana, sans-serif;}
   padding: 10px; /* Reduce padding to fit content better */
   text-align: center;
 }
-/*
+
+#calendar-body div:hover {
+  background-color: #eee; /* Light gray background on hover */
+}
+
 #calendar-body div {
-  padding: 20px;
-  background-color: #fff;
-  text-align: center;
-}*/
+  font-size: small; /* Adjust font size */
+  color: #333; /* Darker gray text color */
+}
+
 .change-month {
   cursor: pointer;
 }
@@ -432,6 +436,19 @@ body {font-family: Verdana, sans-serif;}
 .schedule h6 {
   margin-bottom: 5px;
   color: #032540;
+}
+
+.schedule ul li {
+  position: relative; /* Enable pseudo-element positioning */
+  padding-left: 20px; /* Adjust padding to accommodate time */
+}
+
+.schedule ul li::before {
+  content: attr(data-time) ": "; /* Insert time before title */
+  position: absolute;
+  left: 0; /* Align left */
+  font-size: small; /* Adjust font size for time */
+  color: #888; /* Gray text color for time */
 }
 
 .days li.active {
