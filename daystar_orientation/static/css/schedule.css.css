@@ -1,0 +1,189 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    color:#032540;
+    ;
+}
+
+.container {
+    display: flex;
+    margin: 0;
+}
+
+.col-md-2 {
+    background-color: #f7f9fc;
+    padding: 10px;
+    height: 100vh;
+    font-size: small;
+}
+
+.profile {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.profile-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-top: 20px;
+}
+
+.profile-name {
+    margin-top: 10px;
+    font-size: 1.2em;
+}
+
+.dashicon-class{
+    width: 15px;
+    height: 15px;
+  }
+
+.FAQ-class{
+    width: 15px;
+    height: 15px;
+  }
+
+.menu {
+    list-style: none;
+}
+
+.menu li {
+    margin: 5px 0;
+}
+
+.menu li a {
+    text-decoration: none;
+    color: #333;
+    font-size: 1.1em;
+    display: block;
+    padding: 10px;
+    transition: background-color 0.3s;
+}
+
+.menu li a.active, .menu li a:hover {
+    background-color: #ffff;
+    border: 2px solid #02AEEE;
+    border-radius: 5px;
+}
+
+.calendar {
+    width: 100%;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.calendar-header h1 {
+    margin: 0;
+}
+
+.calendar-days {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.calendar-days div {
+    width: calc(100% / 7);
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+.activities {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.tab {
+    width: 100%;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.tab h2 {
+    margin-top: 0;
+}
+
+@media only screen and (max-width: 768px) {
+    .container {
+        width: 100%;
+    }
+}
+
+.col-md-3 {
+    padding: 20px;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.column {
+    padding: 15px;
+}
+
+.event-column{
+    flex: 0.5;
+}
+
+.col-md-5{
+    margin-top: 20px;
+    border-left: 1px solid #ddd;
+}
+
+.col-md-5 h2 {
+    margin-bottom: 10px;
+}
+
+.events-list {
+    list-style: none;
+}
+
+.events-list li {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+}
+
+.time {
+    font-weight: bold;
+    margin-right: 15px;
+}
+
+.calendar iframe {
+    width: 100%;
+    height: 50%;
+    border: none;
+}
+
+@media (max-width: 768px) {
+    .row {
+        flex-direction: column;
+    }
+}
