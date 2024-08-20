@@ -8,13 +8,13 @@ class AccountAdmin(UserAdmin):
     
     list_display = ['id', 'admission_number', 'email', 'first_name', 'last_name', 'campus', 'user_type', 'phone_number', 'is_first_time_user', 'parent', 'username']
     fieldsets = UserAdmin.fieldsets + (
-        (None, {'fields': ('user_type', 'phone_number', 'admission_number', 'course', 'campus')}),
+        (None, {'fields': ('user_type', 'phone_number', 'admission_number', 'course', 'campus', 'gender', 'accomodation')}),
     )
 
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('admission_number', 'email', 'first_name', 'last_name', 'username', 'campus', 'course', 'phone_number', 'user_type', 'password1', 'password2'),
+            'fields': ('admission_number', 'email', 'first_name', 'last_name', 'username', 'campus', 'course', 'phone_number', 'user_type', 'password1', 'password2', 'gender', 'accomodation'),
         }),
     )
 

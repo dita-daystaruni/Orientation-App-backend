@@ -4,7 +4,7 @@ from django.db import models
 class AccountManager(BaseUserManager):
     '''The user manager for the application'''
     
-    def create_user(self, email, username, first_name, last_name, admission_number, course, phone_number, user_type='regular', password=None, campus='Athi river'):
+    def create_user(self, email, username, first_name, last_name, admission_number, course, phone_number, user_type='regular', password=None, campus='Athi river', gender='Male', accomodation='Boarder'):
         '''Create a regular user'''
         if not admission_number:
             raise ValueError('Users must have an admission number')
@@ -23,6 +23,10 @@ class AccountManager(BaseUserManager):
             raise ValueError(f'Invalid user type: {user_type}. Must be one of {list(Account.USER_TYPE_CHOICES_DICT.keys())}.')
         if campus not in Account.CAMPUS_CHOICES_DICT:
             raise ValueError(f'Invalid campus: {campus}. Must be one of {list(Account.CAMPUS_CHOICES_DICT.keys())}.')
+        if gender not in Account.GENDER:
+            raise ValueError(f'Invalid gender: {gender}. Must be one of {list(Account.GENDER_DICT.keys())}.')
+        if accomodation not in Account.ACCOMODATION:
+            raise ValueError(f'Invalid accomodation type: {accomodation}. Must be one of {list(Account.ACCOMODATION_DICT.keys())}.')
 
         user = self.model(
             email=self.normalize_email(email),
@@ -73,12 +77,26 @@ class Account(AbstractUser):
         ('Nairobi', 'Nairobi'),
         ('Athi river', 'Athi River'),
     )
+
+    ACCOMODATION = (
+        ('Boarder', 'Boarder'),
+        ('Dayscholar', 'Dayscholar'),
+    )
+
+    GENDER = (
+        ('Male', 'Male'),
+        ('Female', 'Female'),
+    )
     
     USER_TYPE_CHOICES_DICT = dict(USER_TYPE_CHOICES)
     CAMPUS_CHOICES_DICT = dict(CAMPUS_CHOICES)
+    GENDER_DICT = dict(GENDER)
+    ACCOMODATION_DICT = dict(ACCOMODATION)
 
     user_type = models.CharField(max_length=10, choices=USER_TYPE_CHOICES, default='regular')
     campus = models.CharField(max_length=12, choices=CAMPUS_CHOICES, default='Athi river')
+    gender = models.CharField(max_length=8, choices=GENDER, default='Male')
+    accomodation = models.CharField(max_length=12, choices=ACCOMODATION, default='Boarder')
     first_name = models.CharField(max_length=100, null=True, blank=True)
     last_name = models.CharField(max_length=100, null=True, blank=True)
     username = models.CharField(max_length=100, unique=True, null=True, blank=True)
