@@ -29,7 +29,6 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'corsheaders',
     'orientation',
-    'drf_spectacular',
     'account',
     'djoser',
     'faqs',
