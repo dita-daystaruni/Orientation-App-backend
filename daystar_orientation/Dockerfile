@@ -26,8 +26,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Run migrations to create the database schema
-RUN python3 manage.py makemigrations account activities events faqs orientation
-RUN python3 manage.py migrate
+RUN python manage.py makemigrations account activities events faqs orientation notifications
+RUN python manage.py migrate
 
 # Expose the port the app runs on
 EXPOSE 8000
