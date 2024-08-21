@@ -75,6 +75,8 @@ class CustomAuthToken(ObtainAuthToken):
                 'admission_number': user.admission_number,
                 'course': user.course,
                 'phone_number': user.phone_number,
+                'gender': user.gender,
+                'accomodation': user.accomodation,
                 'parent': parent_details
             })
         else:
@@ -179,6 +181,8 @@ def login_view(request):
         user = authenticate(request, admission_number=admission_number, password=password)
 
         if user is not None:
+            if user.user_type == 'regular' or user.user_type == 'parent':
+                return Response({'message': 'Only Admins(G9) are allowed to login to the web version of the application'}, status=status.HTTP_403_FORBIDDEN)
             token, created = Token.objects.get_or_create(user=user)
             request.session['auth_token'] = token.key
             return redirect('dashboard')
