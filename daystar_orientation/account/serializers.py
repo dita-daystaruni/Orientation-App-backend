@@ -5,7 +5,7 @@ from .models import Account
 class AccountSerializer(serializers.ModelSerializer):
     class Meta:
         model = Account
-        fields = ['id', 'first_name', 'last_name', 'username', 'password', 'email', 'admission_number', 'course', 'phone_number', 'user_type', 'campus', 'gender', 'accomodation', 'parent']
+        fields = ['id', 'first_name', 'last_name', 'username', 'password', 'email', 'admission_number', 'course', 'phone_number', 'user_type', 'campus', 'gender', 'accomodation', 'checked_in', 'parent']
 
 class PasswordChangeSerializer(serializers.Serializer):
     admission_number = serializers.CharField()
