@@ -23,9 +23,9 @@ class AccountManager(BaseUserManager):
             raise ValueError(f'Invalid user type: {user_type}. Must be one of {list(Account.USER_TYPE_CHOICES_DICT.keys())}.')
         if campus not in Account.CAMPUS_CHOICES_DICT:
             raise ValueError(f'Invalid campus: {campus}. Must be one of {list(Account.CAMPUS_CHOICES_DICT.keys())}.')
-        if gender not in Account.GENDER:
+        if gender not in Account.GENDER_DICT:
             raise ValueError(f'Invalid gender: {gender}. Must be one of {list(Account.GENDER_DICT.keys())}.')
-        if accomodation not in Account.ACCOMODATION:
+        if accomodation not in Account.ACCOMODATION_DICT:
             raise ValueError(f'Invalid accomodation type: {accomodation}. Must be one of {list(Account.ACCOMODATION_DICT.keys())}.')
 
         user = self.model(
@@ -36,6 +36,8 @@ class AccountManager(BaseUserManager):
             campus=campus,
             admission_number=admission_number,
             course=course,
+            gender=gender,
+            accomodation=accomodation,
             password=password,
             phone_number=phone_number,
             user_type=user_type,
@@ -56,6 +58,8 @@ class AccountManager(BaseUserManager):
             phone_number=phone_number,
             user_type='admin',
             campus='Athi river',
+            gender='Male',
+            accomodation='Boarder',
             password=password
         )
         user.is_admin = True
@@ -105,6 +109,7 @@ class Account(AbstractUser):
     phone_number = models.CharField(max_length=15)
     email = models.EmailField(unique=True, null=True, blank=True)
     is_first_time_user = models.BooleanField(default=False)
+    checked_in = models.BooleanField(default=False)
     parent = models.ForeignKey('self', on_delete=models.SET_NULL, null=True, blank=True, related_name='children', limit_choices_to={'user_type': 'parent'})
 
 
