@@ -1,91 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Details</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="students_add.css">
+    <link rel="stylesheet" href="{% static 'css/students_add.css' %}">
 </head>
 <body>
     <div class="container">
         <nav class="col-md-2">
             <div class="avtr">
-                <img src="images/avatar.png" alt="Avatar" id="user-avatar">
-                <div id="name">Name</div>
+                <img src="{% static 'images/avatar.png' %}" alt="Avatar" id="user-avatar">
+                <div id="name">{{ request.user.first_name }}</div> <!-- Display logged-in user's name -->
             </div>
             <nav class="sidenav">
-                <a href="dashboard.html"><i><img src="images/bl-dashicon.png" alt="dashicon" class="dashicon-class"></i> Dashboard</a> 
+                <a class="active" href="#"><i><img src="{% static 'images/dashicon.png' %}" alt="dashicon" class="dashicon-class"></i> Dashboard</a> 
                 <a href="schedule.html"><i class="bi bi-calendar2-week"></i> Schedule</a> 
                 <a href="notifications.html"><i class="bi bi-bell"></i> Notifications</a> 
-                <a class="active" href="#"><i class="bi bi-people"></i> Students</a> 
-                <a href="faq.html"><i><img src="images/FAQ.png" alt="dashicon" class="FAQ-class"></i> FAQ</a>
+                <a href="students.html"><i class="bi bi-people"></i> Students</a> 
+                <a href="faq.html"><i><img src="{% static 'images/FAQ.png' %}" alt="dashicon" class="FAQ-class"></i> FAQ</a>
                 <br>
                 <a href="#"><i class="bi bi-box-arrow-right"></i> Log out</a> 
             </nav>
         </nav>
-                <div class="col-md-10">
-                    <h5>Student Details</h5>
-                    <form>
-                        <label for="Name">Name</label>
-                      <div class="form-row">
-                        <div class="col">
-                          <input type="text" id="firstName" name="firstName" placeholder="First Name" required>
-                        </div>
-                        <div class="col">
-                          <input type="text" id="lastName" name="lastName" placeholder="Last Name" required>
-                        </div>
-                      </div> 
-                      <div class="form-row">
-                        <div class="col"> 
-                          <label for="gender">Gender:</label>
-                          <div class="gender-container">
-                            <input type="radio" id="male" name="gender" value="male"> Male
-                            <input type="radio" id="female" name="gender" value="female"> Female
-                          </div>
+        <div class="col-md-10">
+            <h5>Student Details</h5>
+            <form method="POST" action="{% url 'students_add' %}">
+                {% csrf_token %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-danger">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+                <div class="form-row">
+                    <div class="col">
+                        <label for="firstName">Name</label>
+                        <input type="text" id="firstName" name="firstName" placeholder="First Name" required>
+                    </div>
+                    <div class="col">
+                        <input type="text" id="lastName" name="lastName" placeholder="Last Name" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col"> 
+                        <label for="gender">Gender:</label>
+                        <div class="gender-container">
+                            <input type="radio" id="male" name="gender" value="Male" required> Male
+                            <input type="radio" id="female" name="gender" value="Female"> Female
                         </div>
                     </div>
-                    <div class="form-row">
-                        <div class="col">
-                          <label for="admissionNumber">Admission Number</label>
-                          <input type="text" id="admissionNumber" name="admissionNumber" placeholder="eg.24-0000" required>
-                        </div>
-                        <div class="col">
-                            <label for="studentCourse">Course Name</label>
-                            <input type="text" id="courseName" name="courseName" placeholder="eg.Computer Science" required>
-                          </div>
+                </div>
+                <div class="form-row">
+                    <div class="col">
+                        <label for="admissionNumber">Admission Number</label>
+                        <input type="text" id="admissionNumber" name="admissionNumber" placeholder="eg. 24-0000" required>
                     </div>
-
-                    <div class="form-row">
-                        <div class="col">
-                          <label for="phoneNumber">Phone Number</label>
-                          <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="254700000000" required>
-                        </div>
-                        <div class="col">
-                            <label for="accomodation">Accomodation</label>
-                            <input type="text" id="accomodation" name="accomodation" placeholder="Dayscholar/Boarder" required>
-                          </div>
+                    <div class="col">
+                        <label for="courseName">Course Name</label>
+                        <input type="text" id="courseName" name="courseName" placeholder="eg. Computer Science" required>
                     </div>
-                    <div class="form-row">
-                        <div class="col"> 
-                          <label for="campus">Campus</label>
-                          <div class="gender-container">
-                            <input type="radio" id="athi" name="athi" value="athi-river"> Athi River
-                            <input type="radio" id="vroad" name="vroad" value="v-road"> Nairobi
-                          </div>
+                </div>
+                <div class="form-row">
+                    <div class="col">
+                        <label for="phoneNumber">Phone Number</label>
+                        <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="254700000000" required>
+                    </div>
+                    <div class="col">
+                        <label for="accomodation">Accommodation</label>
+                        <input type="text" id="accomodation" name="accomodation" placeholder="Dayscholar/Boarder" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col"> 
+                        <label for="campus">Campus</label>
+                        <div class="gender-container">
+                            <input type="radio" id="athi" name="campus" value="Athi river" required> Athi River
+                            <input type="radio" id="vroad" name="campus" value="Nairobi"> Nairobi
                         </div>
                     </div>
-                      
-                    </form>
-                    <button type="submit">Update</button>
-                  </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Update</button>
+            </form>
         </div>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Font Awesome CSS -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-        <!-- bootstrap icons -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-    </body>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+</body>
 </html>
-

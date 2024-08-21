@@ -23,7 +23,7 @@ This repository contains the backend for the Daystar University's Orientation ap
 
 3. Run the following command to create the database:
     ```bash
-    python manage.py makemigrations
+    python manage.py makemigrations account activities events faqs notifications orientation
     python manage.py migrate
     ```
 

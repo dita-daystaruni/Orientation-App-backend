@@ -11,6 +11,7 @@ from django.contrib.auth import authenticate
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseForbidden
 
 class FirstTimeUserPasswordChangeView(generics.GenericAPIView):
     serializer_class = PasswordChangeSerializer
@@ -181,16 +182,63 @@ def login_view(request):
         user = authenticate(request, admission_number=admission_number, password=password)
 
         if user is not None:
-            if user.user_type == 'regular' or user.user_type == 'parent':
+            if request.user.user_type != 'admin':
                 return Response({'message': 'Only Admins(G9) are allowed to login to the web version of the application'}, status=status.HTTP_403_FORBIDDEN)
             token, created = Token.objects.get_or_create(user=user)
             request.session['auth_token'] = token.key
-            return redirect('dashboard')
+            return redirect('students_details')
         else:
             messages.error(request, 'Invalid admission number or password.')
             return render(request, 'signin.html')
 
     return render(request, 'signin.html')
+
+@login_required
+def studentsadd_view(request):
+    if request.user.user_type != 'admin':
+        return HttpResponseForbidden("You are not authorized to view this page.")
+    
+    if request.method == 'POST':
+        first_name = request.POST.get('firstName')
+        last_name = request.POST.get('lastName')
+        gender = request.POST.get('gender')
+        admission_number = request.POST.get('admissionNumber')
+        course = request.POST.get('courseName')
+        phone_number = request.POST.get('phoneNumber')
+        accomodation = request.POST.get('accomodation')
+        campus = request.POST.get('campus')
+
+        if not (first_name and last_name and gender and admission_number and course and phone_number and accomodation and campus):
+            messages.error(request, 'All fields are required.')
+            return render(request, 'students_add.html')
+
+        if Account.objects.filter(admission_number=admission_number).exists():
+            messages.error(request, "Admission number already exists.")
+            return render(request, 'students_add.html')
+
+        Account.objects.create(
+            first_name=first_name,
+            last_name=last_name,
+            gender=gender,
+            admission_number=admission_number,
+            course=course,
+            phone_number=phone_number,
+            accomodation=accomodation,
+            campus=campus
+        )
+
+        messages.success(request, 'Student details added successfully!')
+        return redirect('students_add')
+
+    return render(request, 'students_add.html')
+
+@login_required
+def studentsdetails_view(request):
+    if request.user.user_type != 'admin':
+        return HttpResponseForbidden("You are not authorized to view this page.")
+    
+    students = Account.objects.filter(user_type='regular')
+    return render(request, 'students.html', {'students': students})
 
 @login_required
 def dashboard_view(request):
