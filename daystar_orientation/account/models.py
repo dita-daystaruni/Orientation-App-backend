@@ -1,8 +1,16 @@
 from django.contrib.auth.models import AbstractUser, Group, Permission, BaseUserManager
 from django.db import models
+import random
+import string
 
 class AccountManager(BaseUserManager):
     '''The user manager for the application'''
+
+    def generate_password(self, admission_number):
+        '''Password generation with four random letters and the admission number'''
+        random_letters = ''.join(random.choices(string.ascii_uppercase, k=4))
+        password = f"{random_letters}-{admission_number}"
+        return password
     
     def create_user(self, email, username, first_name, last_name, admission_number, course, phone_number, user_type='regular', password=None, campus='Athi river', gender='Male', accomodation='Boarder'):
         '''Create a regular user'''
@@ -18,6 +26,9 @@ class AccountManager(BaseUserManager):
             raise ValueError('Users must have a password')
         if not phone_number:
             raise ValueError('Users must have a phone number')
+        
+        if password is None:
+            password = self.generate_password(admission_number)
 
         if user_type not in Account.USER_TYPE_CHOICES_DICT:
             raise ValueError(f'Invalid user type: {user_type}. Must be one of {list(Account.USER_TYPE_CHOICES_DICT.keys())}.')
@@ -38,7 +49,6 @@ class AccountManager(BaseUserManager):
             course=course,
             gender=gender,
             accomodation=accomodation,
-            password=password,
             phone_number=phone_number,
             user_type=user_type,
         )
