@@ -12,7 +12,7 @@ class AccountManager(BaseUserManager):
         password = f"{random_letters}-{admission_number}"
         return password
     
-    def create_user(self, email, username, first_name, last_name, admission_number, course, phone_number, user_type='regular', password=None, campus='Athi river', gender='Male', accomodation='Boarder'):
+    def create_user(self, email, username, first_name, last_name, admission_number, course, phone_number, user_type='regular', password=None, campus='Athi river', gender='Male', accomodation='Boarder', parent=None):
         '''Create a regular user'''
         if not admission_number:
             raise ValueError('Users must have an admission number')
@@ -22,8 +22,6 @@ class AccountManager(BaseUserManager):
             raise ValueError('Users must have a first name')
         if not last_name:
             raise ValueError('Users must have a last name')
-        if not password:
-            raise ValueError('Users must have a password')
         if not phone_number:
             raise ValueError('Users must have a phone number')
         
@@ -51,6 +49,7 @@ class AccountManager(BaseUserManager):
             accomodation=accomodation,
             phone_number=phone_number,
             user_type=user_type,
+            parent=parent
         )
         user.set_password(password)
         user.save(using=self._db)
@@ -145,4 +144,4 @@ class Account(AbstractUser):
     )
 
     def __str__(self):
-        return self.username
+        return self.admission_number
