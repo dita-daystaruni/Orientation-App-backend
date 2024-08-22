@@ -9,4 +9,5 @@ urlpatterns = [
     path('activities/', include('activities.urls')),
     path('events/', include('events.urls')),
     path('notifications/', include('notifications.urls')),
+    path('hods/', include('hods.urls')),
 ]
