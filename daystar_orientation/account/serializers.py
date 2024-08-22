@@ -5,7 +5,12 @@ from .models import Account
 class AccountSerializer(serializers.ModelSerializer):
     class Meta:
         model = Account
-        fields = ['id', 'first_name', 'last_name', 'username', 'password', 'email', 'admission_number', 'course', 'phone_number', 'user_type', 'campus', 'gender', 'accomodation', 'checked_in', 'parent']
+        fields = ['id', 'first_name', 'last_name', 'username', 'email', 'admission_number', 'course', 'phone_number', 'user_type', 'campus', 'gender', 'accomodation', 'checked_in', 'parent']
+        read_only_fields = ['password']
+
+    def create(self, validated_data):
+        user = Account.objects.create_user(**validated_data)
+        return user
 
 class ContactSerializer(serializers.ModelSerializer):
     class Meta:
