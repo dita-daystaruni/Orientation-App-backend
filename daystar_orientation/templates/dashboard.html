@@ -14,7 +14,7 @@
             <nav class="col-md-2">
                 <div class="avtr">
                     <img src="{% static 'images/avatar.png' %}" alt="Avatar" id="user-avatar">
-                    <div id="name">Name</div>
+                     <div id="name">{{ request.user.first_name }} {{ request.user.last_name }}</div> 
                 </div>
                 <nav class="sidenav">
                     <a class="active" href="#"><i><img src="{% static 'images/dashicon.png' %}" alt="dashicon" class="dashicon-class"></i> Dashboard</a> 

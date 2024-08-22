@@ -1,17 +1,21 @@
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated, AllowAny
-from .permissions import IsAdmin, IsChild, IsParent
+from .permissions import IsAdmin
 from .models import Account
-from .serializers import AccountSerializer, ParentSerializer, PasswordChangeSerializer, ChildSerializer
+from .serializers import AccountSerializer, PasswordChangeSerializer, ContactSerializer
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
 from rest_framework import status
-from django.contrib.auth import authenticate
-from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login, logout
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseForbidden
+from django.utils.cache import add_never_cache_headers
+from rest_framework.views import APIView
+from hods.models import HOD
+from hods.serializers import ContactsSerializer
 
 class FirstTimeUserPasswordChangeView(generics.GenericAPIView):
     serializer_class = PasswordChangeSerializer
@@ -116,61 +120,50 @@ class AccountDetail(generics.RetrieveUpdateDestroyAPIView):
         if self.request.method in ['DELETE']:
             self.permission_classes = [IsAdmin]
         return super(AccountDetail, self).get_permissions()
-
-
-class ParentChildrenView(generics.ListAPIView):
-    '''Parents see their children.'''
-    serializer_class = ParentSerializer
-    permission_classes = [IsParent]
-
-    def get_queryset(self):
-        return Account.objects.filter(id=self.request.user.id, user_type='parent')
-
-class ChildParentView(generics.RetrieveAPIView):
-    '''Children to see their parent's details.'''
-    serializer_class = ChildSerializer
-    permission_classes = [IsChild]
-
-    def get_object(self):
-        return self.request.user
     
-class AdminParentChildrenView(generics.ListAPIView):
-    '''Admins to see all parents and their children.'''
-    serializer_class = ParentSerializer
-    permission_classes = [IsAdmin]  
+class Contacts(APIView):
+    permission_classes = [IsAuthenticated]
 
-    def get_queryset(self):
-        return Account.objects.filter(user_type='parent')
+    def get(self, request, pk):
+        user = get_object_or_404(Account, pk=pk)
+        
+        if user.user_type == 'admin':
+            parents = Account.objects.filter(user_type='parent')
+            serializer = ContactSerializer(parents, many=True)
+            return Response(serializer.data)
+        
+        elif user.user_type == 'parent':
+            children = user.children.all()
+            serializer = ContactSerializer(children, many=True)
+            return Response(serializer.data)
+        
+        elif user.user_type == 'regular':
+            response_data = []
 
-    def get(self, request, *args, **kwargs):
-        if not request.user.is_authenticated or request.user.user_type != 'admin':
-            return Response({'error': 'Only an admin can see this.'}, status=status.HTTP_403_FORBIDDEN)
-        return super().get(request, *args, **kwargs)
+            admins = Account.objects.filter(user_type='admin')
+            response_data.extend(ContactSerializer(admins, many=True).data)
 
-class AdminParentChildrenDetailView(generics.RetrieveAPIView):
-    '''Admins to see an exact parent and their children.'''
-    serializer_class = ParentSerializer
-    permission_classes = [IsAdmin] 
+            if user.parent:
+                response_data.append(ContactSerializer(user.parent).data)
 
-    def get_queryset(self):
-        return Account.objects.filter(user_type='parent')
+            hods = HOD.objects.filter(course=user.course)
+            response_data.extend(ContactsSerializer(hods, many=True).data)
 
-    def get_object(self):
-        admission_number = self.kwargs.get('admission_number')
-        if admission_number:
-            try:
-                return Account.objects.get(admission_number=admission_number, user_type='parent')
-            except Account.DoesNotExist:
-                return Response({'error': 'Parent not found.'}, status=status.HTTP_404_NOT_FOUND)
-        return super().get_object()
-    
-    def get(self, request, *args, **kwargs):
-        if not request.user.is_authenticated or request.user.user_type != 'admin':
-            return Response({'error': 'Only an admin can see this.'}, status=status.HTTP_403_FORBIDDEN)
-        return super().get(request, *args, **kwargs)
+            return Response(response_data)
+        
+        else:
+            return Response({"error": "Invalid user type"}, status=404)
+
     
 # Web views
 def login_view(request):
+    if request.user.is_authenticated:
+        return redirect('dashboard')
+    
+    response = render(request, 'signin.html')
+    
+    add_never_cache_headers(response)
+
     if request.method == 'POST':
         admission_number = request.POST.get('admission_number')
         password = request.POST.get('password')
@@ -182,8 +175,12 @@ def login_view(request):
         user = authenticate(request, admission_number=admission_number, password=password)
 
         if user is not None:
-            if request.user.user_type != 'admin':
-                return Response({'message': 'Only Admins(G9) are allowed to login to the web version of the application'}, status=status.HTTP_403_FORBIDDEN)
+            if user.user_type != 'admin':
+                return render(request, 'signin.html', {
+                    'error_message': 'Only Admins(G9) are allowed to login to the web version of the application'
+                })
+
+            login(request, user)
             token, created = Token.objects.get_or_create(user=user)
             request.session['auth_token'] = token.key
             return redirect('students_details')
@@ -192,6 +189,10 @@ def login_view(request):
             return render(request, 'signin.html')
 
     return render(request, 'signin.html')
+
+def logout_view(request):
+    logout(request)
+    return redirect('signin')
 
 @login_required
 def studentsadd_view(request):

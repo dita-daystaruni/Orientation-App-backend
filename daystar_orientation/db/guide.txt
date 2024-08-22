@@ -1,0 +1,2 @@
+The database file goes into this folder for data to persist.
+With this folder addition migrations will lack errors on initial cloning of the project.
