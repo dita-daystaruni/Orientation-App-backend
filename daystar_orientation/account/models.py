@@ -2,6 +2,7 @@ from django.contrib.auth.models import AbstractUser, Group, Permission, BaseUser
 from django.db import models
 import random
 import string
+from django.conf import settings
 
 class AccountManager(BaseUserManager):
     '''The user manager for the application'''
@@ -145,3 +146,14 @@ class Account(AbstractUser):
 
     def __str__(self):
         return self.admission_number
+    
+class Documents(models.Model):
+    '''The document upload class'''
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True)
+    title = models.CharField(max_length=255, null=True, blank=True)
+    file = models.FileField(upload_to='documents/')
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+    description = models.TextField(null=True, blank=True)
+
+    def __str__(self):
+        return self.file.name

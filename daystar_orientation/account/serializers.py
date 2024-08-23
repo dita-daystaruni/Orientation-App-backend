@@ -1,11 +1,11 @@
 from rest_framework import serializers
-from .models import Account
+from .models import Account, Documents
 
 
 class AccountSerializer(serializers.ModelSerializer):
     class Meta:
         model = Account
-        fields = ['id', 'first_name', 'last_name', 'username', 'email', 'admission_number', 'course', 'phone_number', 'user_type', 'campus', 'gender', 'accomodation', 'checked_in', 'parent']
+        fields = ['id', 'first_name', 'last_name', 'username', 'email', 'admission_number', 'course', 'phone_number', 'user_type', 'campus', 'gender', 'accomodation', 'checked_in', 'parent', 'password']
         read_only_fields = ['password']
 
     def create(self, validated_data):
@@ -29,3 +29,9 @@ class PasswordChangeSerializer(serializers.Serializer):
         if not any(char.islower() for char in value):
             raise serializers.ValidationError("Password must contain at least one lowercase letter.")
         return value
+
+class DocumentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Documents
+        fields = ['id', 'user', 'title', 'file', 'uploaded_at', 'description']
+        read_only_fields = ['id', 'uploaded_at', 'user']
