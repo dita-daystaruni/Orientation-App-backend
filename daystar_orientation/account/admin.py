@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from .models import Account
+from .models import Documents
 
 class AccountAdmin(UserAdmin):
     '''Custom admin for the Account model'''
@@ -45,3 +46,4 @@ class AccountAdmin(UserAdmin):
         return obj is None or obj == request.user
 
 admin.site.register(Account, AccountAdmin)
+admin.site.register(Documents)
