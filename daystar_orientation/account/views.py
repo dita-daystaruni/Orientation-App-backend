@@ -31,7 +31,7 @@ class FirstTimeUserPasswordChangeView(generics.GenericAPIView):
         try:
             user = Account.objects.get(admission_number=admission_number, is_first_time_user=True, user_type='regular')
         except Account.DoesNotExist:
-            return Response({'error': 'Invalid admission number or the user is not a first-time user.'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'message': 'Invalid admission number or the user is not a first-time user.'}, status=status.HTTP_400_BAD_REQUEST)
 
         user.set_password(new_password)
         user.is_first_time_user = False
@@ -54,7 +54,7 @@ class CustomAuthToken(ObtainAuthToken):
 
         if user is not None:
             if user.user_type == 'regular' and user.is_first_time_user:
-                return Response({'message': 'First time user, please change your password.'}, status=status.HTTP_403_FORBIDDEN)
+                return Response({'message': 'First time user, please change your password.'}, status=status.HTTP_412_PRECONDITION_FAILED)
 
             token, created = Token.objects.get_or_create(user=user)
 
