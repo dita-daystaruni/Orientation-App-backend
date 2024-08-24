@@ -47,7 +47,7 @@ class CustomAuthToken(ObtainAuthToken):
         password = request.data.get('password')
 
         if not admission_number or not password:
-            return Response({'error': 'Admission number and password are required.'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'message': 'Admission number and password are required.'}, status=status.HTTP_400_BAD_REQUEST)
 
         user = authenticate(request, admission_number=admission_number, password=password)
 
@@ -85,7 +85,7 @@ class CustomAuthToken(ObtainAuthToken):
                 'parent': parent_details
             })
         else:
-            return Response({'error': 'Invalid admission number or password.'}, status=status.HTTP_401_UNAUTHORIZED)
+            return Response({'message': 'Invalid admission number or password.'}, status=status.HTTP_401_UNAUTHORIZED)
 
 class AccountList(generics.ListCreateAPIView):
     queryset = Account.objects.all()
@@ -152,7 +152,7 @@ class Contacts(APIView):
             return Response(response_data)
         
         else:
-            return Response({"error": "Invalid user type"}, status=404)
+            return Response({"message": "Invalid user type"}, status=404)
 
     
 # Web views
