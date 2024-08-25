@@ -1,8 +1,8 @@
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from .permissions import IsAdmin
-from .models import Account
-from .serializers import AccountSerializer, PasswordChangeSerializer, ContactSerializer
+from .models import Account, Documents
+from .serializers import AccountSerializer, PasswordChangeSerializer, ContactSerializer, DocumentSerializer
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
@@ -154,7 +154,27 @@ class Contacts(APIView):
         else:
             return Response({"message": "Invalid user type"}, status=404)
 
-    
+class DocumentUploadView(generics.CreateAPIView):
+    queryset = Documents.objects.all()
+    serializer_class = DocumentSerializer
+    permission_classes = [IsAuthenticated]
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
+class DocumentListView(generics.ListAPIView):
+    queryset = Documents.objects.all()
+    serializer_class = DocumentSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return Documents.objects.all()
+
+class DocumentDetailView(generics.RetrieveAPIView):
+    queryset = Documents.objects.all()
+    serializer_class = DocumentSerializer
+    permission_classes = [IsAuthenticated]
+
 # Web views
 def login_view(request):
     if request.user.is_authenticated:

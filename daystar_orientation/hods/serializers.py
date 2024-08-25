@@ -9,4 +9,5 @@ class HODSearializer(serializers.ModelSerializer):
 class ContactsSerializer(serializers.ModelSerializer):
     class Meta:
         model = HOD
-        fields = ['first_name', 'last_name', 'email', 'phone_number']
+        fields = ['id', 'title', 'first_name', 'last_name', 'email', 'phone_number', 'course']
+        read_only_fields = ['id','title']

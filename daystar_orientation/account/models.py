@@ -2,6 +2,7 @@ from django.contrib.auth.models import AbstractUser, Group, Permission, BaseUser
 from django.db import models
 import random
 import string
+from django.conf import settings
 
 class AccountManager(BaseUserManager):
     '''The user manager for the application'''
@@ -110,8 +111,8 @@ class Account(AbstractUser):
     campus = models.CharField(max_length=12, choices=CAMPUS_CHOICES, default='Athi river')
     gender = models.CharField(max_length=8, choices=GENDER, default='Male')
     accomodation = models.CharField(max_length=12, choices=ACCOMODATION, default='Boarder')
-    first_name = models.CharField(max_length=100, null=True, blank=True)
-    last_name = models.CharField(max_length=100, null=True, blank=True)
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
     username = models.CharField(max_length=100, unique=True, null=True, blank=True)
     admission_number = models.CharField(max_length=20, unique=True)
     course = models.CharField(max_length=100, null=True, blank=True)
@@ -145,3 +146,14 @@ class Account(AbstractUser):
 
     def __str__(self):
         return self.admission_number
+    
+class Documents(models.Model):
+    '''The document upload class'''
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True)
+    title = models.CharField(max_length=255, null=True, blank=True)
+    file = models.FileField(upload_to='documents/')
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+    description = models.TextField(null=True, blank=True)
+
+    def __str__(self):
+        return self.file.name
