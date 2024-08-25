@@ -19,7 +19,8 @@ class AccountSerializer(serializers.ModelSerializer):
 class ContactSerializer(serializers.ModelSerializer):
     class Meta:
         model = Account
-        fields = ['first_name', 'last_name', 'email', 'phone_number']
+        fields = ['id', 'first_name', 'last_name', 'email', 'phone_number', 'user_type']
+        read_only_fields = ['id', 'user_type']
 
 class PasswordChangeSerializer(serializers.Serializer):
     admission_number = serializers.CharField()
