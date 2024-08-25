@@ -6,3 +6,4 @@ drf-yasg
 Pillow
 pandas
 openpyxl
+drf-spectacular
