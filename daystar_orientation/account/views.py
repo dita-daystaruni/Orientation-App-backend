@@ -134,7 +134,7 @@ class Contacts(APIView):
         
         elif user.user_type == 'parent':
             children = user.children.all()
-            serializer = ContactSerializer(children, many=True)
+            serializer = AccountSerializer(children, many=True)
             return Response(serializer.data)
         
         elif user.user_type == 'regular':
