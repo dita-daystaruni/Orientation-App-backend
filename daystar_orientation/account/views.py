@@ -31,7 +31,7 @@ class FirstTimeUserPasswordChangeView(generics.GenericAPIView):
         try:
             user = Account.objects.get(admission_number=admission_number, is_first_time_user=True, user_type='regular')
         except Account.DoesNotExist:
-            return Response({'error': 'Invalid admission number or the user is not a first-time user.'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'message': 'Invalid admission number or the user is not a first-time user.'}, status=status.HTTP_400_BAD_REQUEST)
 
         user.set_password(new_password)
         user.is_first_time_user = False
@@ -47,14 +47,14 @@ class CustomAuthToken(ObtainAuthToken):
         password = request.data.get('password')
 
         if not admission_number or not password:
-            return Response({'error': 'Admission number and password are required.'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'message': 'Admission number and password are required.'}, status=status.HTTP_400_BAD_REQUEST)
 
         user = authenticate(request, admission_number=admission_number, password=password)
 
 
         if user is not None:
             if user.user_type == 'regular' and user.is_first_time_user:
-                return Response({'message': 'First time user, please change your password.'}, status=status.HTTP_403_FORBIDDEN)
+                return Response({'message': 'First time user, please change your password.'}, status=status.HTTP_412_PRECONDITION_FAILED)
 
             token, created = Token.objects.get_or_create(user=user)
 
@@ -85,7 +85,7 @@ class CustomAuthToken(ObtainAuthToken):
                 'parent': parent_details
             })
         else:
-            return Response({'error': 'Invalid admission number or password.'}, status=status.HTTP_401_UNAUTHORIZED)
+            return Response({'message': 'Invalid admission number or password.'}, status=status.HTTP_401_UNAUTHORIZED)
 
 class AccountList(generics.ListCreateAPIView):
     queryset = Account.objects.all()
@@ -152,8 +152,8 @@ class Contacts(APIView):
             return Response(response_data)
         
         else:
-            return Response({"error": "Invalid user type"}, status=404)
-        
+            return Response({"message": "Invalid user type"}, status=404)
+
 class DocumentUploadView(generics.CreateAPIView):
     queryset = Documents.objects.all()
     serializer_class = DocumentSerializer
