@@ -23,16 +23,21 @@ This repository contains the backend for the Daystar University's Orientation ap
 
 3. Run the following command to create the database:
     ```bash
-    python manage.py makemigrations account activities events faqs notifications orientation
+    python manage.py makemigrations account activities events faqs notifications orientation hods
     python manage.py migrate
     ```
 
-4. Run the development server:
+4. Populate the courses table with the courses(Diploma, Undergraduate and masters) available in Daystar unviversity
+    ```bash
+    python manage.py load_courses
+    ```
+
+5. Run the development server:
     ```bash
     python manage.py runserver
     ```
 
-4. Create a superuser(admin) for the admin panel for a GUI on the CRUD operations(Optional):
+6. Create a superuser(admin) for the admin panel for a GUI on the CRUD operations(Optional):
     ```bash
     python manage.py createsuperuser
     ```
