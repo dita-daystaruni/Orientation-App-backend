@@ -175,6 +175,34 @@ class DocumentDetailView(generics.RetrieveAPIView):
     serializer_class = DocumentSerializer
     permission_classes = [IsAuthenticated]
 
+class StatsView(APIView):
+    def get(self, request):
+        course = request.query_params.get('course')
+
+        regular_users = Account.objects.filter(user_type='regular')
+        if course:
+            regular_users = regular_users.filter(course=course)
+
+        total_students = regular_users.count()
+        male_students = regular_users.filter(gender='Male').count()
+        female_students = regular_users.filter(gender='Female').count()
+        nairobi_students = regular_users.filter(campus='Nairobi').count()
+        athi_river_students = regular_users.filter(campus='Athi river').count()
+        dayscholar_students = regular_users.filter(accomodation='Dayscholar').count()
+        boarder_students = regular_users.filter(accomodation='Boarder').count()
+
+        data = {
+            'total_students': total_students,
+            'male_students': male_students,
+            'female_students': female_students,
+            'nairobi_students': nairobi_students,
+            'athi_river_students': athi_river_students,
+            'dayscholar_students': dayscholar_students,
+            'boarder_students': boarder_students
+        }
+
+        return Response(data)
+
 # Web views
 def login_view(request):
     if request.user.is_authenticated:

@@ -1,6 +1,5 @@
 from django.conf import settings
 from django.db import models
-from account.models import Account  # Import the Account model
 
 class Notification(models.Model):
     '''Model for the notifications'''
@@ -12,7 +11,9 @@ class Notification(models.Model):
         related_name='notifications',
         null=True
     )
-    viewers = models.ManyToManyField('account.Account', related_name='viewable_notifications', blank=True, limit_choices_to={'user_type__in': ['admin', 'parent', 'regular']})
+    is_admin_viewer = models.BooleanField(default=False)
+    is_parent_viewer = models.BooleanField(default=False)
+    is_regular_viewer = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

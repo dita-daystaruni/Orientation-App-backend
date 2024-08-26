@@ -3,6 +3,8 @@ from django.db import models
 import random
 import string
 from django.conf import settings
+from hods.models import Course
+from django.core.exceptions import ObjectDoesNotExist
 
 class AccountManager(BaseUserManager):
     '''The user manager for the application'''
@@ -37,6 +39,11 @@ class AccountManager(BaseUserManager):
             raise ValueError(f'Invalid gender: {gender}. Must be one of {list(Account.GENDER_DICT.keys())}.')
         if accomodation not in Account.ACCOMODATION_DICT:
             raise ValueError(f'Invalid accomodation type: {accomodation}. Must be one of {list(Account.ACCOMODATION_DICT.keys())}.')
+        
+        try:
+            course_instance = Course.objects.get(name=course)
+        except ObjectDoesNotExist:
+            raise ValueError(f"Course with name '{course}' does not exist.")
 
         user = self.model(
             email=self.normalize_email(email),
@@ -45,7 +52,7 @@ class AccountManager(BaseUserManager):
             username=username,
             campus=campus,
             admission_number=admission_number,
-            course=course,
+            course=course_instance,
             gender=gender,
             accomodation=accomodation,
             phone_number=phone_number,
@@ -115,7 +122,7 @@ class Account(AbstractUser):
     last_name = models.CharField(max_length=100)
     username = models.CharField(max_length=100, unique=True, null=True, blank=True)
     admission_number = models.CharField(max_length=20, unique=True)
-    course = models.CharField(max_length=100, null=True, blank=True)
+    course = models.ForeignKey(Course, on_delete=models.SET_NULL, null=True, blank=True)
     phone_number = models.CharField(max_length=15)
     email = models.EmailField(unique=True, null=True, blank=True)
     is_first_time_user = models.BooleanField(default=False)
