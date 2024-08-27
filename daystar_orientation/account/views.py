@@ -179,7 +179,7 @@ class StatsView(APIView):
     def get(self, request):
         course = request.query_params.get('course')
 
-        regular_users = Account.objects.filter(user_type='regular')
+        regular_users = Account.objects.filter(user_type='regular', checked_in=True)
         if course:
             regular_users = regular_users.filter(course=course)
 

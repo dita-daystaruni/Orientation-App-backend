@@ -152,7 +152,7 @@ class Account(AbstractUser):
     )
 
     def __str__(self):
-        return self.admission_number
+        return f"{self.first_name} {self.last_name}"
     
 class Documents(models.Model):
     '''The document upload class'''
