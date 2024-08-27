@@ -78,7 +78,7 @@ class CustomAuthToken(ObtainAuthToken):
                 'campus': user.campus,
                 'email': user.email,
                 'admission_number': user.admission_number,
-                'course': user.course,
+                'course': user.course.name,
                 'phone_number': user.phone_number,
                 'gender': user.gender,
                 'accomodation': user.accomodation,
