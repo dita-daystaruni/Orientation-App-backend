@@ -34,7 +34,6 @@ INSTALLED_APPS = [
     'djoser',
     'faqs',
     'activities',
-    'events',
     'notifications',
     'hods',
 ]
