@@ -1,0 +1,77 @@
+.course-content .header-container{
+    padding-top: 90px;
+    padding-bottom: 90px;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.course-content .header-container .col.d-flex.justify-content-end i {
+    cursor: pointer;
+    margin-left: 30px; 
+}
+
+.course-content .header-container.add-icon{
+  height: 24px;
+}
+
+.course-content .header-container .col.d-flex.justify-content-end i:first-child {
+    margin-left: 30px; 
+}
+
+.course-content .header-container .col.d-flex.justify-content-end i:hover {
+  color: #02AEEE;
+  transform: scale(1.2); 
+  transition: transform 0.2s, color 0.2s;
+}
+
+.course-content h5 {
+    margin-top: 15px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #ccc; 
+    font-size: 36px;
+    font-weight: bolder;
+}
+
+/* Main content table styling */
+.course-content .table-hover tbody tr:hover {
+    background-color: rgba(3, 37, 64, 0.6);
+}
+
+.course-content .col-md-10{
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.course-content .header-container a {
+  color: #032540;
+  transition: color 0.3s ease; 
+}
+
+.course-content .header-container a:hover {
+  color: #02AEEE;
+}
+
+.course-content .table th{
+  color: rgba(3, 37, 64, 0.6);
+  font-weight: 400;
+  font-size: 24px;
+}
+
+.course-content .table td {
+  font-size: 18px; 
+}
+
+.course-content .table th, .course-content .table td {
+    vertical-align: middle;
+}
+
+.course-content .bi-pencil, .course-content .bi-trash {
+    cursor: pointer;
+    margin-right: 10px;
+    color: rgba(3, 37, 64, 0.6);
+}
+
+.course-content .bi-pencil:hover, .course-content .bi-trash:hover {
+    color: #02AEEE;
+}
