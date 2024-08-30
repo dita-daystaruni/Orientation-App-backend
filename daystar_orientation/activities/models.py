@@ -18,3 +18,4 @@ class Activity(models.Model):
     class Meta:
        '''Meta class for the model'''
        pass
+
