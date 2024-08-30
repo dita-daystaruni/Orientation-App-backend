@@ -24,4 +24,4 @@ COPY . .
 EXPOSE 8000
 
 # Command to run the development server
-CMD ["sh", "-c", "python manage.py makemigrations account activities events faqs orientation notifications hods && python manage.py migrate && python manage.py load_courses && python manage.py runserver 0.0.0.0:8000"]
+CMD ["sh", "-c", "python manage.py makemigrations account activities faqs orientation notifications hods && python manage.py migrate && python manage.py load_courses && python manage.py runserver 0.0.0.0:8000"]
