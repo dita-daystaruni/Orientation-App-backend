@@ -1,102 +1,73 @@
-html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
+.header-container{
+    padding-top: 90px;
+    padding-bottom: 90px;
+    display: flex;
+    flex-direction: row;
     width: 100%;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    color: #032540;
   }
 
-  .container{
-    margin: 0;
-    height: 100vh;
-  }
-
-  .col-md-2{
-    justify-content: space-between;
-  }
-
-  .avtr{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+  .view-courses-link{
+    cursor: pointer;
+    align-items: flex-end;
     margin-top: 25px;
-    margin-bottom: 25px;
-    color: #032540;
-  }
-  #user-avatar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: transparent;
-    margin-top: 10px;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
+    margin-bottom: 5px;
   }
 
-  .dashicon-class{
-    width: 15px;
-    height: 15px;
-  }
+  .header-container .col.d-flex.justify-content-end i {
+    cursor: pointer;
+    margin-left: 30px; 
+}
 
-  .FAQ-class{
-    width: 15px;
-    height: 15px;
-  }
-  
-  .sidenav {
-    display: flex;
-    flex-direction: column;
-    padding: 10px;
-    margin-top: 10px;
-    background-color: #ffffff;
-    height: 100vh;
-    overflow: hidden;
-    padding: 0;
-    border-radius: 8px;
-    gap: 10px;
-    box-shadow: 0 2px 4px rgba(204, 202, 202, 0.1);
-  }
-  
-  .sidenav a {
-    padding: 8px;
-    font-size: small;
-    justify-content: space-between;
-    color: #032540;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: border-color 0.3s ease-in-out;
-  }
-  
-  .sidenav a:hover {
-    background-color: #f8f8f8;
-    border: 2px solid #02AEEE; /* Blue border */
-    border-radius: 5px; /* Curved border radius */
-  }
-  
-  .active {
-    background-color: #f8f8f8;
-    border-radius: 5px;
-    border: 2px solid #02AEEE; /* Blue border for active state */
-  }
-  
-  @media screen and (max-width: 500px) {
-    .sidenav a {
-      float: none;
-      display: block;
-    }
-  }
+.header-container.add-icon{
+  height: 24px;
+}
 
-  h4 {
-    border-bottom: 1px solid #ccc; /* Adjust border style, color, and width as needed */
+.header-container .col.d-flex.justify-content-end i:first-child {
+    margin-left: 30px; 
+}
+
+.header-container .col.d-flex.justify-content-end i:hover {
+  color: #02AEEE;
+  transform: scale(1.2); /* Slightly increase the size on hover */
+  transition: transform 0.2s, color 0.2s; /* Smooth transition for the effects */
+}
+
+  h5 {
+    margin-top: 15px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #ccc; 
+    font-size: 36px;
+    font-weight: bolder;
   }
 
 /* Main content table styling */
 .table-hover tbody tr:hover {
-    background-color: rgba(0, 123, 255, 0.1);
+    background-color: rgba(3, 37, 64, 0.6);
+}
+
+.col-md-10{
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.header-container a {
+  color: #032540;
+  transition: color 0.3s ease; /* Smooth transition for color change */
+}
+
+.header-container a:hover {
+  color: #02AEEE;
+}
+
+
+.table th{
+  color: rgba(3, 37, 64, 0.6);
+  font-weight: 400;
+  font-size: 24px;
+}
+
+.table td {
+  font-size: 18px; 
 }
 
 .table th, .table td {
@@ -106,11 +77,11 @@ html, body {
 .bi-pencil, .bi-trash {
     cursor: pointer;
     margin-right: 10px;
-    color: #6c757d;
+    color: rgba(3, 37, 64, 0.6);
 }
 
 .bi-pencil:hover, .bi-trash:hover {
-    color: #007bff;
+    color: #02AEEE;
 }
 
 /* Sidebar item styling */
@@ -122,6 +93,51 @@ html, body {
     max-width: 100%;
     height: auto;
 }
+
+#search-input {
+  transition: width 0.3s ease;
+  width: 0;
+  margin-left: 10px;
+}
+
+#search-input.active {
+  width: 200px; /* Adjust the width as needed */
+  margin-left: 10px;
+}
+
+.d-none {
+  display: none;
+}
+
+/*search bar*/
+.searchbar{
+  display: flex;
+  height: 20px;
+  background-color: #ffffff;
+  border-radius: 20px;
+  color: rgba(3, 37, 64);
+  align-items: center;
+}
+
+.searchbar i{
+  color: #032540;
+}
+
+.searchbar:hover input{
+  width: 150px;
+  border: 1px solid #02AEEE;
+  border-radius: 50px;
+  color: #032540;
+}
+
+.searchbar input{
+  width: 0;
+  outline: none;
+  border: none;
+  transition: 0.5s;
+  background: transparent;
+}
+/*search bar*/
 
 /* Responsive design */
 @media (max-width: 767.98px) {
