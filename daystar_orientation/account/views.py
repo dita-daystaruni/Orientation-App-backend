@@ -203,6 +203,19 @@ class StatsView(APIView):
 
         return Response(data)
 
+class StatsData(APIView):
+    def get(self, request):
+        """
+        """
+        course = request.query_params.get('course')
+
+        regular_users = Account.objects.filter(user_type='regular', checked_in=True)
+        if course:
+            regular_users = regular_users.filter(course=course)
+        serializer = AccountSerializer(regular_users, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
+
 # Web views
 def login_view(request):
     if request.user.is_authenticated:
