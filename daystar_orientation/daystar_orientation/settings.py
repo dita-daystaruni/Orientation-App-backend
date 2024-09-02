@@ -1,4 +1,6 @@
 from pathlib import Path
+import firebase_admin
+from firebase_admin import credentials
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -29,6 +31,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'corsheaders',
+    'fcm_django',
     'orientation',
     'account',
     'djoser',
@@ -175,3 +178,14 @@ FILE_UPLOAD_MAX_MEMORY_SIZE = 15485760 # 15MB maximum file size
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# To do: use environment variables
+
+# Get the Firebase credentials path from the environment variable
+firebase_credentials_path = os.environ.get('FIREBASE_CREDENTIALS_PATH')
+
+if firebase_credentials_path:
+    cred = credentials.Certificate(firebase_credentials_path)
+    firebase_admin.initialize_app(cred)
+else:
+    raise Exception("FIREBASE_CREDENTIALS_PATH environment variable is not set.")
