@@ -39,7 +39,6 @@ class FirstTimeUserPasswordChangeView(generics.GenericAPIView):
         return Response({'message': 'Password changed successfully.'}, status=status.HTTP_200_OK)
 
 
-
 class CustomAuthToken(ObtainAuthToken):
     def post(self, request, *args, **kwargs):
         '''Authenticate a user using login fields and return a token to be used for future requests.'''
@@ -65,7 +64,9 @@ class CustomAuthToken(ObtainAuthToken):
                     'first_name': user.parent.first_name,
                     'last_name': user.parent.last_name,
                     'admission_number': user.parent.admission_number,
-                    'campus': user.parent.campus
+                    'campus': user.parent.campus,
+                    'phone_number': user.parent.phone_number,
+                    'email': user.parent.email,
                 }
             
             return Response({
@@ -202,6 +203,7 @@ class StatsView(APIView):
         }
 
         return Response(data)
+    
 
 class StatsData(APIView):
     def get(self, request):
