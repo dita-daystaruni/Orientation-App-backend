@@ -1,112 +1,3 @@
-html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    width: 100%;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    color: #032540;
-  }
-
-  .container-fluid{
-    height: 100vh;
-  }
-
-  .col-md-2{
-    justify-content: space-between;
-  }
-
-  .avtr{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    margin-top: 25px;
-    margin-bottom: 25px;
-    color: #032540;
-  }
-  #user-avatar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: transparent;
-    margin-top: 10px;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-  }
-
-  .dashicon-class{
-    width: 15px;
-    height: 15px;
-  }
-
-  .FAQ-class{
-    width: 15px;
-    height: 15px;
-  }
-  
-  .sidenav {
-    display: flex;
-    flex-direction: column;
-    padding: 10px;
-    margin-top: 10px;
-    background-color: #ffffff;
-    height: 100vh;
-    overflow: hidden;
-    padding: 0;
-    border-radius: 8px;
-    gap: 10px;
-    box-shadow: 0 2px 4px rgba(204, 202, 202, 0.1);
-  }
-  
-  .sidenav a {
-    padding: 8px;
-    font-size: small;
-    justify-content: space-between;
-    color: #032540;
-    text-decoration: none;
-    border-radius: 10px;
-    transition: border-color 0.3s ease-in-out;
-  }
-  
-  .sidenav a:hover {
-    background-color: #f8f8f8;
-    border: 2px solid #02AEEE; /* Blue border */
-    border-radius: 10px; /* Curved border radius */
-  }
-  
-  .active {
-    background-color: #f8f8f8;
-    border-radius: 10px;
-    border: 2px solid #02AEEE; /* Blue border for active state */
-  }
-  
-  @media screen and (max-width: 500px) {
-    .sidenav a {
-      float: none;
-      display: block;
-    }
-  }
-
-  .row{
-    height: 100%;
-  }
-
-  .col-md-2, .col-md-7, .col-md-3 {
-    height: 100%;
-    overflow: hidden;
-
-}
-  
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  width: 100%;
-  font-family: Verdana, sans-serif;
-}
-
 .main-content{
   display: flex;
   flex-direction: column;
@@ -114,6 +5,11 @@ html, body {
   margin-top: 25px;
   width: 100%;
   height: 100vh;
+}
+
+header .bi-person-plus:hover {
+  transform: scale(1.2); /* Increase size by 20% */
+  color: #02AEEE;
 }
 
 /* First row - Stats and Notifications */
@@ -160,7 +56,9 @@ html, body {
   margin-bottom: 2px;
   box-sizing: border-box;
   border-radius: 1px;
-  background-color: #f8f8f8;
+  background-color: #ffffff;
+  box-shadow: #032540;
+  border-radius: 20px;
   /*height: 20%;*/
 }
 
@@ -342,7 +240,7 @@ height: 60%;
 
 }
 
-.graphimage{
+.graphimage {
   display: flex;
   justify-content: space-around;
   width: 50%;
@@ -493,8 +391,8 @@ li {
 }
 
 time {
-  font-weight: bold;
-  margin-right: 10px;
+  font-weight: 400;
+  margin-right: 5px;
 }
 
 .bi-chevron-right {
@@ -541,4 +439,8 @@ justify-content: flex-start;
     display: flex;
     justify-content: flex-end;
    
+}
+
+.todays-schedule{
+  overflow-y: auto;
 }

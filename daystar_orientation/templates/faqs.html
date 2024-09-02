@@ -1,113 +1,115 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FAQs</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-<div class="container-fluid">
-    <div class="row">
-        <!-- Sidebar -->
-        <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
-            <div class="sidebar-sticky">
-                <div class="text-center py-4">
-                    <img src="images/avatar.png" alt="Avatar" class="rounded-circle img-fluid mb-2" style="width: 80px;">
-                    <div class="user-name">Name</div>
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} FAQS {% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/faqs.css' %}">
+{% endblock %}
+
+{% block content %}
+<!-- Main Content -->
+        <main class="col-md-10 col-lg-10 px-md-4">
+            <div class="row">
+                <!-- FAQ List Column -->
+                <div class="col-md-5">
+                    <header>
+                    <h6 class="d-flex justify-content-center align-items-center">Frequently Asked Questions</h6> &nbsp; &nbsp; &nbsp;
+                    <a><img src="{% static 'images/paper-add.png' %}" alt="add-icon" class="add-icon"></a>
+                    
+                </header>
+                <div class="faq-list">
+                    <!-- FAQ Item -->
+                    <div class="faq-item">
+                        <div class="question">
+                          <p>Lorem ipsum dolor sit amet, consectetur adipiscing</p>
+                          <i class="bi bi-chevron-right float-end question-toggle"></i>
+                        </div>
+                        <div class="answer" style="color:rgba(3, 37, 64, 0.6);">
+                       <!-- <h6 class="d-flex justify-content-center" style="font-size: small; color: #032540;">answer</h6>-->
+                          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                            Nunc faucibus rhoncus dui, eget scelerisque sapien varius 
+                            et...</p>
+                            <div class="ans-i" style="display: flex;justify-content: flex-end;">
+                                <a href=""><i class="bi bi-pencil" style="margin-right: 7px; color: rgba(3, 37, 64, 0.6);"></i></a>
+                                <a href=""><i class="bi bi-trash" style="margin-right: 2px; color: rgba(3, 37, 64, 0.8);"></i></a>   
+                            </div> 
+                      </div>
+                    </div>
+                    <!-- FAQ Item -->
+                    <div class="faq-item">
+                        <div class="question">
+                          <p>Lorem ipsum dolor sit amet, consectetur adipiscing</p>
+                          <i class="bi bi-chevron-right float-end question-toggle"></i>
+                        </div>
+                        <div class="answer" style="color: rgba(3, 37, 64, 0.6);">
+                       <!-- <h6 class="d-flex justify-content-center" style="font-size: small; color: #032540;">answer</h6>-->
+                          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                            Nunc faucibus rhoncus dui, eget scelerisque sapien varius 
+                            et...</p>
+                            <div class="ans-i" style="display: flex;justify-content: flex-end;">
+                                <a href=""><i class="bi bi-pencil" style="margin-right: 7px;color: rgba(3, 37, 64, 0.6);"></i></a>
+                                <a href=""><i class="bi bi-trash" style="margin-right: 2px;color: rgba(3, 37, 64, 0.8);"></i></a>   
+                            </div> 
+                      </div>
+                    </div>
+                            <!-- FAQ Item -->
+                    <div class="faq-item">
+                        <div class="question">
+                          <p>Lorem ipsum dolor sit amet, consectetur adipiscing</p>
+                          <i class="bi bi-chevron-right float-end question-toggle"></i>
+                        </div>
+                        <div class="answer" style="color: rgba(3, 37, 64, 0.6);">
+                       <!-- <h6 class="d-flex justify-content-center" style="font-size: small; color: #032540;">answer</h6>-->
+                          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                            Nunc faucibus rhoncus dui, eget scelerisque sapien varius 
+                            et...</p>
+                            <div class="ans-i" style="display: flex;justify-content: flex-end;">
+                               <a href=""><i class="bi bi-pencil" style="margin-right: 7px;color: rgba(3, 37, 64, 0.6);"></i></a>
+                                <a href=""><i class="bi bi-trash" style="margin-right: 2px;color: rgba(3, 37, 64, 0.8);"></i></a>  
+                            </div> 
+                      </div>
+                    </div>
                 </div>
-                <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link" href="dashboard.html">
-                            <i class="bi bi-speedometer2"></i> Dashboard
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="schedule.html">
-                            <i class="bi bi-calendar2-week"></i> Schedule
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="notifications.html">
-                            <i class="bi bi-bell"></i> Notifications
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="students.html">
-                            <i class="bi bi-people"></i> Students
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="faq.html">
-                            <i class="bi bi-question-circle"></i> FAQ
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" onclick="handleLogout()">
-                            <i class="bi bi-box-arrow-right"></i> Log out
-                        </a>
+                    <!-- Repeat FAQ Items as needed -->
 
-                    </li>
-                </ul>
-            </div>
-        </nav>
-
-        <!-- FAQ Section -->
-        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-            <h4 class="my-4">Frequently Asked Questions</h4>
-
-            <!-- FAQ List -->
-            <div class="faq-item">
-                <div class="question">
-                    <i class="bi bi-question-circle-fill"></i> Question: Lorem ipsum dolor sit amet
-                    <i class="bi bi-chevron-right float-end"></i>
                 </div>
-                <div class="answer">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc faucibus rhoncus dui, eget scelerisque sapien varius et...</p>
-                    <div class="icons">
-                        <i class="bi bi-pencil"></i>
-                        <i class="bi bi-trash"></i>
+
+                <!-- Right Side Column (Image and Form) -->
+                <div class="col-md-5">
+                    <div class="row h-100">
+                        <!-- Image Section -->
+                        <div class="col-md-12 mb-3 d-flex justify-content-center align-items-center" style="height: 40%;">
+                            <img src="{% static 'images/faqs.png' %}" alt="Bubble Gum Man" class="bbgman">
+                        </div>
+
+                        <!-- Form Section -->
+                        <div class="col-md-12" style="height: 60%;">
+                            <h4 class="text-center">Any new question?</h4>
+                            <form>
+                                <div class="mb-3">
+                                    <input type="text" class="form-control" placeholder="Add a new question here">
+                                </div>
+                                <div class="mb-3">
+                                    <textarea class="form-control" rows="3" placeholder="Add answer"></textarea>
+                                </div>
+                                <div class="d-flex justify-content-center">
+                                    <button type="submit" class="btn-primary" style="width: 50%;">Upload</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
-
-            <!-- Repeat FAQ Items as needed -->
-            <div class="faq-item">
-                <div class="question">
-                    <i class="bi bi-question-circle-fill"></i> Question: Lorem ipsum dolor sit amet
-                    <i class="bi bi-chevron-right float-end"></i>
-                </div>
-                <!-- Add more FAQ items as necessary -->
-            </div>
-
-            <!-- Right side - New Question Form and Image -->
-            <div class="row">
-                <div class="col-md-6">
-                    <img src="images/faqs.png" alt="Bubble Gum Man" class="img-fluid">
-                </div>
-                <div class="col-md-6">
-                    <h4>Any new question?</h4>
-                    <form>
-                        <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="Add a new question here">
-                        </div>
-                        <div class="mb-3">
-                            <textarea class="form-control" rows="3" placeholder="Add answer"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Upload</button>
-                    </form>
-                </div>
-            </div>
         </main>
-    </div>
-</div>
 
-<script src="js/logout.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<!-- Font Awesome CSS -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<!-- bootstrap icons -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-</body>
-</html>
+<footer class="d-flex justify-content-center align-items-center py-3" style="margin-top: 20px;">
+<a href=""><i class="bi bi-chevron-left" style="margin-right: 20px; font-size: 14px;"></i></a>
+<a href=""><i class="bi bi-chevron-right" style="margin-left: 20px; font-size: 14px;"></i></a>
+</footer>
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'js/toggle.js' %}"></script>
+{% endblock %}

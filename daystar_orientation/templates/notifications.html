@@ -1,48 +1,77 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Form</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="notifications.css">
-</head>
-<body>
-    <div class="container">
-        <div class="sidebar">
-            <div class="avtr">
-        <img src="images/avatar.png" alt="Avatar" id="user-avatar">
-        <div id="name">Name</div>
-            </div>
-             <nav class="sidenav">
-        <a href="dashboard.html"><i><img src="images/bl-dashicon.png" alt="dashicon" class="dashicon-class"></i> Dashboard</a> 
-        <a href="schedule.html"><i class="bi bi-calendar2-week"></i> Schedule</a> 
-        <a class="active" href="notifications.html"><i><img src="images/actv-bell.png" alt="notf-icon" class="notf-class"></i> Notifications</a> 
-        <a href="students.html"><i class="bi bi-people"></i> Students</a> 
-        <a href="faq.html"><i><img src="images/FAQ.png" alt="dashicon" class="FAQ-class"></i> FAQ</a>
-        <br>
-        <a href="#"><i class="bi bi-box-arrow-right"></i> Log out</a> 
-              </nav>
-        </div>
+{% extends 'base.html' %}
 
-        <div class="notification-page-main">
+{% load static %}
+
+{% block title %}Notifications{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/notifications.css' %}">
+{% endblock %}
+
+{% block content %}
+  <div class="col-md-10">
+
+            <div class="header-container">
+                <div class="col d-flex justify-content-start">
+                    <h4>Notifications</h4>
+                </div>
+                <div class="col d-flex justify-content-end">
+                    <a href="js/markallasread" class="masr">mark all as read</a>
+                    <a href="send-notifications.html" style="color: rgba(3, 37, 64, 0.6);"><i class="bsi bi-pencil"></i></a>
+                </div>
+            </div>
+
             <div class="notification-item">
                 <div class="initials-icon" data-initials="GC"></div>
                 <div class="notification-content">
+                    <div class="nof-ttl">
+                    <p class="sender-name" style="color: #02AEEE;">Sender's Name</p>
+                    <br>
                     <h4 class="notification-title">Title here</h4>
-                    <p class="notification-description">Description here...</p>
+                </div>
+                    <p class="notification-description">Lorem ipsum dolor sit amet consectetur, 
+                        adipisicing elit. Esse eum, suscipit expedita nesciunt vel consequuntur 
+                        rerum culpa, tenetur dolores molestias, eaque quisquam molestiae non 
+                        provident quae ipsa nostrum aliquid. Optio?</p>
+                    <span class="notification-time">Time info</span>
+                </div>
+            </div>
+
+            <div class="notification-item">
+                <div class="initials-icon" data-initials="GC"></div>
+                <div class="notification-content">
+                    <div class="nof-ttl">
+                    <p class="sender-name" style="color: #02AEEE;">Sender's Name</p>
+                    <br>
+                    <h4 class="notification-title">Title here</h4>
+                </div>
+                    <p class="notification-description">Lorem ipsum dolor sit amet consectetur, 
+                        adipisicing elit. Esse eum, suscipit expedita nesciunt vel consequuntur 
+                        rerum culpa, tenetur dolores molestias, eaque quisquam molestiae non 
+                        provident quae ipsa nostrum aliquid. Optio?</p>
+                    <span class="notification-time">Time info</span>
+                </div>
+            </div>
+
+            <div class="notification-item">
+                <div class="initials-icon" data-initials="GC"></div>
+                <div class="notification-content">
+                    <div class="nof-ttl">
+                    <p class="sender-name" style="color: #02AEEE;">Sender's Name</p>
+                    <br>
+                    <h4 class="notification-title">Title here</h4>
+                </div>
+                    <p class="notification-description">Lorem ipsum dolor sit amet consectetur, 
+                        adipisicing elit. Esse eum, suscipit expedita nesciunt vel consequuntur 
+                        rerum culpa, tenetur dolores molestias, eaque quisquam molestiae non 
+                        provident quae ipsa nostrum aliquid. Optio?</p>
                     <span class="notification-time">Time info</span>
                 </div>
             </div>
             <!-- Repeat .notification-item for each notification -->
         </div>
-        
-</div>
-    <script src="js/initialicons.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Font Awesome CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <!-- bootstrap icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-</body>
-</html>
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'js/initialicons.js' %}"></script>
+{% endblock %}

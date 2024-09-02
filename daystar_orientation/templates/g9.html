@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} G9 Create {% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/g9.css' %}">
+{% endblock %}
+
+{% block content %}
+ <div class="col-md-10">
+                <form>
+                    <h4 class="d-flex justify-content-center">Parent/G9 Details</h4>
+                    <div class="form-row">
+                    <div class="fields">
+                        <div class="input-field">
+                            <label for="firstName" class="form-label">First Name</label>
+                            <input type="text" class="form-control" id="firstName" placeholder="First Name" style="width: 300px;">
+                        </div>
+                        <div class="input-field">
+                            <label for="lastName" class="form-label"></label>
+                            <input type="text" class="form-control" id="lastName" placeholder="Last Name" style="width: 300px;">
+                        </div>
+                    </div>
+                    
+                    <div class="fields">
+                        <div class="input-field">
+                            <label for="gender" class="form-label">Gender</label><br>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" id="female" name="gender"va1ue="female" class="form-check-input">
+                                <label for="female" class="form-check-label">Female</label>
+                            </div>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <div class="form-check form-check-inline ">
+                                <input type="radio" id="male" name="gender" value="male" class="form-check-input">
+                                <label for="male" class="form-check-label">Male</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="fields">
+                        <div class="input-field">
+                            <label for="admissionNumber" class="form-label">Admission Number</label>
+                            <input type="text" class="form-control" id="admissionNumber" placeholder="eg. 24-0001" style="width: 300px;">
+                        </div>
+                        <div class="input-field">
+                            <label for="courseName" class="form-label">Course Name</label>
+                            <input type="text" class="form-control" id="courseName" placeholder="eg. Computer Science" style="width: 300px;">
+                        </div>
+                    </div>
+                    <div class="fields">
+                        <div class="input-field">
+                            <label for="phoneNumber" class="form-label">Phone Number</label>
+                            <input type="text" class="form-control" id="phoneNumber" placeholder="eg. +2547 12 345 678" style="width: 300px;">
+                        </div>
+                        <div class="input-field">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" placeholder="name@gmail.com" style="width: 300px;">
+                        </div>
+                    </div>
+                </div>
+                    <div class="fields">
+                        <div class="input-field">
+                            <label for="campus" class="form-label">Campus</label><br>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" id="athi-campus" name="campus" value="Athi" class="form-check-input">
+                                <label for="Athi" class="form-check-label">Athi River</label>
+                            </div>
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                          &nbsp;&nbsp;
+                            <div class="form-check form-check-inline">
+                                <input type="radio" id="nbo-campus" name="campus" value="Nairobi" class="form-check-input">
+                                <label for="Nairobi" class="form-check-label">Nairobi</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="btn-container">
+                        <button type="submit" class="btn btn-primary">Update</button>
+                    </div>
+                </form>
+            </div>
+{% endblock %}

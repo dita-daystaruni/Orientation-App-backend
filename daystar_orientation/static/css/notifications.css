@@ -1,99 +1,43 @@
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f9f9f9;
-    margin: 0;
-    padding: 0;
-}
-
-.container{
-    display: flex;
-    margin: 0;
-    height: 100vh;
-    justify-content: space-between;
-}
-
-.sidebar{
-    background-color: #ffffff;
-    width: 20%;
-}
-
-.sidenav {
-    display: flex;
-    flex-direction: column;
-    padding: 10px;
-    margin-top: 10px;
-    height: 100vh;
-    overflow: hidden;
-    padding: 0;
-    border-radius: 8px;
-    gap: 10px;
-    box-shadow: 0 2px 4px rgba(204, 202, 202, 0.1);
-  }
-  .sidenav a {
-    padding: 8px;
-    font-size: small;
-    justify-content: space-between;
-    color: #032540;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: border-color 0.3s ease-in-out;
-  }
-  
-  .sidenav a:hover {
-    background-color: #f8f8f8;
-    border: 2px solid #02AEEE; /* Blue border */
-    border-radius: 5px; /* Curved border radius */
-  }
-
-  .active {
-    background-color: #f8f8f8;
-    border-radius: 5px;
-    border: 2px solid #02AEEE; /* Blue border for active state */
-  }
-
-  .avtr{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    margin-top: 25px;
-    margin-bottom: 25px;
-    color: #032540;
-  }
-  #user-avatar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: transparent;
-    margin-top: 10px;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-  }
-
-.dashicon-class{
-    width: 15px;
-    height: 15px;
-  }
-
-  .notf-class{
-    width: 15px;
-    height: 15px;
-  }
-
-.FAQ-class{
-    width: 15px;
-    height: 15px;
-  }
-
-.notification-page-main {
-    width: 100%;
+.col-md-10 {
+    width: 87.33%;
     /*max-width: 400px;  Assuming mobile view */
-    margin: 0 auto;
+    margin: 0;
     padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+}
+
+.header-container{
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.view-courses-link{
+  cursor: pointer;
+  align-items: flex-end;
+  margin-top: 15px;
+  margin-bottom: 5px;
+}
+
+.header-container .col.d-flex.justify-content-end i {
+  cursor: pointer;
+  margin-right: 10px; 
+}
+
+/* Add margin to the first icon to ensure it's not too close to the edge */
+.header-container .col.d-flex.justify-content-end i:first-child {
+  margin-right: 0; 
+}
+
+.header-container .col.d-flex.justify-content-end i:hover {
+color: #02AEEE; 
+transform: scale(1.2);
+transition: transform 0.2s, color 0.2s;
+}
+
+.col.d-flex.justify-content-end a {
+  margin-left: 10px;
 }
 
 .notification-item {
@@ -105,8 +49,8 @@ body {
 }
 
 .notification-icon {
-    width: 40px; /* Example size */
-    height: auto;
+    width: 40px;
+    height: 40px;
     margin-right: 10px;
 }
 
@@ -151,9 +95,34 @@ body {
     height: 50px;
     line-height: 50px;
     text-align: center;
+    flex-shrink: 0;
 }
 
 [data-initials]:before {
     content: attr(data-initials); 
 }
 
+.masr{
+  color: #02AEEE;
+}
+
+.masr:hover{
+  color: #032540;
+}
+
+/* Optional: Styling for the rest of the notification content */
+.notification-item {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Space between the icon and content */
+}
+
+.notification-content {
+  flex: 1; /* Allows the content to grow and take up available space */
+}
+
+.nof-ttl{
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}

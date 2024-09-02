@@ -3,6 +3,9 @@ from .models import Notification
 from .serializers import NotificationSerializer
 from .permissions import IsAdminOrReadOnly, IsAuthenticatedReadOnly
 from django.db.models import Q
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render
+from django.http import HttpResponseForbidden
 
 class NotificationList(generics.ListCreateAPIView):
     serializer_class = NotificationSerializer
@@ -60,3 +63,26 @@ class RecentNotificationList(generics.ListAPIView):
 
     def get_queryset(self):
         return Notification.objects.order_by('-created_at')[:3]
+    
+# Web views.
+@login_required
+def notifications_view(request):
+    if request.user.user_type != 'admin':
+        return HttpResponseForbidden("You are not authorized to view this page.")
+    
+    notifications = Notification.objects.all()
+    return render(request, 'notifications.html', {'notifications': notifications})
+
+@login_required
+def notificationadd_view(request):
+    if request.user.user_type != 'admin':
+        return HttpResponseForbidden("You are not authorized to view this page.")
+    
+    return render(request, 'notifications_add.html')
+
+@login_required
+def notificationedit_view(request):
+    if request.user.user_type != 'admin':
+        return HttpResponseForbidden("You are not authorized to view this page.")
+    
+    return render(request, 'notifications_edit.html')

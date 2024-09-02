@@ -1,7 +1,5 @@
 .col-md-10{
   display: flex;
-  width: 83.33%; 
-  margin-left: 16.67%;
 }
 
 
@@ -35,8 +33,6 @@
 }
 
 .btn-primary {
-  margin-top: 10px;
-  margin-bottom: 10px;
   background-color: #ffffff;
   width: 150px;
   color: #02AEEE;
@@ -77,7 +73,7 @@ form{
 
 .input-field .form-label{
 margin-top: 10px;
-margin-bottom: 20px;
+margin-bottom: 10px;
 }
 
 

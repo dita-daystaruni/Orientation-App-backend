@@ -59,4 +59,25 @@ def hodsdetails_view(request):
         return HttpResponseForbidden("You are not authorized to view this page.")
     
     hods = HOD.objects.all()
-    return render(request, 'courses.html', {'hods': hods})
+    return render(request, 'courses-details.html', {'hods': hods})
+
+@login_required
+def hodsadd_view(request):
+    if request.user.user_type != 'admin':
+        return HttpResponseForbidden("You are not authorized to view this page.")
+    
+    return render(request, 'course-details_add.html')
+
+@login_required
+def hodsedit_view(request):
+    if request.user.user_type != 'admin':
+        return HttpResponseForbidden("You are not authorized to view this page.")
+    
+    return render(request, 'course-details_edit.html')
+
+@login_required
+def stats_view(request):
+    if request.user.user_type != 'admin':
+        return HttpResponseForbidden("You are not authorized to view this page.")
+    
+    return render(request, 'course_stats.html')

@@ -230,7 +230,7 @@ def login_view(request):
             login(request, user)
             token, created = Token.objects.get_or_create(user=user)
             request.session['auth_token'] = token.key
-            return redirect('students_details')
+            return redirect('dashboard')
         else:
             messages.error(request, 'Invalid admission number or password.')
             return render(request, 'signin.html')
@@ -255,6 +255,7 @@ def studentsadd_view(request):
         phone_number = request.POST.get('phoneNumber')
         accomodation = request.POST.get('accomodation')
         campus = request.POST.get('campus')
+        checked_in = request.POST.get('checkedin')
 
         if not (first_name and last_name and gender and admission_number and course and phone_number and accomodation and campus):
             messages.error(request, 'All fields are required.')
@@ -272,7 +273,8 @@ def studentsadd_view(request):
             course=course,
             phone_number=phone_number,
             accomodation=accomodation,
-            campus=campus
+            campus=campus,
+            checked_in=checked_in
         )
 
         messages.success(request, 'Student details added successfully!')
@@ -281,12 +283,26 @@ def studentsadd_view(request):
     return render(request, 'students_add.html')
 
 @login_required
+def studentedit_view(request):
+    if request.user.user_type != 'admin':
+        return HttpResponseForbidden("You are not authorized to view this page.")
+    
+    return render(request, 'students_edit.html')
+
+@login_required
 def studentsdetails_view(request):
     if request.user.user_type != 'admin':
         return HttpResponseForbidden("You are not authorized to view this page.")
     
     students = Account.objects.filter(user_type='regular')
     return render(request, 'students.html', {'students': students})
+
+@login_required
+def G9_view(request):
+    if request.user.user_type != 'admin':
+        return HttpResponseForbidden("You are not authorized to view this page.")
+    
+    return render(request, 'g9.html')
 
 @login_required
 def dashboard_view(request):

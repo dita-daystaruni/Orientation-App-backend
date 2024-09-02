@@ -1,0 +1,47 @@
+.schedule-header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .schedule-form {
+    margin-top: 20px;
+  }
+
+  .fields{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+
+  .form-control::placeholder {
+    justify-content: center;
+  }
+
+  
+input[type='radio']:after {
+    width: 15px;
+    height: 15px;
+    border-radius: 15px;
+    top: -2px;
+    left: -1px;
+    position: relative;
+    background-color: #ffffff;
+    content: '';
+    display: inline-block;
+    visibility: visible;
+    border: 1px solid #032540;
+  }
+  
+  input[type='radio']:checked:after {
+    width: 15px;
+    height: 15px;
+    border-radius: 15px;
+    top: -2px;
+    left: -1px;
+    position: relative;
+    background-color: #02AEEE;
+    content: '';
+    display: inline-block;
+    visibility: visible;
+    border: 2px solid #ffffff;
+  }

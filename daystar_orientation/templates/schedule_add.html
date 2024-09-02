@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} Schedule Addition {% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/schedule_add.css' %}">
+{% endblock %}
+
+{% block content %}
+ <div class="col-md-10">
+      <div class="schedule-header">
+        <h2>Schedule</h2>
+      </div>
+     <form>
+        <div class="form-row">
+        <div class="fields">
+            <div class="input-field">
+                <label for="activity-date" class="form-label">Date</label>
+                <input type="date" class="form-control" id="activity-date" placeholder="21 July 2024" style="width: 200px;">
+            </div>
+            <div class="input-field">
+                <label for="activity-time" class="form-label">Time</label>
+                <input type="time" class="form-control" id="activity-time" placeholder="8:00 AM" style="width: 200px;">
+            </div>
+            <div class="input-field">
+                <label for="activity-duration" class="form-label">Duration</label>
+                <input type="number" class="form-control" id="activity-duration" placeholder="1 hour" style="width: 200px;">
+            </div>
+        </div>
+        <div class="fields">
+            <div class="input-field">
+                <label for="activity" class="form-label">Activity</label><br>
+                <div class="form-check form-check-inline">
+                    <input type="radio" id="activity" name="event-btn" value="activity" class="form-check-input">
+                    <label for="activity" class="form-check-label">Activity</label>
+                </div>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <div class="form-check form-check-inline ">
+                    <input type="radio" id="session" name="event-btn" value="session" class="form-check-input">
+                    <label for="session" class="form-check-label">Session</label>
+                </div>
+            </div>
+        </div>
+        <div class="fields">
+            <div class="input-field">
+                <label for="activity-name" class="form-label">Event/Session Name</label>
+                <input type="text" class="form-control" id="activity-name" placeholder="Title/event Name" style="width: 300px;">
+                </div>
+        </div>
+        <div class="fields">
+                <div class="input-field">
+                    <label for="activity-location" class="form-label">Location</label>
+                    <input type="text" class="form-control" id="activity-location" placeholder="Location" style="width: 300px;">
+                    </div>
+        </div>
+     </div>
+     <div class="mb-3">
+        <label for="activity-description" class="form-label">Description</label>
+        <textarea class="form-control" id="activity-description" rows="3" placeholder="Description"></textarea>
+      </div>
+        <div class="btn-container" style= "display: flex; justify-content: flex-end;">
+            <button type="submit" class="btn btn-primary" style="background-color: #ffffff; color: #02AEEE;width: 150px; border-radius: 20px;border: 1px solid #02AEEE;">Update</button>
+        </div>
+     </form>
+  </div>
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'js/scheduletime.js' %}"></script>
+{% endblock %}
