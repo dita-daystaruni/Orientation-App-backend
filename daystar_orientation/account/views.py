@@ -226,9 +226,8 @@ def login_view(request):
 
         if user is not None:
             if user.user_type != 'admin':
-                return render(request, 'signin.html', {
-                    'error_message': 'Only Admins(G9) are allowed to login to the web version of the application'
-                })
+                messages.error(request, 'Only Admins(G9s) can see the administrative view')
+                return render(request, 'signin.html')
 
             login(request, user)
             token, created = Token.objects.get_or_create(user=user)

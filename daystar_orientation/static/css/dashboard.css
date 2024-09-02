@@ -66,19 +66,19 @@ html, body {
     justify-content: space-between;
     color: #032540;
     text-decoration: none;
-    border-radius: 5px;
+    border-radius: 10px;
     transition: border-color 0.3s ease-in-out;
   }
   
   .sidenav a:hover {
     background-color: #f8f8f8;
     border: 2px solid #02AEEE; /* Blue border */
-    border-radius: 5px; /* Curved border radius */
+    border-radius: 10px; /* Curved border radius */
   }
   
   .active {
     background-color: #f8f8f8;
-    border-radius: 5px;
+    border-radius: 10px;
     border: 2px solid #02AEEE; /* Blue border for active state */
   }
   
@@ -191,10 +191,33 @@ html, body {
   color: #032540;
 }
 
-#card-textnum {
+#new-textnum {
   font-size: 36px; /* Adjusted text size */
   color: #032540;
   text-align: center;
+}
+
+#checkedin-textnum {
+  font-size: 36px; /* Adjusted text size */
+  color: #032540;
+  text-align: center;
+}
+
+#notcheckedin-textnum {
+  font-size: 36px; /* Adjusted text size */
+  color: #032540;
+  text-align: center;
+}
+
+.statscard-row2{
+  display: flex;
+  justify-content: space-between;
+  font-size: small;
+}
+
+.stats-col{
+  display: flex;
+  flex-direction: column;
 }
 
 /* Notifications card content */
@@ -286,7 +309,8 @@ float: inline-start;
 .active-dot {
   height: 10px;
   width: 10px;
-  background-color: #228822; /* Green color */
+  background-color: #97D444;
+  ; /* Green color */
   border-radius: 50%;
   display: inline-block;
   margin-right: 5px; /* Adjust spacing as needed */
@@ -351,111 +375,170 @@ height: 60%;
 
 .prog-row{
     display: flex;
+    justify-content: space-between;
     flex-direction: row;
 }
 
+.icon-prog i{
+  margin-right: 10px;
+  cursor: pointer;
+}
 
-.icon-prog{
-    display: flex;
-    justify-content: flex-end;
+.icon-prog i :hover{
+  color: #02AEEE;
 }
 
 ul {list-style-type: none;}
 body {font-family: Verdana, sans-serif;}
 
+.notification-card {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.notification-header {
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.notification-header span {
+  font-weight: 500;
+}
+
+.notification-header a {
+  color: #02AEEE;
+  text-decoration: none;
+}
+
+.notification-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.notification-item {
+  margin-bottom: 10px;
+  padding: 5px;
+  border-bottom: 1px solid #ccc;
+  display: flex;
+  flex-direction: row;
+  height: 55px;
+}
+
+.notification-icon {
+  margin-right: 10px;
+}
+
+.notification-content {
+  display: flex;
+  flex-direction: column;
+  font-size: small;
+}
+
+.notification-sender, .notification-title, .notification-message {
+  margin: 0;
+  padding: 0;
+}
+
+.notification-message {
+  color: #888;
+  font-size: 14px;
+}
+
+.notification-message a {
+  color: #02AEEE;
+  text-decoration: none;
+}
+
+/* col-md-3*/
 .col-md-3{
   justify-content: space-between;
   display: flex;
+  font-size: 12px;
   flex-direction: column;
   margin-top: 25px;
   gap: 10px;
-}
-#calendar {
-  max-height: 50%; /* Adjust to ensure it doesn't occupy the whole column */
-  width: 100%;
-  /*overflow-y: auto;  Enable vertical scroll if necessary */
-  overflow-x: hidden; /* Prevent horizontal overflow */
-  padding: 25px;
-  background-color: #ffffff;
-  font-size: x-small;
+  padding: 8px;
+  line-height: 0.9;
 }
 
-#calendar-header {
-  font-size: x-small;
+.main-sessions, .todays-schedule {
+  margin-bottom: 20px;
+}
+
+.todays-schedule ul {
+  max-height: 300px; /* Adjust the maximum height as needed */
+  overflow-y: auto;
+}
+
+h2 {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+time {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.bi-chevron-right {
+  margin-left: auto;
+}
+
+.col-md-3 .main-sessions ul li,
+.col-md-3 .todays-schedule ul li {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  padding: 5px;
-  background-color: #ffffff;
-  color: #0f0f0f;
 }
 
-#calendar-body {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 1px;
-  background-color: #ffffff;
-  padding: 10px; /* Reduce padding to fit content better */
-  text-align: center;
+.col-md-3 .main-sessions ul li i,
+.col-md-3 .todays-schedule ul li i {
+  color: #555;
 }
 
-#calendar-body div:hover {
-  background-color: #eee; /* Light gray background on hover */
+.col-md-3 .main-sessions ul li i:hover,
+.col-md-3 .todays-schedule ul li i:hover {
+  color: #02AEEE;
 }
 
-#calendar-body div {
-  font-size: small; /* Adjust font size */
-  color: #333; /* Darker gray text color */
+.row-col{
+  display: flex;
+  flex-direction: column;
 }
 
-.change-month {
-  cursor: pointer;
+.bi-geo-alt {
+  color: #02AEEE;
 }
 
-.schedule, #calendar {
-  background-color: #ffffff;
-  background-color: transparent;
-  /*border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);*/
-  overflow: hidden; /* Prevent overflow */
+.main-content header{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
-/*.week-days{
-  color: #03254066;
-}*/
-
-.schedule{
-  font-size: small;
-  overflow-y: auto;
-  padding: 20px;
-  background-color: transparent;
-  margin-bottom: 0;
-  max-height: 50%;
+.main-content header h5{
+display: flex;
+justify-content: flex-start;
 }
 
-.schedule h6 {
-  margin-bottom: 5px;
-  color: #032540;
+.main-content header p{
+    display: flex;
+    justify-content: flex-end;
+   
 }
-
-.schedule ul li {
-  position: relative; /* Enable pseudo-element positioning */
-  padding-left: 20px; /* Adjust padding to accommodate time */
-}
-
-.schedule ul li::before {
-  content: attr(data-time) ": "; /* Insert time before title */
-  position: absolute;
-  left: 0; /* Align left */
-  font-size: small; /* Adjust font size for time */
-  color: #888; /* Gray text color for time */
-}
-
-.days li.active {
-  padding: 5px;
-  background: #007bff;
-  color: white !important;
-  border-radius: 50%; /* Add rounded border to active day */
-}
-
-

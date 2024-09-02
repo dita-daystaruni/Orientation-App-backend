@@ -2,6 +2,9 @@ from rest_framework import generics
 from .models import HOD, Course
 from .serializers import HODSearializer, CourseSerializer
 from .permissions import IsAdminOrReadOnly, IsAuthenticatedReadOnly
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render
+from django.http import HttpResponseForbidden
 
 class HODList(generics.ListCreateAPIView):
     queryset = HOD.objects.all()
@@ -48,3 +51,12 @@ class CourseDetail(generics.RetrieveUpdateDestroyAPIView):
         else:
             self.permission_classes = [IsAuthenticatedReadOnly]
         return super().get_permissions()
+    
+# Web views.
+@login_required
+def hodsdetails_view(request):
+    if request.user.user_type != 'admin':
+        return HttpResponseForbidden("You are not authorized to view this page.")
+    
+    hods = HOD.objects.all()
+    return render(request, 'courses.html', {'hods': hods})
