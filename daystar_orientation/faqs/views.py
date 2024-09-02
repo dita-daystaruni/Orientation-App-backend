@@ -3,8 +3,9 @@ from .models import FAQ
 from .serializers import FAQSerializer
 from .permissions import IsAdminOrReadOnly, IsAuthenticatedReadOnly
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
+from django.shortcuts import render ,redirect, get_object_or_404
 from django.http import HttpResponseForbidden
+from django.core.paginator import Paginator
 
 class FAQList(generics.ListCreateAPIView):
     queryset = FAQ.objects.all()
@@ -31,8 +32,32 @@ class FAQDetail(generics.RetrieveUpdateDestroyAPIView):
 # Web views 
 @login_required
 def faqs_view(request):
-    if request.user.user_type != 'admin':
-        return HttpResponseForbidden("You are not authorized to view this page.")
-    
     faqs = FAQ.objects.all()
-    return render(request, 'faqs.html', {'faqs': faqs})
+    paginator = Paginator(faqs, 10) 
+    
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    
+    return render(request, 'faqs.html', {'page_obj': page_obj})
+
+def add_faq(request):
+    if request.method == 'POST':
+        question = request.POST['question']
+        answer = request.POST['answer']
+        FAQ.objects.create(question=question, answer=answer)
+        return redirect('faqs')
+
+def edit_faq(request, id):
+    faq = get_object_or_404(FAQ, id=id)
+    if request.method == 'POST':
+        faq.question = request.POST['question']
+        faq.answer = request.POST['answer']
+        faq.save()
+        return redirect('faqs')
+    
+    return render(request, 'faqs.html', {'faq': faq})
+
+def delete_faq(request, id):
+    faq = get_object_or_404(FAQ, id=id)
+    faq.delete()
+    return redirect('faqs')

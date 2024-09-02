@@ -182,10 +182,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # To do: use environment variables
 
 # Get the Firebase credentials path from the environment variable
-firebase_credentials_path = os.environ.get('FIREBASE_CREDENTIALS_PATH')
+# firebase_credentials_path = os.environ.get('FIREBASE_CREDENTIALS_PATH')
 
-if firebase_credentials_path:
-    cred = credentials.Certificate(firebase_credentials_path)
-    firebase_admin.initialize_app(cred)
-else:
-    raise Exception("FIREBASE_CREDENTIALS_PATH environment variable is not set.")
+# if firebase_credentials_path:
+#     cred = credentials.Certificate(firebase_credentials_path)
+#     firebase_admin.initialize_app(cred)
+# else:
+#     raise Exception("FIREBASE_CREDENTIALS_PATH environment variable is not set.")

@@ -53,8 +53,8 @@
                 <td>{{ student.email }}</td>
                 <td>{{ student.parent.first_name }}</td>
                 <td>
-                    <i class="bi bi-pencil"></i>
-                    <i class="bi bi-trash"></i>
+                    <a href="{% url 'students_edit' %}"><i class="bi bi-pencil"></i></a>
+                    <a href=""><i class="bi bi-trash"></i></a>
                 </td>
             </tr>
             {% endfor %}

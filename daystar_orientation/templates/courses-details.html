@@ -16,7 +16,7 @@
         </div>
         <div class="col d-flex justify-content-end">                                
             <div class="searchbar" style="margin-right: 20px;">
-                <input type="text" placeholder="&nbsp; Search">
+                <input type="text" id="search-input" placeholder="&nbsp; Search">
                 &nbsp;
                 <a href="#"><i class="bi bi-search"></i></a>
             </div>
@@ -33,6 +33,7 @@
                 <th scope="col">Phone No.</th>
                 <th scope="col">Email</th>
                 <th scope="col">Course</th>
+                <th scope="col">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -42,18 +43,29 @@
                 <td>{{ hod.title }}</td>
                 <td>{{ hod.phone_number }}</td>
                 <td>{{ hod.email }}</td>
-                <td>{{ hod.course }}</td>
+                <td>{{ hod.course.name }}</td>
                 <td>
-                    <i class="bi bi-pencil"></i>
-                    <i class="bi bi-trash"></i>
+                    <a href="{% url 'courses_details_edit' hod.pk %}"><i class="bi bi-pencil"></i></a>
+                    <a href="{% url 'courses_details_delete' hod.pk %}"><i class="bi bi-trash"></i></a>
                 </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">next</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
 {% endblock %}
 
 {% block extra_js %}
     <script src="{% static 'js/search.js' %}"></script>
 {% endblock %}
-

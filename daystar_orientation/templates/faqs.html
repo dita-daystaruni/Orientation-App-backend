@@ -9,107 +9,94 @@
 {% endblock %}
 
 {% block content %}
-<!-- Main Content -->
-        <main class="col-md-10 col-lg-10 px-md-4">
-            <div class="row">
-                <!-- FAQ List Column -->
-                <div class="col-md-5">
-                    <header>
-                    <h6 class="d-flex justify-content-center align-items-center">Frequently Asked Questions</h6> &nbsp; &nbsp; &nbsp;
-                    <a><img src="{% static 'images/paper-add.png' %}" alt="add-icon" class="add-icon"></a>
-                    
-                </header>
-                <div class="faq-list">
-                    <!-- FAQ Item -->
-                    <div class="faq-item">
-                        <div class="question">
-                          <p>Lorem ipsum dolor sit amet, consectetur adipiscing</p>
-                          <i class="bi bi-chevron-right float-end question-toggle"></i>
-                        </div>
-                        <div class="answer" style="color:rgba(3, 37, 64, 0.6);">
-                       <!-- <h6 class="d-flex justify-content-center" style="font-size: small; color: #032540;">answer</h6>-->
-                          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                            Nunc faucibus rhoncus dui, eget scelerisque sapien varius 
-                            et...</p>
-                            <div class="ans-i" style="display: flex;justify-content: flex-end;">
-                                <a href=""><i class="bi bi-pencil" style="margin-right: 7px; color: rgba(3, 37, 64, 0.6);"></i></a>
-                                <a href=""><i class="bi bi-trash" style="margin-right: 2px; color: rgba(3, 37, 64, 0.8);"></i></a>   
-                            </div> 
-                      </div>
+<main class="col-md-10 col-lg-10 px-md-4">
+    <div class="row">
+        <!-- FAQ List Column -->
+        <div class="col-md-5">
+            <header>
+                <h6 class="d-flex justify-content-center align-items-center">Frequently Asked Questions</h6> &nbsp; &nbsp; &nbsp;
+                <a><img src="{% static 'images/paper-add.png' %}" alt="add-icon" class="add-icon"></a>
+            </header>
+            <div class="faq-list">
+                <!-- FAQ Item Loop -->
+                {% for faq in page_obj %}
+                <div class="faq-item">
+                    <div class="question">
+                        <p>{{ faq.question }}</p>
+                        <i class="bi bi-chevron-right float-end question-toggle"></i>
                     </div>
-                    <!-- FAQ Item -->
-                    <div class="faq-item">
-                        <div class="question">
-                          <p>Lorem ipsum dolor sit amet, consectetur adipiscing</p>
-                          <i class="bi bi-chevron-right float-end question-toggle"></i>
+                    <div class="answer" style="display: none;">
+                        <p>{{ faq.answer }}</p>
+                        <div class="ans-i" style="display: flex; justify-content: flex-end;">
+                            <a href="{% url 'edit_faq' faq.id %}"><i class="bi bi-pencil" style="margin-right: 7px;"></i></a>
+                            <a href="{% url 'delete_faq' faq.id %}"><i class="bi bi-trash" style="margin-right: 2px;"></i></a>
                         </div>
-                        <div class="answer" style="color: rgba(3, 37, 64, 0.6);">
-                       <!-- <h6 class="d-flex justify-content-center" style="font-size: small; color: #032540;">answer</h6>-->
-                          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                            Nunc faucibus rhoncus dui, eget scelerisque sapien varius 
-                            et...</p>
-                            <div class="ans-i" style="display: flex;justify-content: flex-end;">
-                                <a href=""><i class="bi bi-pencil" style="margin-right: 7px;color: rgba(3, 37, 64, 0.6);"></i></a>
-                                <a href=""><i class="bi bi-trash" style="margin-right: 2px;color: rgba(3, 37, 64, 0.8);"></i></a>   
-                            </div> 
-                      </div>
-                    </div>
-                            <!-- FAQ Item -->
-                    <div class="faq-item">
-                        <div class="question">
-                          <p>Lorem ipsum dolor sit amet, consectetur adipiscing</p>
-                          <i class="bi bi-chevron-right float-end question-toggle"></i>
-                        </div>
-                        <div class="answer" style="color: rgba(3, 37, 64, 0.6);">
-                       <!-- <h6 class="d-flex justify-content-center" style="font-size: small; color: #032540;">answer</h6>-->
-                          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                            Nunc faucibus rhoncus dui, eget scelerisque sapien varius 
-                            et...</p>
-                            <div class="ans-i" style="display: flex;justify-content: flex-end;">
-                               <a href=""><i class="bi bi-pencil" style="margin-right: 7px;color: rgba(3, 37, 64, 0.6);"></i></a>
-                                <a href=""><i class="bi bi-trash" style="margin-right: 2px;color: rgba(3, 37, 64, 0.8);"></i></a>  
-                            </div> 
-                      </div>
                     </div>
                 </div>
-                    <!-- Repeat FAQ Items as needed -->
+                {% empty %}
+                <p>No FAQs found.</p>
+                {% endfor %}
+            </div>
 
+            <!-- Pagination Controls -->
+            <nav>
+                <ul class="pagination justify-content-center">
+                    {% if page_obj.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    {% endif %}
+                    {% if page_obj.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Right Side Column (Image and Form) -->
+        <div class="col-md-5">
+            <div class="row h-100">
+                <!-- Image Section -->
+                <div class="col-md-12 mb-3 d-flex justify-content-center align-items-center" style="height: 40%;">
+                    <img src="{% static 'images/faqs.png' %}" alt="Bubble Gum Man" class="bbgman">
                 </div>
 
-                <!-- Right Side Column (Image and Form) -->
-                <div class="col-md-5">
-                    <div class="row h-100">
-                        <!-- Image Section -->
-                        <div class="col-md-12 mb-3 d-flex justify-content-center align-items-center" style="height: 40%;">
-                            <img src="{% static 'images/faqs.png' %}" alt="Bubble Gum Man" class="bbgman">
+                <!-- Form Section -->
+                <div class="col-md-12" style="height: 60%;">
+                    <h4 class="text-center">Any new question?</h4>
+                    <form method="POST" action="{% if faq %}{% url 'edit_faq' faq.id %}{% else %}{% url 'add_faq' %}{% endif %}">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <input type="text" name="question" class="form-control" placeholder="Add a new question here" value="{% if faq %}{{ faq.question }}{% endif %}">
                         </div>
-
-                        <!-- Form Section -->
-                        <div class="col-md-12" style="height: 60%;">
-                            <h4 class="text-center">Any new question?</h4>
-                            <form>
-                                <div class="mb-3">
-                                    <input type="text" class="form-control" placeholder="Add a new question here">
-                                </div>
-                                <div class="mb-3">
-                                    <textarea class="form-control" rows="3" placeholder="Add answer"></textarea>
-                                </div>
-                                <div class="d-flex justify-content-center">
-                                    <button type="submit" class="btn-primary" style="width: 50%;">Upload</button>
-                                </div>
-                            </form>
+                        <div class="mb-3">
+                            <textarea class="form-control" name="answer" rows="3" placeholder="Add answer">{% if faq %}{{ faq.answer }}{% endif %}</textarea>
                         </div>
-                    </div>
+                        <div class="d-flex justify-content-center">
+                            <button type="submit" class="btn-primary" style="width: 50%;">{% if faq %}Edit{% else %}Upload{% endif %}</button>
+                        </div>
+                    </form>
                 </div>
             </div>
-        </main>
-
+        </div>
+    </div>
+</main>
 <footer class="d-flex justify-content-center align-items-center py-3" style="margin-top: 20px;">
-<a href=""><i class="bi bi-chevron-left" style="margin-right: 20px; font-size: 14px;"></i></a>
-<a href=""><i class="bi bi-chevron-right" style="margin-left: 20px; font-size: 14px;"></i></a>
+    <a href="{% if page_obj.has_previous %}?page={{ page_obj.previous_page_number }}{% endif %}">
+        <i class="bi bi-chevron-left" style="margin-right: 20px; font-size: 14px;"></i>
+    </a>
+    <a href="{% if page_obj.has_next %}?page={{ page_obj.next_page_number }}{% endif %}">
+        <i class="bi bi-chevron-right" style="margin-left: 20px; font-size: 14px;"></i>
+    </a>
 </footer>
 {% endblock %}
 
 {% block extra_js %}
-    <script src="{% static 'js/toggle.js' %}"></script>
+<script src="{% static 'js/toggle.js' %}"></script>
 {% endblock %}

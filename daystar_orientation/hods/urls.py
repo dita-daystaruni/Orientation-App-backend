@@ -8,6 +8,7 @@ urlpatterns = [
     path('courses/<str:name>/', CourseDetail.as_view(), name='course-detail'),
     path('course-detail/', hodsdetails_view, name='courses_details'),
     path('course-detail/add/', hodsadd_view, name='courses_details_add'),
-    path('course-detail/edit/', hodsedit_view, name='courses_details_edit'),
+    path('course-detail/<int:pk>/edit/', hodsedit_view, name='courses_details_edit'),
+    path('course-detail/<int:pk>/delete/', stats_view, name='courses_details_delete'),
     path('course-detail/stats/', stats_view, name='courses_stats'),
 ]

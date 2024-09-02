@@ -10,66 +10,51 @@
 
 {% block content %}
   <div class="col-md-10">
-
-            <div class="header-container">
-                <div class="col d-flex justify-content-start">
-                    <h4>Notifications</h4>
-                </div>
-                <div class="col d-flex justify-content-end">
-                    <a href="js/markallasread" class="masr">mark all as read</a>
-                    <a href="send-notifications.html" style="color: rgba(3, 37, 64, 0.6);"><i class="bsi bi-pencil"></i></a>
-                </div>
+        <div class="header-container">
+            <div class="col d-flex justify-content-start">
+                <h4>Notifications</h4>
             </div>
-
-            <div class="notification-item">
-                <div class="initials-icon" data-initials="GC"></div>
-                <div class="notification-content">
-                    <div class="nof-ttl">
-                    <p class="sender-name" style="color: #02AEEE;">Sender's Name</p>
-                    <br>
-                    <h4 class="notification-title">Title here</h4>
+            <div class="col d-flex justify-content-end">
+                <div class="csv-icon">
+                    <a href=""><img src="{% static 'images/paper-add.png' %}" alt="add-icon" class="add-icon"></a>
                 </div>
-                    <p class="notification-description">Lorem ipsum dolor sit amet consectetur, 
-                        adipisicing elit. Esse eum, suscipit expedita nesciunt vel consequuntur 
-                        rerum culpa, tenetur dolores molestias, eaque quisquam molestiae non 
-                        provident quae ipsa nostrum aliquid. Optio?</p>
-                    <span class="notification-time">Time info</span>
-                </div>
+                <div>
+                     <a href="{% url 'notifications_add' %}"><i class="bi bi-pencil" style="margin-left: 15px;"></i></a>
+                  </div>
+                <a href="js/markallasread" class="masr">mark all as read</a>
             </div>
-
-            <div class="notification-item">
-                <div class="initials-icon" data-initials="GC"></div>
-                <div class="notification-content">
-                    <div class="nof-ttl">
-                    <p class="sender-name" style="color: #02AEEE;">Sender's Name</p>
-                    <br>
-                    <h4 class="notification-title">Title here</h4>
-                </div>
-                    <p class="notification-description">Lorem ipsum dolor sit amet consectetur, 
-                        adipisicing elit. Esse eum, suscipit expedita nesciunt vel consequuntur 
-                        rerum culpa, tenetur dolores molestias, eaque quisquam molestiae non 
-                        provident quae ipsa nostrum aliquid. Optio?</p>
-                    <span class="notification-time">Time info</span>
-                </div>
-            </div>
-
-            <div class="notification-item">
-                <div class="initials-icon" data-initials="GC"></div>
-                <div class="notification-content">
-                    <div class="nof-ttl">
-                    <p class="sender-name" style="color: #02AEEE;">Sender's Name</p>
-                    <br>
-                    <h4 class="notification-title">Title here</h4>
-                </div>
-                    <p class="notification-description">Lorem ipsum dolor sit amet consectetur, 
-                        adipisicing elit. Esse eum, suscipit expedita nesciunt vel consequuntur 
-                        rerum culpa, tenetur dolores molestias, eaque quisquam molestiae non 
-                        provident quae ipsa nostrum aliquid. Optio?</p>
-                    <span class="notification-time">Time info</span>
-                </div>
-            </div>
-            <!-- Repeat .notification-item for each notification -->
         </div>
+
+        {% for notification in page_obj %}
+        <div class="notification-item">
+            <div class="initials-icon" data-initials="{{ notification.created_by.first_name|slice:":1" }}{{ notification.created_by.last_name|slice:":1" }}"></div>
+            <div class="notification-content">
+                <div class="nof-ttl">
+                    <p class="sender-name" style="color: #02AEEE;">{{ notification.created_by.first_name }} {{ notification.created_by.last_name }}</p>
+                    <br>
+                    <h4 class="notification-title">{{ notification.title }}</h4>
+                </div>
+                <p class="notification-description">{{ notification.description }}</p>
+                <span class="notification-time">{{ notification.created_at|date:"F j, Y, g:i a" }}</span>
+            </div>
+        </div>
+        {% endfor %}
+
+        <!-- Pagination controls -->
+        <div class="pagination">
+            <span class="page-links">
+                {% if page_obj.has_previous %}
+                    <a href="?page=1">&laquo; first</a>
+                    <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                {% endif %}
+                <span class="current">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}">next</a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+    </div>
 {% endblock %}
 
 {% block extra_js %}

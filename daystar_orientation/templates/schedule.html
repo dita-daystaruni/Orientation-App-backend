@@ -10,114 +10,65 @@
 
 {% block content %}
   <div class="col-md-10">
-
-            <div class="header-container">
-                <div class="col d-flex justify-content-start">
-                    <h4>Today's Schedule</h4>
-                </div>
-                <div class="col d-flex justify-content-center">
-                <p id="current-date"></p>
-                </div>
-                <div class="col d-flex justify-content-end">
-                    <div class="csv-icon">
-                        <a><img src="{% static 'images/paper-add.png' %}" alt="add-icon" class="add-icon"></a>
-                    </div>
-                    <a href="schedule-update.html"><i class="bi bi-pencil" style="margin-left: 15px;"></i></a>
-                  </div>
-            </div>
-            <!-- Repeat .schedule-item for each schedule -->
-            <div class="schedule-item"style="margin-bottom:7px;">
-                <div class="content-row row">
-                        <div class="col-2">
-                            <div class="data-time d-flex justify-content-start">
-                                <p id="activity-time">8:00 AM</p>
-                            </div>
-                        </div>
-                        <div class="col-10" style="border-left: 2px solid #5caae5;">
-                            <div class="activity-row"style="font-size:xx-small;">
-                                <div class="activity-location">
-                                    <h6 style="color: #02AEEE; font-size: xx-small;">Location</h6>
-                                </div>
-                                <div class="Title"style="font-size:x-small;">
-                                    <h6 style="font-size:x-small;">Activity Name</h6>
-                                </div>
-                                <div class="description">
-                                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. 
-                                        Ratione veritatis fugit odio perspiciatis accusantium 
-                                        amet magni consequuntur nihil reiciendis! Animi incidunt 
-                                        minima, quidem laudantium repudiandae nobis iste facilis 
-                                        expedita nulla?</p>
-                                </div>
-                            </div>
-                        </div>
-                </div>
-            </div>
-
-            <div class="schedule-item"style="margin-bottom:7px;">
-                <div class="content-row row">
-                        <div class="col-2">
-                            <div class="data-time d-flex justify-content-start">
-                                <p id="activity-time">8:00 AM</p>
-                            </div>
-                        </div>
-                        <div class="col-10" style="border-left: 2px solid #5caae5;">
-                            <div class="activity-row"style="font-size:xx-small;">
-                                <div class="activity-location">
-                                    <h6 style="color: #02AEEE; font-size: xx-small;">Location</h6>
-                                </div>
-                                <div class="Title"style="font-size:x-small;">
-                                    <h6 style="font-size:x-small;">Activity Name</h6>
-                                </div>
-                                <div class="description">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-                                        In similique accusamus ratione pariatur cum magni consequuntur, 
-                                        rerum autem velit aperiam ea porro, minima, facere atque quod 
-                                        modi! Blanditiis, quaerat nulla!</p>
-                                </div>
-                            </div>
-                        </div>
-                </div>
-            </div>
-
-            <div class="schedule-item"style="margin-bottom:7px;">
-                <div class="content-row row">
-                        <div class="col-2">
-                            <div class="data-time d-flex justify-content-start">
-                                <p id="activity-time">8:00 AM</p>
-                            </div>
-                        </div>
-                        <div class="col-10" style="border-left: 2px solid #02AEEE;">
-                            <div class="activity-row"style="font-size:xx-small;">
-                                <div class="activity-location">
-                                    <h6 style="color: #02AEEE; font-size: xx-small;">Location</h6>
-                                </div>
-                                <div class="Title">
-                                    <h6 style="font-size:x-small;">Activity Name</h6>
-                                </div>
-                                <div class="description">
-                                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
-                                        Repellat labore excepturi officiis, iure ex molestiae ullam 
-                                        illo a laudantium, commodi alias unde voluptatibus sequi? 
-                                        Itaque excepturi nisi assumenda ipsa sit!</p>
-                                </div>
-                            </div>
-                        </div>
-                </div>
-            </div>
-
-            <!-- Repeat .schedule-item for each schedule -->
+     <div class="header-container">
+      <div class="col d-flex justify-content-start">
+        <h4>Today's Schedule</h4>
+      </div>
+      <div class="col d-flex justify-content-center">
+        <p id="current-date"></p>
+      </div>
+      <div class="col d-flex justify-content-end">
+        <div class="csv-icon">
+          <a href="{% url 'activities_add' %}"><img src="{% static 'images/paper-add.png' %}" alt="add-icon" class="add-icon"></a>
         </div>
-
-        <div class="footer-container">
-        <footer class="d-flex justify-content-center align-items-center py-3 ">
-        <a href="previous"><i class="bi bi-chevron-left" style="color: #02AEEE;"></i></a>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <a href="next"><i class="bi bi-chevron-right" style="color: #02AEEE;"></i></a>
-        </footer>
+         <div>
+        <a href="{% url 'activities_edit' %}"><i class="bi bi-pencil" style="margin-left: 15px;"></i></a>
         </div>
-
+        <div>
+        <a href="{% url 'activities_add' %}"><i class="bi bi-person-plus"></i></a>
+        </div>
+      </div>
+    </div>
+    {% for activity in activities %}
+    <div class="schedule-item" style="margin-bottom:7px;">
+      <div class="content-row row">
+        <div class="col-2">
+          <div class="data-time d-flex justify-content-start">
+            <p id="activity-time">{{ activity.start_time|date:"g:i A" }}</p>
+          </div>
+        </div>
+        <div class="col-10" style="border-left: 2px solid #5caae5;">
+          <div class="activity-row" style="font-size:xx-small;">
+            <div class="activity-location">
+              <h6 style="color: #02AEEE; font-size: xx-small;">{{ activity.location }}</h6>
+            </div>
+            <div class="Title" style="font-size:x-small;">
+              <h6 style="font-size:x-small;">{{ activity.title }}</h6>
+            </div>
+            <div class="description">
+              <p>{{ activity.description }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% empty %}
+      <p>No activities scheduled for today.</p>
+    {% endfor %}
+  </div>
+  <div class="footer-container">
+    <footer class="d-flex justify-content-center align-items-center py-3">
+      {% if activities.has_previous %}
+      <a href="?page={{ activities.previous_page_number }}"><i class="bi bi-chevron-left" style="color: #02AEEE;"></i></a>
+      {% endif %}
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      {% if activities.has_next %}
+      <a href="?page={{ activities.next_page_number }}"><i class="bi bi-chevron-right" style="color: #02AEEE;"></i></a>
+      {% endif %}
+    </footer>
+  </div>
 {% endblock %}
 
 {% block extra_js %}
-    <script src="{% static 'js/scheduletime.js' %}"></script>
+  <script src="{% static 'js/scheduletime.js' %}"></script>
 {% endblock %}
