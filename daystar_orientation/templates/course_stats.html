@@ -15,45 +15,44 @@
                         <h5>Course</h5>
                         <div class="d-flex align-items-center">
                             <select class="form-select" id="courseSelect" style="background-color: #ffffff;width: 250px;color: #032540;">
-                                <option selected>ACS</option>
-                                <option value="Acturial">Acturial</option>
-                                <option value="2">DICT</option>
-                                <option value="3">Biomed</option>
+                                {% for course in courses %}
+                                    <option value="{{ course.name }}" {% if course.name == selected_course %}selected{% endif %}>
+                                        {{ course.name }}
+                                    </option>
+                                {% endfor %}
                             </select>
                             <button class="btn btn-link print-btn ms-3"><i class="bi bi-printer"></i></button>
                         </div>
                     </div>
-                    <div class="course-stats-content">
+                   <div class="course-stats-content">
                         <ul class="list-group">
                             <li class="list-group-item">
-                                Total Students:
-                                <span class="students-stats">300</span>
+                                Total Students: <span id="total-students">{{ total_students }}</span>
                             </li>
                             <li class="list-group-item">
-                                Male:
-                                <span class="male-stats">50</span>
+                                Male: <span id="male-students">{{ male_students }}</span>
                             </li>
                             <li class="list-group-item">
-                                Female:
-                                <span class="female-stats">200</span>
+                                Female: <span id="female-students">{{ female_students }}</span>
                             </li>
                             <li class="list-group-item">
-                                Nairobi Campus:
-                                <span class="nairobi-stats">50</span>
+                                Nairobi Campus: <span id="nairobi-campus">{{ nairobi_campus }}</span>
                             </li>
                             <li class="list-group-item">
-                                Athi River Campus:
-                                <span class="athi-stats">250</span>
+                                Athi River Campus: <span id="athi_river_campus">{{ athi_river_campus }}</span>
                             </li>
                             <li class="list-group-item">
-                                Dayscholar:
-                                <span class="day-stats">200</span>
+                                Dayscholar: <span id="dayscholars">{{ dayscholars }}</span>
                             </li>
                             <li class="list-group-item">
-                                Boarders:
-                                <span class="boarders-stas">100</span>
+                                Boarders: <span id="boarders">{{ boarders }}</span>
                             </li>
+
                         </ul>
                     </div>
                 </div>
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'js/stats.js' %}"></script>
 {% endblock %}

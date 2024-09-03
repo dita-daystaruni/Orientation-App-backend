@@ -10,7 +10,7 @@
  
 {% block content %}
   <div class="col-md-10">
-               <form method="post" action="{% url 'course_details_add' %}">
+    <form method="post" action="{% url 'courses_details_add' %}">
     {% csrf_token %}
     <h4 style="text-align: center;">Course Name</h4>
     <h5 style="text-align: flex-start;">Add a member</h5>

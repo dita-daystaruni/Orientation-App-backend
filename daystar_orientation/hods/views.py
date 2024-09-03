@@ -4,9 +4,9 @@ from .serializers import HODSearializer, CourseSerializer
 from .permissions import IsAdminOrReadOnly, IsAuthenticatedReadOnly
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponseForbidden
 from django.core.paginator import Paginator
 from .forms import HODForm 
+from account.models import Account
 
 class HODList(generics.ListCreateAPIView):
     queryset = HOD.objects.all()
@@ -58,7 +58,7 @@ class CourseDetail(generics.RetrieveUpdateDestroyAPIView):
 @login_required
 def hodsdetails_view(request):
     hods_list = HOD.objects.all()
-    paginator = Paginator(hods_list, 10)  # Show 10 HODs per page
+    paginator = Paginator(hods_list, 10)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
@@ -104,8 +104,34 @@ def hodsedit_view(request, pk):
     return render(request, 'course-details_edit.html', {'form': form})
 
 @login_required
+def hod_delete(request, pk):
+    hod = get_object_or_404(HOD, pk=pk)
+    hod.delete()
+    return redirect('courses_details')
+
+@login_required
 def stats_view(request):
-    if request.user.user_type != 'admin':
-        return HttpResponseForbidden("You are not authorized to view this page.")
+    selected_course = request.GET.get('course', 'Theology')
+    course = Course.objects.get(name=selected_course)
     
-    return render(request, 'course_stats.html')
+    total_students = Account.objects.filter(course=course, user_type='regular').count()
+    male_students = Account.objects.filter(course=course, user_type='regular', gender='Male').count()
+    female_students = Account.objects.filter(course=course, user_type='regular', gender='Female').count()
+    nairobi_campus = Account.objects.filter(course=course, user_type='regular', campus='Nairobi').count()
+    athi_river_campus = Account.objects.filter(course=course, user_type='regular', campus='Athi river').count()
+    dayscholars = Account.objects.filter(course=course, user_type='regular', accomodation='Dayscholar').count()
+    boarders = Account.objects.filter(course=course, user_type='regular', accomodation='Boarder').count()
+
+    context = {
+        'courses': Course.objects.all(),
+        'selected_course': selected_course,
+        'total_students': total_students,
+        'male_students': male_students,
+        'female_students': female_students,
+        'nairobi_campus': nairobi_campus,
+        'athi_river_campus': athi_river_campus,
+        'dayscholars': dayscholars,
+        'boarders': boarders,
+    }
+
+    return render(request, 'course_stats.html', context)

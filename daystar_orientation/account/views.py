@@ -14,8 +14,10 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseForbidden
 from django.utils.cache import add_never_cache_headers
 from rest_framework.views import APIView
-from hods.models import HOD
+from hods.models import HOD, Course
 from hods.serializers import ContactsSerializer
+from .forms import StudentForm 
+from django.core.paginator import Paginator
 
 class FirstTimeUserPasswordChangeView(generics.GenericAPIView):
     serializer_class = PasswordChangeSerializer
@@ -262,62 +264,133 @@ def studentsadd_view(request):
         return HttpResponseForbidden("You are not authorized to view this page.")
     
     if request.method == 'POST':
+        # Handle form submission
         first_name = request.POST.get('firstName')
         last_name = request.POST.get('lastName')
         gender = request.POST.get('gender')
         admission_number = request.POST.get('admissionNumber')
-        course = request.POST.get('courseName')
+        course_name = request.POST['course']  
         phone_number = request.POST.get('phoneNumber')
-        accomodation = request.POST.get('accomodation')
+        email = request.POST.get('email')
+        parent_id = request.POST.get('parentName')
         campus = request.POST.get('campus')
-        checked_in = request.POST.get('checkedin')
+        accomodation = request.POST.get('accomodation')
+        checked_in = request.POST.get('checkedin') == 'true'
 
-        if not (first_name and last_name and gender and admission_number and course and phone_number and accomodation and campus):
-            messages.error(request, 'All fields are required.')
-            return render(request, 'students_add.html')
 
-        if Account.objects.filter(admission_number=admission_number).exists():
-            messages.error(request, "Admission number already exists.")
-            return render(request, 'students_add.html')
+        course = Course.objects.get(name=course_name) if course_name else None
+        parent = Account.objects.get(pk=parent_id) if parent_id else None
 
-        Account.objects.create(
+        new_student = Account(
+            user_type='regular',
             first_name=first_name,
             last_name=last_name,
             gender=gender,
             admission_number=admission_number,
             course=course,
             phone_number=phone_number,
-            accomodation=accomodation,
+            email=email,
+            parent=parent,
             campus=campus,
+            accomodation=accomodation,
             checked_in=checked_in
         )
+        new_student.save()
 
-        messages.success(request, 'Student details added successfully!')
-        return redirect('students_add')
+        return redirect('students_details')
 
-    return render(request, 'students_add.html')
+    courses = Course.objects.all()
+    parents = Account.objects.filter(user_type='parent')
+
+    return render(request, 'students_add.html', {
+        'courses': courses,
+        'parents': parents
+    })
+
 
 @login_required
-def studentedit_view(request):
-    if request.user.user_type != 'admin':
-        return HttpResponseForbidden("You are not authorized to view this page.")
+def studentedit_view(request, student_id):
+    student = get_object_or_404(Account, id=student_id)
     
-    return render(request, 'students_edit.html')
+    if request.method == 'POST':
+        form = StudentForm(request.POST, instance=student)
+        if form.is_valid():
+            form.save()
+            return redirect('students_details') 
+    else:
+        form = StudentForm(instance=student)
+    
+    context = {
+        'form': form,
+        'student': student,
+        'courses': Course.objects.all()
+    }
+    return render(request, 'students_edit.html', context)
+
+@login_required
+def delete_student(request, student_id):
+    student = get_object_or_404(Account, id=student_id)
+    student.delete()
+    return redirect('students_details')
 
 @login_required
 def studentsdetails_view(request):
     if request.user.user_type != 'admin':
         return HttpResponseForbidden("You are not authorized to view this page.")
     
-    students = Account.objects.filter(user_type='regular')
-    return render(request, 'students.html', {'students': students})
+    student_list = Account.objects.filter(user_type='regular')
+    paginator = Paginator(student_list, 15) 
+    
+    page_number = request.GET.get('page') 
+    page_obj = paginator.get_page(page_number)
+    
+    return render(request, 'students.html', {'page_obj': page_obj})
 
 @login_required
 def G9_view(request):
-    if request.user.user_type != 'admin':
-        return HttpResponseForbidden("You are not authorized to view this page.")
+    if request.method == 'POST':
+        user_type = request.POST['user_type']
+        first_name = request.POST['first_name']
+        last_name = request.POST['last_name']
+        gender = request.POST['gender']
+        admission_number = request.POST['admission_number']
+        course_name = request.POST['course']  
+        phone_number = request.POST['phone_number']
+        email = request.POST['email']
+        campus = request.POST['campus']
+        
+        try:
+            # Fetch the course object using the course name
+            course = Course.objects.get(name=course_name)
+            
+            
+            Account.objects.create(
+                user_type=user_type,
+                first_name=first_name,
+                last_name=last_name,
+                gender=gender,
+                admission_number=admission_number,
+                course=course,
+                phone_number=phone_number,
+                email=email,
+                campus=campus,
+            )
+            
+            return redirect('admin_add')
+        
+        except Course.DoesNotExist:
+            context = {
+                'courses': Course.objects.all(),
+                'error_message': f"The course '{course_name}' does not exist.",
+            }
+            return render(request, 'admin_parent.html', context)
     
-    return render(request, 'g9.html')
+    courses = Course.objects.all()
+    context = {
+        'courses': courses
+    }
+    return render(request, 'admin_parent.html', context)
+
 
 @login_required
 def dashboard_view(request):
