@@ -10,6 +10,15 @@
  
 {% block content %}
   <div class="col-md-10">
+     {% if messages %}
+            <div>
+                {% for message in messages %}
+                <div class="{% if message.tags %}alert {{ message.tags }}{% endif %}">
+                    {{ message }}
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
     <form method="post" action="{% url 'courses_details_add' %}">
     {% csrf_token %}
     <h4 style="text-align: center;">Course Name</h4>

@@ -13,6 +13,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from django.core.paginator import Paginator
+from django.contrib import messages
 
 class NotificationList(generics.ListCreateAPIView):
     serializer_class = NotificationSerializer
@@ -141,7 +142,7 @@ class RegisterDevice(APIView):
 # Web views.
 @login_required
 def notifications_view(request):
-    notifications = Notification.objects.filter(is_admin_viewer=True)
+    notifications = Notification.objects.filter(is_admin_viewer=True).order_by('-created_at')
     
     paginator = Paginator(notifications, 7) 
     page_number = request.GET.get('page')
@@ -158,14 +159,19 @@ def notificationadd_view(request):
         is_parent_viewer = 'instructors' in request.POST
         is_regular_viewer = 'students' in request.POST
 
-        Notification.objects.create(
-            title=title,
-            description=description,
-            created_by=request.user,
-            is_admin_viewer=is_admin_viewer,
-            is_parent_viewer=is_parent_viewer,
-            is_regular_viewer=is_regular_viewer
-        )
-        return redirect('notifications')
+        try:
+            Notification.objects.create(
+                title=title,
+                description=description,
+                created_by=request.user,
+                is_admin_viewer=is_admin_viewer,
+                is_parent_viewer=is_parent_viewer,
+                is_regular_viewer=is_regular_viewer
+            )
+            messages.success(request, 'Notification created successfully.')
+            return redirect('notifications')
+        except Exception as e:
+            messages.error(request, f"An error occurred: {str(e)}")
+            return render(request, 'notifications_add.html')
 
     return render(request, 'notifications_add.html')

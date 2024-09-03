@@ -3,7 +3,7 @@ from .models import Activity
 from django.utils import timezone
 
 class ActivityForm(forms.ModelForm):
-    duration = forms.IntegerField(help_text="Duration in hours") 
+    duration = forms.IntegerField(help_text="Duration in hours")
 
     class Meta:
         model = Activity

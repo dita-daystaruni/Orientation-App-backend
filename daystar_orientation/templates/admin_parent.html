@@ -10,10 +10,18 @@
 
 {% block content %}
  <div class="col-md-10">
+     {% if messages %}
+            <div>
+                {% for message in messages %}
+                <div class="{% if message.tags %}alert {{ message.tags }}{% endif %}">
+                    {{ message }}
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
     <form method="POST" action="{% url 'admin_add' %}">
         {% csrf_token %}
         <h4 class="d-flex justify-content-center">Parent/G9 Details</h4>
-
         <div class="form-row">
             <div class="fields">
                 <div class="input-field">

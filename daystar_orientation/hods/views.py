@@ -5,7 +5,8 @@ from .permissions import IsAdminOrReadOnly, IsAuthenticatedReadOnly
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.core.paginator import Paginator
-from .forms import HODForm 
+from .forms import HODForm
+from django.contrib import messages
 from account.models import Account
 
 class HODList(generics.ListCreateAPIView):
@@ -57,7 +58,7 @@ class CourseDetail(generics.RetrieveUpdateDestroyAPIView):
 # Web views.
 @login_required
 def hodsdetails_view(request):
-    hods_list = HOD.objects.all()
+    hods_list = HOD.objects.all().order_by('id')
     paginator = Paginator(hods_list, 10)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -74,22 +75,26 @@ def hodsadd_view(request):
         phone_number = request.POST['phone_number']
         email = request.POST['email']
         
-        course = Course.objects.get(name=course_name)
-        
-        HOD.objects.create(
-            first_name=first_name,
-            last_name=last_name,
-            title=title,
-            course=course,
-            phone_number=phone_number,
-            email=email
-        )
-        
-        return redirect('course_details')
+        try:
+            course = Course.objects.get(name=course_name)
+            
+            HOD.objects.create(
+                first_name=first_name,
+                last_name=last_name,
+                title=title,
+                course=course,
+                phone_number=phone_number,
+                email=email
+            )
+            messages.success(request, 'HOD added successfully.')
+        except Course.DoesNotExist:
+            messages.error(request, f"Course '{course_name}' does not exist.")
+        except Exception as e:
+            messages.error(request, f"An error occurred: {str(e)}")
+        return redirect('courses_details')
     
     courses = Course.objects.all()
     return render(request, 'course-details_add.html', {'courses': courses})
-
 
 @login_required
 def hodsedit_view(request, pk):
@@ -97,7 +102,11 @@ def hodsedit_view(request, pk):
     if request.method == 'POST':
         form = HODForm(request.POST, instance=hod)
         if form.is_valid():
-            form.save()
+            try:
+                form.save()
+                messages.success(request, 'HOD updated successfully.')
+            except Exception as e:
+                messages.error(request, f"An error occurred: {str(e)}")
             return redirect('courses_details')
     else:
         form = HODForm(instance=hod)
@@ -106,7 +115,11 @@ def hodsedit_view(request, pk):
 @login_required
 def hod_delete(request, pk):
     hod = get_object_or_404(HOD, pk=pk)
-    hod.delete()
+    try:
+        hod.delete()
+        messages.success(request, 'HOD deleted successfully.')
+    except Exception as e:
+        messages.error(request, f"An error occurred: {str(e)}")
     return redirect('courses_details')
 
 @login_required

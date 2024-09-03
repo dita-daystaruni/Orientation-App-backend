@@ -13,6 +13,15 @@
       <div class="schedule-header">
         <h2>Schedule</h2>
       </div>
+       {% if messages %}
+            <div>
+                {% for message in messages %}
+                <div class="{% if message.tags %}alert {{ message.tags }}{% endif %}">
+                    {{ message }}
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
      <form method="POST" action="{% url 'activities_add' %}">
     {% csrf_token %}
     <div class="form-row">

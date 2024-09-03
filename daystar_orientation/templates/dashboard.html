@@ -9,180 +9,160 @@
 {% endblock %}
 
 {% block content %}
-<div class="col-md-7">  
-                <div class="main-content">
-                  <header>
-                    <h5>Greetings</h5>
-                    <p style="font-size: small; color: #032540;">Add parent/g9 &nbsp;&nbsp;<a href="g9create.html"><i class="bi bi-person-plus" style="color: #032540; transform: scale(1.2); color: #02AEEE;" onmouseover="this.style.transform='scale(1.2)'; this.style.color='#02AEEE'" onmouseout="this.style.transform='scale(2)'; this.style.color='#032540'"></i></a></p>
-                  </header>
-                    <div class="first-row">
-                        <div class="stats">
-                                <div class="statscard-body">
-                                    <div class="statscard-row">
-                                        <img src="{% static 'images/ascendinggraph.png' %}" alt="left image" class="graphimage">
-                                   <div class="statscard-title">
-                                    <a href="course-details-stats.html" style="color: #032540;"><h5 style="font-size: medium;">Statistics</h5></a>
-                                  </div> 
-                                </div>
-                                <div class="statscard-row2">
-                                    <div class="stats-col">
-                                    <p id="new-textnum" style="font-size: large;">1327</p>
-                                    <p class="card-textdes" style="font-size: x-small;">New students</p>
-                                </div>
-                                <div class="stats-col">
-                                    <p id="checkedin-textnum" style="font-size: large;">2327</p>
-                                    <p class="card-textdes" style="font-size: x-small;">Checkedin</p>
-                                </div>
-                                <div class="stats-col">
-                                    <p id="notcheckedin-textnum" style="font-size: large;">27</p>
-                                    <p class="card-textdes" style="font-size: x-small;">Not Checkedin</p>
-                                </div>
-                                </div>
-                                </div>
-                        </div>
-                        <div class="notifications">
-                            <div class="notification-header">
-                              <span style="font-size: medium;">Recent notifications</span>
-                              <a href="#" style="font-size: xx-small;">See all</a>
-                            </div>
-                            <div class="notification-list">
-                              <div class="notification-item">
-                                <div class="notification-icon">
-                                  <i><img src="{% static 'images/whitebell.png' %}" alt="notficon" class="megaphone-image" style="background-color: #02AEEE;"></i>
-                                </div>
-                                <div class="notification-content">
-                                  <p class="notification-title" style="font-size: x-small;">Notification Title</p>
-                                  <p class="notification-message"style="font-size: x-small;">Lorem ipsum dolor sit amet, consectetur<a href="#">See more</a></p>
-                                  
-                                </div>
-                              </div>
-
-                              <div class="notification-item">
-                                <div class="notification-icon">
-                                  <i><img src="{% static 'images/megaphone.png' %}" alt="notficon" class="megaphone-image"></i>
-                                </div>
-                                <div class="notification-content">
-                                  <p class="notification-title" style="font-size: x-small;">Notification Title</p>
-                                  <p class="notification-message"style="font-size: x-small;">Lorem ipsum dolor sit amet, consectetur<a href="#">See more</a></p>
-                                  
-                                </div>
-                              </div>
-                              </div>
-                          </div>
+<div class="col-md-7"> 
+    <div class="main-content">
+        <header>
+            <h5>Greetings {{ request.user.first_name }} </h5>
+            <p style="font-size: small; color: #032540;">Add parent/g9 &nbsp;&nbsp;
+                <a href="{% url 'admin_add' %}">
+                    <i class="bi bi-person-plus" style="color: #032540; transform: scale(1.2); color: #02AEEE;" 
+                       onmouseover="this.style.transform='scale(1.2)'; this.style.color='#02AEEE'" 
+                       onmouseout="this.style.transform='scale(2)'; this.style.color='#032540'">
+                    </i>
+                </a>
+            </p>
+        </header>
+         {% if messages %}
+            <div>
+                {% for message in messages %}
+                <div class="{% if message.tags %}alert {{ message.tags }}{% endif %}">
+                    {{ message }}
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+        <div class="first-row">
+            <div class="stats">
+                <div class="statscard-body">
+                    <div class="statscard-row">
+                        <img src="{% static 'images/ascendinggraph.png' %}" alt="left image" class="graphimage">
+                        <div class="statscard-title">
+                            <a href="{% url 'courses_stats' %}">
+                                <h5 style="font-size: medium;">Statistics</h5>
+                            </a>
+                        </div> 
                     </div>
-                    <div class="new-students">
-                        <div class="prog-row">
-                            <div class="txt-prog">
-                                <h5>New students progress</h5>
-                            </div>
-                            <div class="icon-prog" style="display: flex; justify-content: flex-end;">
-                                <i class="bi-search"></i>
-                                <i class="bi-person-plus"></i>
-                            </div>
+                    <div class="statscard-row2">
+                        <div class="stats-col">
+                            <p id="new-textnum" style="font-size: large;">{{ new_students_count }}</p>
+                            <p class="card-textdes" style="font-size: x-small;">New students</p>
                         </div>
-                    
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Admission Number</th>
-                                    <th>Full Name</th>
-                                    <th>Account Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>24-0001</td>
-                                    <td>First & Last name</td>
-                                    <td><span class="active-dot" data-is-active="true"></span> Active</td>
-                                </tr>
-                                <tr>
-                                    <td>24-0857</td>
-                                    <td>First & Last name</td>
-                                    <td><span class="Inactive" data-is-active="false"></span> Inactive</td>
-                                </tr>
-                                <tr>
-                                    <td>24-1748</td>
-                                    <td>First & Last name</td>
-                                    <td><span class="active-dot" data-is-active="true"></span> Active</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div class="stats-col">
+                            <p id="checkedin-textnum" style="font-size: large;">{{ checked_in_count }}</p>
+                            <p class="card-textdes" style="font-size: x-small;">Checked In</p>
+                        </div>
+                        <div class="stats-col">
+                            <p id="notcheckedin-textnum" style="font-size: large;">{{ not_checked_in_count }}</p>
+                            <p class="card-textdes" style="font-size: x-small;">Not Checked In</p>
+                        </div>
                     </div>
-                    
-                    
                 </div>
             </div>
 
- <div class="col-md-3">
-                    <div class="main-sessions">
-                      <p id="current-date" class="d-flex justify-content-center"></p>
-                      <h6 class="d-flex justify-content-center" style="font-size: medium;">Main Sessions</h6>
-                      <ul>
-                        <li>
-                          <time>11:30 AM</time>
-                          <div class="row-col">
-                          <span  style="color: red; margin-bottom: 10px">ID Processing</span>
-                          <h6 style="font-size: x-small;color: #717576;"><i class="bi bi-geo-alt" 
-                          style="color: #02AEEE;"></i>Location</h6>
+            <div class="notifications">
+                <div class="notification-header">
+                    <span style="font-size: medium;">Recent notifications</span>
+                    <a href="{% url 'notifications' %}" style="font-size: xx-small;">See all</a>
+                </div>
+                <div class="notification-list">
+                    {% for notification in recent_notifications %}
+                    <div class="notification-item">
+                        <div class="notification-icon">
+                            <i><img src="{% static 'images/whitebell.png' %}" alt="notficon" class="megaphone-image" style="background-color: #02AEEE;"></i>
                         </div>
-                          <a href="schedule.html"><i class="bi bi-chevron-right"></i></a>
-                        </li>
-                        <li>
-                            <time>2:15 PM</time>
-                            <div class="row-col">
-                              <span  style="color: red;margin-bottom: 10px;">Orientation</span>
-                              <h6 style="font-size: x-small;color: #717576;"><i class="bi bi-geo-alt" 
-                              style="color: #02AEEE;"></i>Location</h6>
-                            </div>
-                            <a href="schedule.html"><i class="bi bi-chevron-right"></i></a>
-                          </li>
-                        <li>
-                          <time>2:15 PM</time>
-                          <div class="row-col">
-                            <span  style="color: red;margin-bottom: 10px;">Matriculation</span>
-                            <h6 style="font-size: x-small;color: #717576;"><i class="bi bi-geo-alt" 
-                            style="color: #02AEEE;"></i>Location</h6>
-                          </div>
-                          <a href="schedule.html"><i class="bi bi-chevron-right"></i></a>
-                        </li>
-                      </ul>
+                        <div class="notification-content">
+                            <p class="notification-title" style="font-size: x-small;">{{ notification.title }}</p>
+                            <p class="notification-message" style="font-size: x-small;">
+                                {{ notification.description|truncatewords:10 }} 
+                                <a href="{% url 'notifications' %}?page={{ notification.page_number }}">See more</a>
+                            </p>
+                        </div>
                     </div>
-                
-                    <div class="todays-schedule">
-                      <h6 class="d-flex justify-content-center" style="font-size: medium;">Today's Schedule</h6>
-                      <ul>
-                        <li>
-                          <time>8:00 AM</time>
-                          <div class="row-col">
-                            <span style="margin-bottom: 10px;">Activity name</span>
-                            <h6 style="font-size: x-small;color: #717576;"><i class="bi bi-geo-alt" 
-                            style="color: #02AEEE;"></i>Location</h6>
-                          </div>
-                          <a href="schedule.html"><i class="bi bi-chevron-right"></i></a>
-                        </li>
-                        <li>
-                          <time>10:00 AM</time>
-                          <div class="row-col">
-                            <span style="margin-bottom: 10px">Activity name</span>
-                            <h6 style="font-size: x-small;color:#717576;"><i class="bi bi-geo-alt" 
-                            style="color: #02AEEE;"></i>Location</h6>
-                          </div>
-                          <a href="schedule.html"><i class="bi bi-chevron-right"></i></a>
-                        </li>
-                        <li>
-                          <time>1:00 PM</time>
-                          <div class="row-col">
-                            <span style="margin-bottom: 10px;">Activity Name</span>
-                            <h6 style="font-size: x-small;color: #717576;"><i class="bi bi-geo-alt" 
-                            style="color: #02AEEE;"></i>Location</h6>
-                          </div>
-                          <a href="schedule.html"><i class="bi bi-chevron-right"></i></a>
-                        </li>
-                      </ul>
-                    </div>
+                    {% endfor %}
+                </div>
             </div>
-{% endblock %}
+        </div>
 
+        <div class="new-students">
+            <div class="prog-row">
+                <div class="txt-prog">
+                    <h5>New students progress</h5>
+                </div>
+                <div class="icon-prog" style="display: flex; justify-content: flex-end;">
+                    <i class="bi-search"></i>
+                    <a href="{% url 'students_add' %}">
+                    <i class="bi bi-person-plus" style="color: #032540; transform: scale(1.2); color: #02AEEE;" 
+                       onmouseover="this.style.transform='scale(1.2)'; this.style.color='#02AEEE'" 
+                       onmouseout="this.style.transform='scale(2)'; this.style.color='#032540'">
+                    </i>
+                </a>
+                </div>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Admission Number</th>
+                        <th>Full Name</th>
+                        <th>Account Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for student in new_students %}
+                    <tr>
+                        <td>{{ student.admission_number }}</td>
+                        <td>{{ student.first_name }} {{ student.last_name }}</td>
+                        <td>
+                            <span class="{% if student.checked_in %}active-dot{% else %}Inactive{% endif %}" 
+                                  data-is-active="{{ student.checked_in }}"></span> 
+                            {% if student.checked_in %}Active{% else %}Inactive{% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-3">
+    <div class="main-sessions">
+        <p id="current-date" class="d-flex justify-content-center"></p>
+        <h6 class="d-flex justify-content-center" style="font-size: medium;">Main Sessions</h6>
+        <ul>
+            {% for session in main_sessions %}
+            <li>
+                <time>{{ session.start_time|date:"h:i A" }}</time>
+                <div class="row-col">
+                    <span style="color: red; margin-bottom: 10px">{{ session.description }}</span>
+                    <h6 style="font-size: x-small;color: #717576;">
+                        <i class="bi bi-geo-alt" style="color: #02AEEE;"></i>{{ session.location }}
+                    </h6>
+                </div>
+                <a href="{% url 'activities' %}"><i class="bi bi-chevron-right"></i></a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="todays-schedule">
+        <h6 class="d-flex justify-content-center" style="font-size: medium;">Today's Schedule</h6>
+        <ul>
+            {% for activity in todays_schedule %}
+            <li>
+                <time>{{ activity.start_time|date:"h:i A" }}</time>
+                <div class="row-col">
+                    <span style="margin-bottom: 10px;">{{ activity.description }}</span>
+                    <h6 style="font-size: x-small;color: #717576;">
+                        <i class="bi bi-geo-alt" style="color: #02AEEE;"></i>{{ activity.location }}
+                    </h6>
+                </div>
+                <a href="{% url 'activities' %}"><i class="bi bi-chevron-right"></i></a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}
 {% block extra_js %}
     <script src="{% static 'js/dashtime.js' %}"></script>
     <script src="{% static 'js/scheduletime.js' %}"></script>

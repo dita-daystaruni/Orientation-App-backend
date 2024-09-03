@@ -4,7 +4,7 @@ from .serializers import FAQSerializer
 from .permissions import IsAdminOrReadOnly, IsAuthenticatedReadOnly
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render ,redirect, get_object_or_404
-from django.http import HttpResponseForbidden
+from django.contrib import messages
 from django.core.paginator import Paginator
 
 class FAQList(generics.ListCreateAPIView):
@@ -32,7 +32,7 @@ class FAQDetail(generics.RetrieveUpdateDestroyAPIView):
 # Web views 
 @login_required
 def faqs_view(request):
-    faqs = FAQ.objects.all()
+    faqs = FAQ.objects.all().order_by('-id')
     paginator = Paginator(faqs, 10) 
     
     page_number = request.GET.get('page')
@@ -40,24 +40,37 @@ def faqs_view(request):
     
     return render(request, 'faqs.html', {'page_obj': page_obj})
 
+
 def add_faq(request):
     if request.method == 'POST':
         question = request.POST['question']
         answer = request.POST['answer']
-        FAQ.objects.create(question=question, answer=answer)
+        try:
+            FAQ.objects.create(question=question, answer=answer)
+            messages.success(request, 'FAQ added successfully.')
+        except Exception as e:
+            messages.error(request, f'An error occurred: {str(e)}')
         return redirect('faqs')
 
 def edit_faq(request, id):
     faq = get_object_or_404(FAQ, id=id)
     if request.method == 'POST':
-        faq.question = request.POST['question']
-        faq.answer = request.POST['answer']
-        faq.save()
+        try:
+            faq.question = request.POST['question']
+            faq.answer = request.POST['answer']
+            faq.save()
+            messages.success(request, 'FAQ updated successfully.')
+        except Exception as e:
+            messages.error(request, f'An error occurred: {str(e)}')
         return redirect('faqs')
     
     return render(request, 'faqs.html', {'faq': faq})
 
 def delete_faq(request, id):
     faq = get_object_or_404(FAQ, id=id)
-    faq.delete()
+    try:
+        faq.delete()
+        messages.success(request, 'FAQ deleted successfully.')
+    except Exception as e:
+        messages.error(request, f'An error occurred: {str(e)}')
     return redirect('faqs')

@@ -10,6 +10,15 @@
 
 {% block content %}
 <main class="col-md-10 col-lg-10 px-md-4">
+     {% if messages %}
+            <div>
+                {% for message in messages %}
+                <div class="{% if message.tags %}alert {{ message.tags }}{% endif %}">
+                    {{ message }}
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
     <div class="row">
         <!-- FAQ List Column -->
         <div class="col-md-5">
@@ -29,7 +38,7 @@
                         <p>{{ faq.answer }}</p>
                         <div class="ans-i" style="display: flex; justify-content: flex-end;">
                             <a href="{% url 'edit_faq' faq.id %}"><i class="bi bi-pencil" style="margin-right: 7px;"></i></a>
-                            <a href="{% url 'delete_faq' faq.id %}"><i class="bi bi-trash" style="margin-right: 2px;"></i></a>
+                            <a href="{% url 'delete_faq' faq.id %}" onclick="return confirm('Are you sure you want to delete this faq?');"><i class="bi bi-trash" style="margin-right: 2px;"></i></a>
                         </div>
                     </div>
                 </div>
@@ -39,24 +48,25 @@
             </div>
 
             <!-- Pagination Controls -->
-            <nav>
-                <ul class="pagination justify-content-center">
-                    {% if page_obj.has_previous %}
-                    <li class="page-item">
-                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                    {% endif %}
-                    {% if page_obj.has_next %}
-                    <li class="page-item">
-                        <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
-                    {% endif %}
-                </ul>
-            </nav>
+           <nav>
+         <ul class="pagination justify-content-center">
+        {% if page_obj.has_previous %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                <span aria-hidden="true">&lsaquo;</span>  <!-- Left chevron -->
+            </a>
+        </li>
+        {% endif %}
+        {% if page_obj.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                <span aria-hidden="true">&rsaquo;</span>  <!-- Right chevron -->
+            </a>
+        </li>
+        {% endif %}
+        </ul>
+</nav>
+
         </div>
 
         <!-- Right Side Column (Image and Form) -->
@@ -87,14 +97,7 @@
         </div>
     </div>
 </main>
-<footer class="d-flex justify-content-center align-items-center py-3" style="margin-top: 20px;">
-    <a href="{% if page_obj.has_previous %}?page={{ page_obj.previous_page_number }}{% endif %}">
-        <i class="bi bi-chevron-left" style="margin-right: 20px; font-size: 14px;"></i>
-    </a>
-    <a href="{% if page_obj.has_next %}?page={{ page_obj.next_page_number }}{% endif %}">
-        <i class="bi bi-chevron-right" style="margin-left: 20px; font-size: 14px;"></i>
-    </a>
-</footer>
+
 {% endblock %}
 
 {% block extra_js %}

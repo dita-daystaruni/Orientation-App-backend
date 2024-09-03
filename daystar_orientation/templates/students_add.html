@@ -10,6 +10,15 @@
 
 {% block content %}
 <div class="col-md-10">
+     {% if messages %}
+            <div>
+                {% for message in messages %}
+                <div class="{% if message.tags %}alert {{ message.tags }}{% endif %}">
+                    {{ message }}
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
     <form method="POST" action="{% url 'students_add' %}">
         {% csrf_token %}
         <h4 class="d-flex justify-content-center">Student Details</h4>
@@ -108,11 +117,11 @@
                 <div class="input-field">
                     <label for="checkedin" class="form-label">Checked-in Status</label><br>
                     <div class="form-check form-check-inline">
-                        <input type="radio" id="checkedIn" name="checkedin" value="true" class="form-check-input">
+                        <input type="radio" id="checkedIn" name="checkedin" value="True" class="form-check-input">
                         <label for="checkedIn" class="form-check-label">Yes</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input type="radio" id="notCheckedIn" name="checkedin" value="false" class="form-check-input">
+                        <input type="radio" id="notCheckedIn" name="checkedin" value="False" class="form-check-input">
                         <label for="notCheckedIn" class="form-check-label">No</label>
                     </div>
                 </div>

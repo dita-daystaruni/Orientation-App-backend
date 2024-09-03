@@ -11,6 +11,15 @@
 {% block content %}
    <div class="col-md-10">
         <h1 class="text-center mt-3">Add Notification</h1>
+         {% if messages %}
+            <div>
+                {% for message in messages %}
+                <div class="{% if message.tags %}alert {{ message.tags }}{% endif %}">
+                    {{ message }}
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
         <form method="POST">
             {% csrf_token %}
             <div class="mb-3">
@@ -24,6 +33,8 @@
             <div class="drop-container">
                 <div class="dropdown">
                     <span class="dropdown-label">Who can see?</span>
+                     <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                          </a>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
                         <li><input type="checkbox" id="students" name="students"> <label for="students">Students</label></li>
                         <li><input type="checkbox" id="instructors" name="instructors"> <label for="instructors">Instructors</label></li>
