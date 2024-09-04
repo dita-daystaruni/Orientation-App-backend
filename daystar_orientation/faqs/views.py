@@ -14,6 +14,8 @@ from account.models import Account
 from notifications.models import Notification
 from hods.models import HOD
 from hods.models import Course
+from django.core.exceptions import ValidationError
+import mimetypes
 
 class FAQList(generics.ListCreateAPIView):
     queryset = FAQ.objects.all()
@@ -154,17 +156,44 @@ def handle_uploaded_file(f, data_type):
         print(f"Error occurred: {e}")
         raise
 
+# Only allow csvs and excels to be uploaded
+def validate_file_type(file):
+    mime_type, encoding = mimetypes.guess_type(file.name)
+    valid_mime_types = ['text/csv', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet']
+    valid_extensions = ['.csv', '.xlsx']
+
+    if mime_type not in valid_mime_types:
+        raise ValidationError('Invalid file type. Please upload a CSV or XLSX file.')
+
+    if not any(file.name.endswith(ext) for ext in valid_extensions):
+        raise ValidationError('Invalid file extension. Please upload a CSV or XLSX file.')
+
+# For memory management I will limit upload to 5Mbs
+def validate_file_size(file):
+    max_size_mb = 7  
+    if file.size > max_size_mb * 1024 * 1024:
+        raise ValidationError(f"File size exceeds {max_size_mb}MB limit.")
+
 def upload_file(request):
     if request.method == 'POST':
         form = UploadFileForm(request.POST, request.FILES)
         if form.is_valid():
+            uploaded_file = request.FILES['file']
+            
             try:
-                handle_uploaded_file(request.FILES['file'], form.cleaned_data['data_type'])
+                validate_file_type(uploaded_file)
+                validate_file_size(uploaded_file)
+            except ValidationError as e:
+                messages.error(request, f"File validation error: {e}")
+                return render(request, 'upload.html', {'form': form})
+
+            try:
+                handle_uploaded_file(uploaded_file, form.cleaned_data['data_type'])
                 messages.success(request, 'File uploaded and processed successfully!')
                 return render(request, 'data_upload')
             except Exception as e:
                 messages.error(request, f"An error occurred during file processing: {e}")
-                return render(request, 'data_upload')
+                return render(request, 'data_upload')  # Redirect or render error page
     else:
         form = UploadFileForm()
 
