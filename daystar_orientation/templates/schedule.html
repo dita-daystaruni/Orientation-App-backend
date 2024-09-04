@@ -28,7 +28,7 @@
     </div>
     <div class="col d-flex justify-content-end">
       <div class="csv-icon">
-        <a href=""><img src="{% static 'images/paper-add.png' %}" alt="add-icon" class="add-icon"></a>
+        <a href="{% url 'data_upload' %}"><img src="{% static 'images/paper-add.png' %}" alt="add-icon" class="add-icon"></a>
       </div>
       <div>
         <a href="{% url 'activities_add' %}"><i class="bi bi-person-plus"></i></a>

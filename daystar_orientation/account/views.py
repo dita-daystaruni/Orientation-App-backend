@@ -376,7 +376,8 @@ def G9_view(request):
         last_name = request.POST['last_name']
         gender = request.POST['gender']
         admission_number = request.POST['admission_number']
-        course_name = request.POST['course']  
+        course_name = request.POST['course']
+        password = request.POST['password'] 
         phone_number = request.POST['phone_number']
         email = request.POST['email']
         campus = request.POST['campus']
@@ -391,6 +392,7 @@ def G9_view(request):
                 gender=gender,
                 admission_number=admission_number,
                 course=course,
+                password=password,
                 phone_number=phone_number,
                 email=email,
                 campus=campus,

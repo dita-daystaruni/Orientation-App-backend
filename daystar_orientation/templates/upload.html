@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} Upload Data {% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/upload.css' %}">
+{% endblock %}
+
+{% block content %}
+<h2>Upload Data</h2>
+       {% if messages %}
+            <div>
+                {% for message in messages %}
+                <div class="{% if message.tags %}alert {{ message.tags }}{% endif %}">
+                    {{ message }}
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Upload</button>
+</form>
+{% endblock %}
