@@ -9,8 +9,9 @@
 {% endblock %}
 
 {% block content %}
-<main class="col-md-10 col-lg-10 px-md-4">
-     {% if messages %}
+    <div class="row">
+        <!-- FAQ List Column -->
+         {% if messages %}
             <div>
                 {% for message in messages %}
                 <div class="{% if message.tags %}alert {{ message.tags }}{% endif %}">
@@ -19,8 +20,6 @@
                 {% endfor %}
             </div>
             {% endif %}
-    <div class="row">
-        <!-- FAQ List Column -->
         <div class="col-md-5">
             <header>
                 <h6 class="d-flex justify-content-center align-items-center">Frequently Asked Questions</h6> &nbsp; &nbsp; &nbsp;
@@ -65,7 +64,7 @@
         </li>
         {% endif %}
         </ul>
-</nav>
+      </nav>
 
         </div>
 
@@ -96,8 +95,6 @@
             </div>
         </div>
     </div>
-</main>
-
 {% endblock %}
 
 {% block extra_js %}

@@ -14,6 +14,7 @@
     margin-right: 50px;
     margin-left: 50px;
 }
+
 .navbar {
     padding: 10px 15px;
     width: 100%;
@@ -22,6 +23,7 @@
   .col-md-2{
     justify-content: space-between;
     padding-right: 22px;
+    padding-left: 10px;
   }
 
   .avtr{
@@ -33,7 +35,9 @@
     margin-top: 35px;
     margin-bottom: 35px;
     color: #032540;
-  }
+    padding-left: 10px;  
+    padding-right: 10px;
+}
 
   #user-avatar {
     display: flex;
@@ -50,7 +54,7 @@
   #name{
     font-size: 24px;
     padding-left: 55px;
-    padding-bottom: 60px;
+    padding-bottom: 30px;
   }
 
   .dashicon-class{
@@ -75,6 +79,8 @@
     border-radius: 20px;
     gap: 35px;
     box-shadow: 0 3px 5px #cccaca1a;
+    padding-right: 10px;
+    padding-left: 10px;
   }
   
   .sidenav a {
@@ -90,17 +96,34 @@
   
   .sidenav a:hover {
     background-color: #ffffff;
-    border: 3px solid #02AEEE; /* Blue border */
+    border: 3px solid #02AEEE;
     color: #02AEEE;
-    border-radius: 21px; /* Curved border radius */
+    border-radius: 21px; 
   }
   
-  .active {
+  .sidenav a.active {
     background-color: #ffffff;
     color: #02AEEE;
     border-radius: 20px;
     border: 2px solid #02AEEE; 
-  }
+}
+
+.active {
+    background-color: #ffffff;
+    color: #02AEEE;
+    border-radius: 20px;
+    border: 2px solid #02AEEE; 
+}
+
+main {
+    margin-left: 20px;
+}
+
+
+main.col-md-10 {
+    padding-left: 30px; 
+    padding-right: 30px; 
+}
 
   /* Message for success and alert  */
 .message-container {
