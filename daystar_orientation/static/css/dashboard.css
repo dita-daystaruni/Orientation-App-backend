@@ -1,3 +1,121 @@
+/* Global styles */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  color: #032540;
+  font-size: 12vw; /* Set a base font size */
+  line-height: 1.2vh; /* Base line height */
+}
+  .container-fluid{
+    height: 100vh;
+  }
+/*sidenav styles*/
+
+.col-md-2{
+  justify-content: space-between;
+  
+}
+
+.avtr{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: 4vh;
+  margin-bottom: 3vh;
+  color: #032540;
+}
+#user-avatar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.dashicon-class{
+  width: 1.5vw;
+  height: 2.6vh;
+}
+
+.FAQ-class{
+  width: 1.5vw;
+  height: 2.6vh;
+}
+
+.sidenav #name {
+  font-size: 1.5vw; /* Adjust the font size as needed */
+}
+
+.sidenav {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  margin-right: 3vw;
+  background-color: transparent;
+  height: 100vh;
+  width: 15%;
+  overflow: hidden;
+  padding: 0;
+  gap: 2.4vh;
+  box-shadow: 0 2px 4px rgba(204, 202, 202, 0.1);
+}
+
+.sidenav a {
+  padding: 1vw 1vh;
+  font-size: 1.3vw;
+  font-weight: 400;
+  justify-content: space-between;
+  color: #032540;
+  text-decoration: none;
+  border-radius: 30px; 
+  transition: border-color 0.3s ease-in-out;
+}
+
+.sidenav a:hover {
+  background-color: #ffffff;
+  border: 2px solid #02AEEE;
+  border-radius: 30px; 
+}
+
+.active {
+  background-color: #ffffff;
+  border-radius: 30px; 
+  border: 2px solid #02AEEE; /* Blue border for active state */
+}
+
+
+@media screen and (max-width: 500px) {
+  .sidenav a {
+    float: none;
+    display: block;
+  }
+}  
+/*sidenav styles*/
+  .row{
+    height: 100%;
+  }
+
+  .col-md-2, .col-md-7, .col-md-3 {
+    height: 100%;
+    overflow: hidden;
+
+}
+  
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  font-family: Verdana, sans-serif;
+}
+
 .main-content{
   display: flex;
   flex-direction: column;
@@ -5,6 +123,10 @@
   margin-top: 25px;
   width: 100%;
   height: 100vh;
+}
+
+header .bi-person-plus{
+  color: #032540;
 }
 
 header .bi-person-plus:hover {
@@ -77,13 +199,12 @@ header .bi-person-plus:hover {
 .graphimage {
   display: flex;
   object-fit: contain; /* Adjusted image size */
-  width: 15px;
+  width: 25vw;
   margin-right: 5px;
 }
 
 .statscard-title h5 {
   margin: 0;
-  font-size: 15px;
   object-fit: contain;
   text-align: center;
   color: #032540;
@@ -163,19 +284,8 @@ header .bi-person-plus:hover {
 float: inline-start;
 }
 
-.greetings{
-    font-size: x-small;
-    display: flex;
-    justify-content: flex-start;
-   /* font-size: 40px;
-    margin-top: 10px;
-    width: 247px;
-    height: 87px;
-    top: 97px;
-    left: 343px;
-    gap: 0px;
-    opacity: 0px;
-*/
+header h5{
+  font-size: 2.5vw;
 }
 
 .dashboard-content {
@@ -227,8 +337,11 @@ float: inline-start;
 .txt-prog{
     display: flex;
     justify-content: flex-start;
-    font-size: medium;
     border-bottom-color: #032540;
+}
+
+.txt-prog h6{
+  font-size: 2vw;
 }
 
 .statscard-row{
@@ -356,12 +469,10 @@ body {font-family: Verdana, sans-serif;}
 .col-md-3{
   justify-content: space-between;
   display: flex;
-  font-size: 12px;
   flex-direction: column;
   margin-top: 25px;
   gap: 10px;
   padding: 8px;
-  line-height: 0.9;
 }
 
 .main-sessions, .todays-schedule {
@@ -424,6 +535,10 @@ time {
   color: #02AEEE;
 }
 
+.statscard-row2 .stats-col{
+  font-size: 10vw;
+}
+
 .main-content header{
   display: flex;
   flex-direction: row;
@@ -443,4 +558,15 @@ justify-content: flex-start;
 
 .todays-schedule{
   overflow-y: auto;
+} 
+
+.table {
+  font-size: 1vw;
+  line-height: 1.5vh;
 }
+
+/* Alternatively, target specific elements within the table 
+.table th,
+.table td {
+  font-size: 16px;
+}*/
