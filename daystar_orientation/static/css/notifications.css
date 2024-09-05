@@ -1,43 +1,33 @@
+/* Layout and Spacing Adjustments */
 .col-md-10 {
     width: 87.33%;
-    /*max-width: 400px;  Assuming mobile view */
-    margin: 0;
+    margin: 20px auto; /* Adds padding from navbar */
     padding: 20px;
     overflow-y: auto;
 }
 
-.header-container{
-  margin-top: 20px;
-  display: flex;
-  flex-direction: row;
-  width: 100%;
+.header-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between; /* Evenly space header contents */
+    align-items: center; /* Align vertically */
+    width: 100%;
 }
 
-.view-courses-link{
-  cursor: pointer;
-  align-items: flex-end;
-  margin-top: 15px;
-  margin-bottom: 5px;
-}
-
+/* Ensuring consistent spacing and hover effects for icons */
 .header-container .col.d-flex.justify-content-end i {
-  cursor: pointer;
-  margin-right: 10px; 
-}
-
-/* Add margin to the first icon to ensure it's not too close to the edge */
-.header-container .col.d-flex.justify-content-end i:first-child {
-  margin-right: 0; 
+    cursor: pointer;
+    margin-right: 10px; 
 }
 
 .header-container .col.d-flex.justify-content-end i:hover {
-color: #02AEEE; 
-transform: scale(1.2);
-transition: transform 0.2s, color 0.2s;
+    color: #02AEEE; 
+    transform: scale(1.2);
+    transition: transform 0.2s, color 0.2s;
 }
 
 .col.d-flex.justify-content-end a {
-  margin-left: 10px;
+    margin-left: 10px;
 }
 
 .notification-item {
@@ -48,14 +38,22 @@ transition: transform 0.2s, color 0.2s;
     border-bottom: 1px solid #ccc;
 }
 
-.notification-icon {
-    width: 40px;
-    height: 40px;
-    margin-right: 10px;
-}
-
 .notification-content {
     flex-grow: 1;
+    padding-left: 15px; /* Creates space between icon and content */
+}
+
+/* Initials Icon Styling */
+.initials-icon {
+    background-color: #099bdd; /* Default color */
+    color: white;
+    font-weight: bold;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    flex-shrink: 0;
 }
 
 .notification-title {
@@ -73,56 +71,28 @@ transition: transform 0.2s, color 0.2s;
 .notification-time {
     font-size: 12px;
     color: #999;
+    margin-top: auto; /* Pushes it to the bottom of the container */
 }
-  
+
+.masr {
+    color: #02AEEE;
+}
+
+.masr:hover {
+    color: #032540;
+}
+
+.nof-ttl {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Align title and name in a row */
+    gap: 10px;
+}
+
+/* Mobile adjustments */
 @media screen and (max-width: 500px) {
     .sidenav a {
-      float: none;
-      display: block;
+        float: none;
+        display: block;
     }
-  }
-
-.initials-icon {
-    background-color: #099bdd; /* Default color if JS doesn't work */
-    color: white;
-    opacity: 1;
-    display: inline-block;
-    font-weight: bold;
-    border-radius: 50%;
-    vertical-align: middle;
-    margin-right: 0.5em;
-    width: 50px;
-    height: 50px;
-    line-height: 50px;
-    text-align: center;
-    flex-shrink: 0;
-}
-
-[data-initials]:before {
-    content: attr(data-initials); 
-}
-
-.masr{
-  color: #02AEEE;
-}
-
-.masr:hover{
-  color: #032540;
-}
-
-/* Optional: Styling for the rest of the notification content */
-.notification-item {
-  display: flex;
-  align-items: center;
-  gap: 15px; /* Space between the icon and content */
-}
-
-.notification-content {
-  flex: 1; /* Allows the content to grow and take up available space */
-}
-
-.nof-ttl{
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
 }

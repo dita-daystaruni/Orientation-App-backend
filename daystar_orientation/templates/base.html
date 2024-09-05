@@ -22,11 +22,11 @@
                     <div id="name">{{ request.user.first_name }} {{ request.user.last_name }}</div> 
                 </div>
                 <nav class="sidenav">
-                    <a href="{% url 'dashboard' %}"><i><img src="{% static 'images/dashicon.png' %}" alt="dashicon" class="dashicon-class"></i> Dashboard</a> 
-                    <a href="{% url 'activities' %}"><i class="bi bi-calendar2-week"></i> Schedule</a> 
-                    <a href="{% url 'notifications' %}"><i class="bi bi-bell"></i> Notifications</a> 
-                    <a href="{% url 'students_details' %}"><i><img src="{% static 'images/actv-students.png' %}" alt="FAQ icon" class="FAQ-class"></i> Students</a> 
-                    <a href="{% url 'faqs' %}"><i><img src="{% static 'images/FAQ.png' %}" alt="dashicon" class="FAQ-class"></i> FAQ</a>
+                    <a href="{% url 'dashboard' %}" class="{% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}"><i><img src="{% static 'images/dashicon.png' %}" alt="dashicon" class="dashicon-class"></i> Dashboard</a> 
+                    <a href="{% url 'activities' %}" class="{% if request.resolver_match.url_name == 'activities' %}active{% endif %}"><i class="bi bi-calendar2-week"></i> Schedule</a> 
+                    <a href="{% url 'notifications' %}" class="{% if request.resolver_match.url_name == 'notifications' %}active{% endif %}"><i class="bi bi-bell"></i> Notifications</a> 
+                    <a href="{% url 'students_details' %}" class="{% if request.resolver_match.url_name == 'students_details' %}active{% endif %}"><i><img src="{% static 'images/actv-students.png' %}" alt="FAQ icon" class="FAQ-class"></i> Students</a> 
+                    <a href="{% url 'faqs' %}" class="{% if request.resolver_match.url_name == 'faqs' %}active{% endif %}"><i><img src="{% static 'images/FAQ.png' %}" alt="dashicon" class="FAQ-class"></i> FAQ</a>
                     <br>
                     <a href="{% url 'logout' %}"><i class="bi bi-box-arrow-right"></i> Log out</a> 
                 </nav>

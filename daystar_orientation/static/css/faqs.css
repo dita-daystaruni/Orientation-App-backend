@@ -1,157 +1,146 @@
-header{
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  margin: 10px;
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 0;
+    padding-left: 40px;
 }
-.add-icon{
-  margin-top: 25px;
-  width: 15px;
-  height: 15px;
+
+h3{
+  padding-bottom: 40px;
+  padding-left: 50px;
+}
+
+.add-icon {
+    font-size: 1.5rem;
+    color: #02AEEE;
 }
 
 .faq-item {
-    width: 100%;
-    border: 1px solid #dee2e6;
-    border-radius: 8px;
-    margin-bottom: 5px;
-    padding: 10px;
+    border-radius: 9px;
+    width: 765px;
+    padding-left: 399px;
+    padding-top: 183px;
+    box-shadow: 4px 4px 12px rgba(15, 1, 1, 0.1);
 }
-
-.faq-item .ans-i a:hover i {
-  color: #02AEEE;
-}
-
-.question-mark{
-    width: 25px;
-    height: 25px;
-}
-
 
 .faq-item .question {
     display: flex;
     align-items: center;
-    color: #032540;
+    width: 718px;
+    color: #000000;
     cursor: pointer;
 }
 
-.faq-item .question i {
-    margin-right: 10px;
-} 
-
-.faq-item .icons {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 10px;  
-    position: absolute;
-    right: 10px;
-    top: 10px;
+.question-mark {
+    width: 67px;
+    height: 51px;
 }
 
-.faq-item .icons i {
-  cursor: pointer;
-  margin-right: 10px;
-  color: #6c757d;
-}
-
-.faq-item .icons i:hover {
-  color: #02AEEE;
-}
-
-.faq-item .answer {
-    margin-top: 10px;
-    padding-top: 5px;
-    border-top: 1px solid #dee2e6;
-    font-size: 14px;
-    color: #666;
-    display: none; /* Initially hidden */
-}
-
-/*middle column*/
-
-/*right column*/ 
-
-form h4 {
-    font-weight: bold;
-    margin-bottom: 15px;
-}
-
-form .form-control {
-    border-radius: 8px;
-    border: 1px solid #dee2e6;
-}
-
-form .btn {
-    background-color: #02AEEE;
-    border: none;
-}
-
-.img-fluid {
-    max-width: 100%;
-    height: auto;
-}
-
-.col-md-5 h6{
-    margin-top: 25px;
-    font-weight: bold;
-}
-.faq-item .answer {
-    margin-top: 10px;
-    padding-top: 10px;
-    border-top: 1px solid #dee2e6;
-    font-size: 14px;
-    color: #666;
-    position: relative;
-}
 
 .question-toggle {
     cursor: pointer;
-  }
-  
-  .question-toggle:hover {
+    align-items: flex-end;
     color: #02AEEE;
-    transform: rotate(90deg);
-  }
-  
-  .question-toggle.active {
-    transform: rotate(90deg);
-  }
-  
-   .answer {
-    display: none;
-  }
-  
-  .answer.active {
-    display: block;
-  }
+}
+
+.question-toggle:hover {
+    color: #02AEEE;
+}
+
+.answer {
+    background-color: #f9f9f9;
+    border-top: 1px solid #dee2e6;
+    position: relative;
+}
+
+.answer .bi-chevron-up {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+.ans-i {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.ans-i i {
+    cursor: pointer;
+    color: black;
+}
+
+
+
+.ans-i i:hover {
+    color: #02AEEE;
+}
 
 /* Right Column */
-form h4 {
-    font-weight: bold;
-    margin-bottom: 15px;
-}
-
-form .form-control {
-    border-radius: 8px;
-    border: 1px solid #dee2e6;
-}
-
-.bbgman{
-    max-width: 100%;
-    height: 250px;
+.bbgman {
+    max-width: 365px;
+    height: 404px;
     margin-top: 20px;
 }
 
-.btn-primary{
-    background-color: #ffffff;
-    color: #02AEEE;
-    border: 1px solid #02AEEE;
-    border-radius: 10px;
+form h4 {
+    font-weight: bold;
+    margin-bottom: 15px;
+    height: 74px;
+    width: 396px;
 }
 
-/* Responsive Design */
+form .form-control {
+    border-radius: 10px;
+    width: 564px;
+    border: 1px solid #dee2e6;
+}
+
+form{
+    margin-left: 100px;
+    padding-top: 10px;
+}
+
+/* Pagination */
+.paginatation{
+   margin-left: 100px;
+}
+
+.pagination .page-link {
+    color: #02AEEE;
+}
+
+.pagination .page-link:hover {
+    color: #005f7a;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #02AEEE;
+    border-color: #02AEEE;
+}
+
+.pagination li {
+   padding: 50px 100px;
+}
+
+.pagination ul {
+   margin-left: 60px;
+}
+
 @media (max-width: 768px) {
-    .faq-item .question i {
-        margin-right: 5px;
+    .faq-item .question-mark {
+        width: 35px;
+        height: 35px;
     }
+
+    .faq-item .question p {
+        font-size: 14px;
+    }
+}
+
+.rotate {
+    transform: rotate(90deg);
+    transition: transform 0.3s ease;
 }

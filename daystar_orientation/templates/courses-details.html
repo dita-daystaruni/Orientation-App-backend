@@ -4,11 +4,12 @@
 
 {% block title %}Course Details{% endblock %}
 
-{% block extra_css %}
+{% block extra_head %}
 <link rel="stylesheet" href="{% static 'css/courses.css' %}">
 {% endblock %}
 
 {% block content %}
+ <div class="col-md-20">
     <div class="course-content">
     <div class="header-container">
         <div class="col d-flex justify-content-start">
@@ -81,6 +82,7 @@
                     {% endif %}
                 </ul>
             </nav>
+        </div>
 {% endblock %}
 
 {% block extra_js %}

@@ -4,12 +4,12 @@
 
 {% block title %} Dashboard {% endblock %}
 
-{% block extra_css %}
+{% block extra_head %}
 <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
 {% endblock %}
 
 {% block content %}
-<div class="col-md-7"> 
+<div class="col-md-10"> 
     <div class="main-content">
         <header>
             <h5>Greetings {{ request.user.first_name }} </h5>

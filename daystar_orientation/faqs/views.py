@@ -43,7 +43,7 @@ class FAQDetail(generics.RetrieveUpdateDestroyAPIView):
 @login_required
 def faqs_view(request):
     faqs = FAQ.objects.all().order_by('-id')
-    paginator = Paginator(faqs, 10) 
+    paginator = Paginator(faqs, 5) 
     
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)

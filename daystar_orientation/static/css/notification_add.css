@@ -1,33 +1,79 @@
-.col-md-10 {
-    margin: 0;
+/* Ensuring the main content stays in place and doesn't overlap */
+.container-fluid {
+    display: flex;
+}
+
+.notification-content {
+    margin-left: 240px; /* Adjusted for sidebar width */
+    padding: 20px;
+    width: calc(100% - 240px); /* Full width minus sidebar width */
+    background-color: #f8f9fa; /* Optional: Background for distinction */
+}
+
+.notification-content h1 {
+    margin-bottom: 30px;
+    font-weight: bold;
+    font-size: 32px;
+}
+
+/* Notification form adjustments */
+form {
+    max-width: 100px; /* Limit the form's width */
+    margin: auto; /* Centering the form */
+}
+
+form .form-control {
+    width: 100%; /* Full width for form elements */
     padding: 10px;
+    margin-top: 8px;
+    margin-bottom: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
 }
 
-form{
-    justify-content: center;
+form .form-control:focus {
+    border-color: #007bff; /* Optional: Focus color */
 }
 
-/*
-.dropdown-toggle i {
-  margin-left: 5px;
-  transition: transform 0.3s ease, color 0.3s ease;
-  font-size: 16px;
+.drop-container {
+    margin-top: 20px;
 }
 
-.dropdown-toggle:hover i {
-  color: #02AEEE;
-  transform: rotate(90deg);
+.dropdown-label {
+    font-weight: bold;
+    display: inline-block;
+    margin-right: 10px;
 }
-*/
+
+.dropdown-toggle {
+    cursor: pointer;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.dropdown-menu {
+    display: block;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    list-style: none;
+}
+
+.dropdown-menu li {
+    padding: 5px 0;
+}
 
 .btn-primary {
-  margin-top: 40px;
-  margin-right: 20px;
-  background-color: #ffffff;
-  border-color: #02AEEE;
-  color: #02AEEE;
-  width: 150px;
-  border-radius: 20px;
+    margin-top: 20px;
+    padding: 10px 20px;
+    border: 2px solid #007bff;
+    color: #007bff;
+    background-color: transparent;
+    border-radius: 30px;
+    transition: all 0.3s ease;
 }
 
-
+.btn-primary:hover {
+    background-color: #007bff;
+    color: white;
+}
