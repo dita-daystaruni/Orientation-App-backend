@@ -4,7 +4,7 @@
 
 {% block title %}Notifications{% endblock %}
 
-{% block extra_css %}
+{% block extra_head %}
 <link rel="stylesheet" href="{% static 'css/notifications.css' %}">
 {% endblock %}
 
@@ -14,7 +14,7 @@
             <div class="col d-flex justify-content-start">
                 <h4>Notifications</h4>
             </div>
-             {% if messages %}
+            {% if messages %}
             <div>
                 {% for message in messages %}
                 <div class="{% if message.tags %}alert {{ message.tags }}{% endif %}">
@@ -28,19 +28,25 @@
                    <a href="{% url 'data_upload' %}"><img src="{% static 'images/paper-add.png' %}" alt="add-icon" class="add-icon"></a>
                 </div>
                 <div>
-                     <a href="{% url 'notifications_add' %}"><i class="bi bi-pencil" style="margin-left: 15px;"></i></a>
-                  </div>
-                <a href="js/markallasread" class="masr">mark all as read</a>
+                    <a href="{% url 'notifications_add' %}">
+                        <i class="bi bi-pencil" style="margin-left: 15px;"></i>
+                    </a>
+                </div>
+                <a href="js/markallasread" class="masr">Mark all as read</a>
             </div>
         </div>
 
+        <!-- Notification Items -->
         {% for notification in page_obj %}
         <div class="notification-item">
-            <div class="initials-icon" data-initials="{{ notification.created_by.first_name|slice:":1" }}{{ notification.created_by.last_name|slice:":1" }}"></div>
+            <!-- Initials Icon -->
+            <div class="initials-icon" data-initials="{{ notification.created_by.first_name|slice:":1" }}{{ notification.created_by.last_name|slice:":1" }}">
+                <!-- JS will handle content and color -->
+            </div>
+            <!-- Notification Content -->
             <div class="notification-content">
                 <div class="nof-ttl">
-                    <p class="sender-name" style="color: #02AEEE;">{{ notification.created_by.first_name }} {{ notification.created_by.last_name }}</p>
-                    <br>
+                    <p class="sender-name">{{ notification.created_by.first_name }} {{ notification.created_by.last_name }}</p>
                     <h4 class="notification-title">{{ notification.title }}</h4>
                 </div>
                 <p class="notification-description">{{ notification.description }}</p>
@@ -67,5 +73,5 @@
 {% endblock %}
 
 {% block extra_js %}
-    <script src="{% static 'js/initialicons.js' %}"></script>
+     <script src="{% static 'js/initialicons.js' %}"></script>
 {% endblock %}

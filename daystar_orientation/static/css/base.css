@@ -1,7 +1,7 @@
  body {
     margin: 0;
     padding-top: 30px;
-    padding-bottom: 30px;
+    padding-bottom: 10px;
     font-family: 'Inter', sans-serif;
     color: #032540;
   }
@@ -9,8 +9,8 @@
  .container-fluid {
     margin: 0;
     display: flex;
-    min-height: 100vh;
-    min-width: 100vh;
+    min-height: 70vh;
+    min-width: 100vw;
     margin-right: 50px;
     margin-left: 50px;
 }
@@ -53,7 +53,7 @@
 
   #name{
     font-size: 24px;
-    padding-left: 55px;
+    padding-left: 35px;
     padding-bottom: 30px;
   }
 
@@ -81,6 +81,7 @@
     box-shadow: 0 3px 5px #cccaca1a;
     padding-right: 10px;
     padding-left: 10px;
+    overflow-y: auto;
   }
   
   .sidenav a {
@@ -121,8 +122,8 @@ main {
 
 
 main.col-md-10 {
-    padding-left: 30px; 
-    padding-right: 30px; 
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
   /* Message for success and alert  */
@@ -134,6 +135,8 @@ main.col-md-10 {
     padding: 15px;
     border-radius: 5px;
     margin-bottom: 10px;
+    margin-top: 15px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
     color: #fff;
     font-size: 1em;
 }

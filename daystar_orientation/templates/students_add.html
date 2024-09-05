@@ -9,128 +9,134 @@
 {% endblock %}
 
 {% block content %}
-<div class="col-md-10">
-     {% if messages %}
-            <div>
-                {% for message in messages %}
-                <div class="{% if message.tags %}alert {{ message.tags }}{% endif %}">
-                    {{ message }}
-                </div>
-                {% endfor %}
-            </div>
-            {% endif %}
-    <form method="POST" action="{% url 'students_add' %}">
-        {% csrf_token %}
-        <h4 class="d-flex justify-content-center">Student Details</h4>
-        <div class="form-row">
-            <div class="fields">
-                <div class="input-field">
-                    <label for="firstName" class="form-label">First Name</label>
-                    <input type="text" class="form-control" id="firstName" name="firstName" placeholder="First Name" style="width: 300px;">
-                </div>
-                <div class="input-field">
-                    <label for="lastName" class="form-label">Last Name</label>
-                    <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Last Name" style="width: 300px;">
-                </div>
-            </div>
 
-            <div class="fields">
-                <div class="input-field">
-                    <label for="gender" class="form-label">Gender</label><br>
-                    <div class="form-check form-check-inline">
-                        <input type="radio" id="female" name="gender" value="Female" class="form-check-input">
-                        <label for="female" class="form-check-label">Female</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input type="radio" id="male" name="gender" value="Male" class="form-check-input">
-                        <label for="male" class="form-check-label">Male</label>
-                    </div>
-                </div>
+<div class="container-fluid">
+    <div class="col-md-10 offset-md-2" style="margin-top: 20px;">
+        {% if messages %}
+        <div>
+            {% for message in messages %}
+            <div class="{% if message.tags %}alert {{ message.tags }}{% endif %}">
+                {{ message }}
             </div>
-
-            <div class="fields">
-                <div class="input-field">
-                    <label for="admissionNumber" class="form-label">Admission Number</label>
-                    <input type="text" class="form-control" id="admissionNumber" name="admissionNumber" placeholder="eg. 24-0001" style="width: 300px;">
-                </div>
-                <div class="input-field">
-                    <label for="course" class="form-label">Course</label>
-                    <select class="form-select" id="course" name="course" style="width: 300px;">
-                        {% for course in courses %}
-                            <option value="{{ course.name }}">{{ course.name }}</option>
-                        {% endfor %}
-                    </select>
-                 </div>
-            </div>
-
-            <div class="fields">
-                <div class="input-field">
-                    <label for="phoneNumber" class="form-label">Phone Number</label>
-                    <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" placeholder="eg. +2547 12 345 678" style="width: 300px;">
-                </div>
-                <div class="input-field">
-                    <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="name@gmail.com" style="width: 300px;">
-                </div>
-            </div>
-
-            <div class="fields">
-                <div class="input-field">
-                    <label for="parentName" class="form-label">Parent</label>
-                    <select class="form-select" id="parentName" name="parentName" style="width: 300px;">
-                        {% for parent in parents %}
-                            <option value="{{ parent.id }}">{{ parent.first_name }} {{ parent.last_name }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-            </div>
-
-            <div class="fields">
-                <div class="input-field">
-                    <label for="campus" class="form-label">Campus</label><br>
-                    <div class="form-check form-check-inline">
-                        <input type="radio" id="athi-campus" name="campus" value="Athi river" class="form-check-input">
-                        <label for="athi-campus" class="form-check-label">Athi River</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input type="radio" id="nbo-campus" name="campus" value="Nairobi" class="form-check-input">
-                        <label for="nbo-campus" class="form-check-label">Nairobi</label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="fields">
-                <div class="input-field">
-                    <label for="accomodation" class="form-label">Accommodation</label><br>
-                    <div class="form-check form-check-inline">
-                        <input type="radio" id="dayScholar" name="accomodation" value="Dayscholar" class="form-check-input">
-                        <label for="dayScholar" class="form-check-label">Dayscholar</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input type="radio" id="boarder" name="accomodation" value="Boarder" class="form-check-input">
-                        <label for="boarder" class="form-check-label">Boarder</label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="fields">
-                <div class="input-field">
-                    <label for="checkedin" class="form-label">Checked-in Status</label><br>
-                    <div class="form-check form-check-inline">
-                        <input type="radio" id="checkedIn" name="checkedin" value="True" class="form-check-input">
-                        <label for="checkedIn" class="form-check-label">Yes</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input type="radio" id="notCheckedIn" name="checkedin" value="False" class="form-check-input">
-                        <label for="notCheckedIn" class="form-check-label">No</label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="btn-container">
-                <button type="submit" class="btn btn-primary">Create Student</button>
-            </div>
+            {% endfor %}
         </div>
-    </form>
+        {% endif %}
+        
+        <!-- Adjusted the form style to ensure proper alignment and spacing -->
+        <form method="POST" action="{% url 'students_add' %}" style="padding: 20px; background-color: #f9f9f9; border-radius: 8px;">
+            {% csrf_token %}
+            <h4 class="d-flex justify-content-center" style="margin-bottom: 20px;">Student Details</h4>
+            <div class="form-row">
+                <!-- Reduced width of input fields to ensure they fit within the layout -->
+                <div class="fields">
+                    <div class="input-field">
+                        <label for="firstName" class="form-label">First Name</label>
+                        <input type="text" class="form-control" id="firstName" name="firstName" placeholder="First Name" style="width: 100%;">
+                    </div>
+                    <div class="input-field">
+                        <label for="lastName" class="form-label">Last Name</label>
+                        <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Last Name" style="width: 100%;">
+                    </div>
+                </div>
+
+                <div class="fields">
+                    <div class="input-field">
+                        <label for="gender" class="form-label">Gender</label><br>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" id="female" name="gender" value="Female" class="form-check-input">
+                            <label for="female" class="form-check-label">Female</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" id="male" name="gender" value="Male" class="form-check-input">
+                            <label for="male" class="form-check-label">Male</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="fields">
+                    <div class="input-field">
+                        <label for="admissionNumber" class="form-label">Admission Number</label>
+                        <input type="text" class="form-control" id="admissionNumber" name="admissionNumber" placeholder="eg. 24-0001" style="width: 100%;">
+                    </div>
+                    <div class="input-field">
+                        <label for="course" class="form-label">Course</label>
+                        <select class="form-select" id="course" name="course" style="width: 100%;">
+                            {% for course in courses %}
+                            <option value="{{ course.name }}">{{ course.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+
+                <div class="fields">
+                    <div class="input-field">
+                        <label for="phoneNumber" class="form-label">Phone Number</label>
+                        <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" placeholder="eg. +2547 12 345 678" style="width: 100%;">
+                    </div>
+                    <div class="input-field">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="name@gmail.com" style="width: 100%;">
+                    </div>
+                </div>
+
+                <div class="fields">
+                    <div class="input-field">
+                        <label for="parentName" class="form-label">Parent</label>
+                        <select class="form-select" id="parentName" name="parentName" style="width: 100%;">
+                            {% for parent in parents %}
+                            <option value="{{ parent.id }}">{{ parent.first_name }} {{ parent.last_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+
+                <div class="fields">
+                    <div class="input-field">
+                        <label for="campus" class="form-label">Campus</label><br>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" id="athi-campus" name="campus" value="Athi river" class="form-check-input">
+                            <label for="athi-campus" class="form-check-label">Athi River</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" id="nbo-campus" name="campus" value="Nairobi" class="form-check-input">
+                            <label for="nbo-campus" class="form-check-label">Nairobi</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="fields">
+                    <div class="input-field">
+                        <label for="accomodation" class="form-label">Accommodation</label><br>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" id="dayScholar" name="accomodation" value="Dayscholar" class="form-check-input">
+                            <label for="dayScholar" class="form-check-label">Dayscholar</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" id="boarder" name="accomodation" value="Boarder" class="form-check-input">
+                            <label for="boarder" class="form-check-label">Boarder</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="fields">
+                    <div class="input-field">
+                        <label for="checkedin" class="form-label">Checked-in Status</label><br>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" id="checkedIn" name="checkedin" value="True" class="form-check-input">
+                            <label for="checkedIn" class="form-check-label">Yes</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" id="notCheckedIn" name="checkedin" value="False" class="form-check-input">
+                            <label for="notCheckedIn" class="form-check-label">No</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="btn-container">
+                    <button type="submit" class="btn btn-primary">Create Student</button>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>
 {% endblock %}

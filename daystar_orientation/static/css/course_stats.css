@@ -1,53 +1,53 @@
-.main-content {
+.container-fluid {
     padding: 15px;
     background-color: #ffffff;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 .course-stats-header {
-    margin-bottom: 20px;
+    margin-bottom: 70px;
 }
 
 .course-stats-header h5 {
-  margin-left: 22px;
-  margin-right: 10px;
+    margin-right: 10px;
 }
 
-.course-stats-content h3 {
-    margin-bottom: 20px;
-    font-weight: bold;
-}
-
-.justify-content-between{
-  gap: 20;
+.course-stats-content {
+    margin-top: 20px;
 }
 
 .list-group-item {
-  display: flex;
-  border: none;
-  color: #032540;
-  gap: 20;
-  margin-bottom: 5px;
-  padding: 8px 20px;
-  font-size: 1.0rem;
-  background-color: transparent;
-}
-
-.print-btn {
-    font-size: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: #f9f9f9;
+    border: 1px solid rgba(3, 37, 64, 0.1);
     color: #032540;
-    text-decoration: none;
+    font-size: 1rem;
 }
 
 .list-group-item span {
-  justify-content: center;
-  margin-left: 25px;
-  text-align: center;
-  min-width: 40px; /* Adjust this width as needed to ensure alignment */
-  color: rgba(3, 37, 64, 0.6);
+    font-weight: bold;
+    color: rgba(3, 37, 64, 0.8);
 }
 
-h3{
-    align-content: center;
+.print-btn {
+    font-size: 5.5rem;
+    color: #032540;
 }
 
+@media (max-width: 768px) {
+    .course-stats-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .list-group-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .list-group-item span {
+        margin-top: 5px;
+    }
+}

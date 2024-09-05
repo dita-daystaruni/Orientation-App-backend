@@ -1,6 +1,5 @@
 .header-container{
-    padding-top: 90px;
-    padding-bottom: 90px;
+    padding-top: 20px;
     display: flex;
     flex-direction: row;
     width: 100%;
@@ -67,7 +66,7 @@
 }
 
 .table td {
-  font-size: 18px; 
+  font-size: 10px; 
 }
 
 .table th, .table td {
@@ -77,7 +76,7 @@
 .bi-pencil, .bi-trash {
     cursor: pointer;
     margin-right: 10px;
-    color: rgba(3, 37, 64, 0.6);
+    color: rgba(104, 145, 179, 0.6);
 }
 
 .bi-pencil:hover, .bi-trash:hover {

@@ -2,16 +2,18 @@
 
 {% load static %}
 
-{% block title %}Notifications Add{% endblock %}
+{% block title %}Add Notification{% endblock %}
 
-{% block extra_css %}
+{% block extra_head %}
 <link rel="stylesheet" href="{% static 'css/notification_add.css' %}">
 {% endblock %}
 
 {% block content %}
-   <div class="col-md-10">
-        <h1 class="text-center mt-3">Add Notification</h1>
-         {% if messages %}
+<div class="container-fluid d-flex">
+    <div class="col-md-10 notification-content">
+        <h1 class="text-center mt-3">Notifications</h1>
+
+        {% if messages %}
             <div>
                 {% for message in messages %}
                 <div class="{% if message.tags %}alert {{ message.tags }}{% endif %}">
@@ -19,17 +21,20 @@
                 </div>
                 {% endfor %}
             </div>
-            {% endif %}
+        {% endif %}
+
         <form method="POST">
             {% csrf_token %}
             <div class="mb-3">
                 <label for="notificationTitle" class="form-label">Notification Title</label>
-                <input type="text" class="form-control" id="notificationTitle" name="notificationTitle" placeholder="Enter title" style="width: 700px;">
+                <input type="text" class="form-control" id="notificationTitle" name="notificationTitle" placeholder="Enter title" style="width: 100%;">
             </div>
+
             <div class="mb-3">
                 <label for="notificationDescription" class="form-label">Description</label>
-                <textarea class="form-control" id="notificationDescription" name="notificationDescription" rows="5" placeholder="Description" style="width: 700px;"></textarea>
+                <textarea class="form-control" id="notificationDescription" name="notificationDescription" rows="5" placeholder="Description" style="width: 100%;"></textarea>
             </div>
+
             <div class="drop-container">
                 <div class="dropdown">
                     <span class="dropdown-label">Who can see?</span>
@@ -41,12 +46,14 @@
                         <li><input type="checkbox" id="admins" name="admins"> <label for="admins">Admins</label></li>
                     </ul>
                 </div>
-            </div>
+
+            <!-- Submit Button -->
             <div class="d-flex justify-content-end">
                 <button type="submit" class="btn btn-primary">Add Notification</button>
             </div>
         </form>
     </div>
+</div>
 {% endblock %}
 
 {% block extra_js %}
