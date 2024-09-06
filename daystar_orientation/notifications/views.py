@@ -28,7 +28,10 @@ class NotificationList(generics.ListCreateAPIView):
         elif user.user_type == 'regular':
             return Notification.objects.filter(
                 is_regular_viewer=True,
-                created_by=user.parent 
+                created_by__user_type="admin"
+            ) | Notification.objects.filter(
+                is_regular_viewer=True,
+                created_by=user.parent
             )
         return Notification.objects.none() 
 
@@ -40,20 +43,18 @@ class NotificationList(generics.ListCreateAPIView):
             admin_viewers = self.request.data.get('is_admin_viewer', False)
             parent_viewers = self.request.data.get('is_parent_viewer', False)
             regular_viewers = self.request.data.get('is_regular_viewer', False)
-
             notification.is_admin_viewer = admin_viewers
             notification.is_parent_viewer = parent_viewers
             notification.is_regular_viewer = regular_viewers
-
-            self.send_push_notification(notification)
+            self.send_push_notification(notification, user)
 
         elif user.user_type == 'parent':
             notification.is_regular_viewer = True 
             # notification.is_parent_viewer = True
-
-            self.send_push_notification(notification, user)  
+            self.send_push_notification(notification, user)
 
         notification.save()
+
     def send_push_notification(self, notification, user):
         # Fetch intended users based on the notification's viewer settings
         users_to_notify = Account.objects.none()
@@ -77,7 +78,7 @@ class NotificationList(generics.ListCreateAPIView):
 
         # If there are no tokens, we shouldn't proceed
         if not tokens:
-            print("No tokens found for push notifications.")
+            # print("No tokens found for push notifications.")
             return
 
         # Create the message payload
@@ -91,15 +92,15 @@ class NotificationList(generics.ListCreateAPIView):
 
         # Send message to multiple device tokens
         try:
-            print(tokens)
+            # print(tokens)
             devices = FCMDevice.objects.filter(registration_id__in=tokens)
             output = devices.send_message(
                 message,
             )
             
-            print(output.response.__dict__)
+            # print(output.response.__dict__)
 
-            print(f"Push notification sent successfully to {len(tokens)} devices.")
+            # print(f"Push notification sent successfully to {len(tokens)} devices.")
             
         except Exception as e:
             raise e
@@ -132,7 +133,10 @@ class RecentNotificationList(generics.ListAPIView):
         elif user.user_type == 'regular':
             notifications = Notification.objects.filter(
                 is_regular_viewer=True,
-                created_by__parent=user  
+                created_by__user_type="admin"
+            ) | Notification.objects.filter(
+                is_regular_viewer=True,
+                created_by=user.parent
             )
             notifications = notifications.order_by('-created_at')[:3]
             return notifications
