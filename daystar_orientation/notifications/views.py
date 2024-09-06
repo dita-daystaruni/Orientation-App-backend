@@ -28,7 +28,7 @@ class NotificationList(generics.ListCreateAPIView):
         elif user.user_type == 'regular':
             return Notification.objects.filter(
                 is_regular_viewer=True,
-                created_by__parent=user  
+                created_by=user.parent 
             )
         return Notification.objects.none() 
 
