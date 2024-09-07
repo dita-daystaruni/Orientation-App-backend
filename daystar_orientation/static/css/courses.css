@@ -1,23 +1,9 @@
-/* Global styles */
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  width: 100%;
-  color: #032540;
-  overflow-x: hidden;
-  overflow-y: auto;
-  font-size: 1rem; /* Set a base font size */
-  line-height: 1.0vh; /* Base line height */
-}
-
 .col-md-10 {
   display: flex;
   flex-direction: column;
     /*max-width: 400px;  Assuming mobile view */
     margin: 0;
     padding-left: 0
-    
 }
 
 .col-md-10{
@@ -30,99 +16,6 @@ html, body {
 height: 100%;
 }
 
-
-/*sidenav styles*/
-.avtr{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  margin-top: 4vh;
-  margin-bottom: 3vh;
-  color: #032540;
-}
-#user-avatar {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: transparent;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-}
-
-.dashicon-class{
-  width: 1.5vw;
-  height: 2.6vh;
-}
-
-.FAQ-class{
-  width: 1.5vw;
-  height: 2.6vh;
-}
-
-.sidenav #name {
-  font-size: 1.5vw; /* Adjust the font size as needed */
-}
-
-.sidenav {
-  position: fixed;
-  display: flex;
-  flex-direction: column;
-  margin-right: 3vw;
-  background-color: transparent;
-  width: 100%;
-  height: 100vh;
-  width: 15%;
-  overflow: hidden;
-  padding: 0;
-  gap: 2.4vh;
-  box-shadow: 0 2px 4px rgba(204, 202, 202, 0.1);
-}
-
-.sidenav a {
-  padding: 1vw 1vh;
-  font-size: 1.3vw;
-  font-weight: 400;
-  justify-content: space-between;
-  color: #032540;
-  text-decoration: none;
-  border-radius: 30px; 
-  transition: border-color 0.3s ease-in-out;
-}
-
-.sidenav a:hover {
-  background-color: #ffffff;
-  border: 2px solid #02AEEE;
-  border-radius: 30px; 
-}
-
-.active {
-  background-color: #ffffff;
-  border-radius: 30px; 
-  border: 2px solid #02AEEE; /* Blue border for active state */
-}
-
-
-@media screen and (max-width: 500px) {
-  .sidenav a {
-    float: none;
-    display: block;
-  }
-}  
-/*sidenav styles*/
-  .row{
-    height: 100%;
-  }
-  
-@media screen and (max-width: 500px) {
-  .sidenav a {
-    float: none;
-    display: block;
-  }
-}
-
 .course-content{
   display: flex;
 }
@@ -131,6 +24,10 @@ header {
   padding: 20px;
 }
 
+.table td, .table th {
+  text-align: center;
+  color: #032540;
+}
 
 .header-container{
   margin-top: 20px;
@@ -229,6 +126,14 @@ border-bottom: 1px solid #ccc; /* Gray 1px bottom border */
 
 .table:hover tbody tr {
 background-color: #eee; /* Hover effect with light gray background */
+}
+
+
+@media screen and (max-width: 500px) {
+  .sidenav a {
+    float: none;
+    display: block;
+  }
 }
 
 
