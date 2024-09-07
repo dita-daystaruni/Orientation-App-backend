@@ -22,7 +22,7 @@
             </div>
         {% endif %}
 
-        <form method="POST" style="display: flex; flex-direction: column; justify-content: flex-start;">
+        <form method="POST">
             {% csrf_token %}
             <div class="mb-3">
                 <label for="notificationTitle" class="form-label">Notification Title</label>
@@ -56,4 +56,5 @@
 
 {% block extra_js %}
     <script src="{% static 'js/initialicons.js' %}"></script>
+    <script src="{% static 'js/customdropdown.js' %}"></script>
 {% endblock %}

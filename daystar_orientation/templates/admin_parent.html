@@ -4,13 +4,13 @@
 
 {% block title %} G9 Create {% endblock %}
 
-{% block extra_css %}
+{% block extra_head %}
 <link rel="stylesheet" href="{% static 'css/admin_parent.css' %}">
 {% endblock %}
 
 {% block content %}
  <div class="col-md-10">
-     {% if messages %}
+     <!-- {% if messages %}
             <div>
                 {% for message in messages %}
                 <div class="{% if message.tags %}alert {{ message.tags }}{% endif %}">
@@ -18,28 +18,18 @@
                 </div>
                 {% endfor %}
             </div>
-            {% endif %}
+            {% endif %} -->
     <form method="POST" action="{% url 'admin_add' %}">
         {% csrf_token %}
         <h4 class="d-flex justify-content-center">Parent/G9 Details</h4>
         <div class="form-row">
             <div class="fields">
                 <div class="input-field">
-                    <label for="user_type" class="form-label">User Type</label>
-                    <select class="form-select" id="user_type" name="user_type" style="width: 300px;">
-                        <option value="parent">Parent (Orientation Lead)</option>
-                        <option value="admin">Admin (G9)</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="fields">
-                <div class="input-field">
-                    <label for="firstName" class="form-label">First Name</label>
+                    <label for="firstName" class="form-label"> Name</label>
                     <input type="text" class="form-control" id="firstName" name="first_name" placeholder="First Name" style="width: 300px;">
                 </div>
                 <div class="input-field">
-                    <label for="lastName" class="form-label">Last Name</label>
+                    <label for="lastName" class="form-label">&nbsp;</label>
                     <input type="text" class="form-control" id="lastName" name="last_name" placeholder="Last Name" style="width: 300px;">
                 </div>
             </div>
@@ -88,6 +78,16 @@
                 <div class="input-field">
                     <label for="email" class="form-label">Email</label>
                     <input type="email" class="form-control" id="email" name="email" placeholder="name@gmail.com" style="width: 300px;">
+                </div>
+            </div>
+            
+            <div class="fields">
+                <div class="input-field">
+                    <label for="user_type" class="form-label">User Type</label>
+                    <select class="form-select" id="user_type" name="user_type" style="width: 300px;">
+                        <option value="parent">Parent (Orientation Lead)</option>
+                        <option value="admin">Admin (G9)</option>
+                    </select>
                 </div>
             </div>
 
