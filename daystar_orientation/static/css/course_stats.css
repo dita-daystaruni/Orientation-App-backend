@@ -20,7 +20,7 @@
     display: flex;
     justify-content: space-between;
     padding: 10px 20px;
-    background-color: #f9f9f9;
+    background-color: #ffffff;
     border: 1px solid rgba(3, 37, 64, 0.1);
     color: #032540;
     font-size: 1rem;
@@ -31,8 +31,17 @@
     color: rgba(3, 37, 64, 0.8);
 }
 
+.list-group {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .list-group-item {
+    border: none;
+  }
+
 .print-btn {
-    font-size: 5.5rem;
+    font-size: 2.5rem;
     color: #032540;
 }
 
