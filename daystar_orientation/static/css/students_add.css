@@ -50,10 +50,10 @@
   border: 1px solid #ffffff;
 }
 
-.form-row .fields{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.fields {
+  display: flex;  /* Ensures horizontal layout */
+  justify-content: space-between; /* Distributes space evenly between elements */
+  margin-bottom: 15px; /* Add some space between each field group */
 }
 
 form{
@@ -61,6 +61,10 @@ form{
   justify-content: center;
   flex-direction: column;
   width: inherit;
+}
+
+.form-row{
+  width: 100%;
 }
 
 .fields {
@@ -92,7 +96,7 @@ input[type='radio']:after {
   content: '';
   display: inline-block;
   visibility: visible;
-  border: 2px solid #f8f8f8;
+  border: 2px solid #e8e6e6;
 }
 
 input[type='radio']:checked:after {

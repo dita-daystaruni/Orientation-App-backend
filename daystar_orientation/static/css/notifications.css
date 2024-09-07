@@ -1,17 +1,105 @@
-/* Layout and Spacing Adjustments */
-.col-md-10 {
-    width: 87.33%;
-    margin: 20px auto; /* Adds padding from navbar */
-    padding: 20px;
+/* Global styles */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    color: #032540;
+    overflow-x: hidden;
     overflow-y: auto;
+    font-size: 1rem; /* Set a base font size */
+    line-height: 1.2vh; /* Base line height */
+  }  
+  .col-md-10 {
+    display: flex;
+    flex-direction: column;
+      /*max-width: 400px;  Assuming mobile view */
+      margin: 0;
+      padding-left: 0
+      
+  }
+  
+  .col-md-10{
+    width: 83.33%;
+    margin-left: 16.67%;
+  }
+  
+  .row{
+    width: 100%;
+  height: 100%;
 }
+  /*sidenav styles*/
+  
+  .avtr{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 4vh;
+    margin-bottom: 3vh;
+    color: #032540;
+  }
+  #user-avatar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
+  
+  .dashicon-class{
+    width: 1.5vw;
+    height: 2.6vh;
+  }
+  
+  .FAQ-class{
+    width: 1.5vw;
+    height: 2.6vh;
+  }
+  
+  .sidenav #name {
+    font-size: 1.5vw; /* Adjust the font size as needed */
+  }
+  
+  .sidenav {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    margin-right: 3vw;
+    background-color: transparent;
+    width: 100%;
+    height: 100vh;
+    width: 15%;
+    overflow: hidden;
+    padding: 0;
+    gap: 2.4vh;
+    box-shadow: 0 2px 4px rgba(204, 202, 202, 0.1);
+  }
+    
+  
+  .sidenav a:hover {
+    background-color: #ffffff;
+    border: 2px solid #02AEEE;
+    border-radius: 30px; 
+  }
+  
+  .active {
+    background-color: #ffffff;
+    border-radius: 30px; 
+    border: 2px solid #02AEEE; /* Blue border for active state */
+  }
+  
+  /*sidenav styles*/
 
 .header-container {
     margin-top: 20px;
     display: flex;
     justify-content: space-between; /* Evenly space header contents */
-    align-items: center; /* Align vertically */
     width: 100%;
+    height: 3vh;
 }
 
 /* Ensuring consistent spacing and hover effects for icons */
@@ -96,3 +184,18 @@
         display: block;
     }
 }
+
+.notification-items-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%; /* Adjust the height as needed */
+  }
+  
+  .notification-items {
+    flex: 1; /* Allow the notification items to take up most of the space */
+  }
+  
+  .pagination {
+    align-self: flex-end; /* Position pagination at the flex end */
+  }

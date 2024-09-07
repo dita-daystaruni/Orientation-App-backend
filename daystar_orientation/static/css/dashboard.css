@@ -1,126 +1,23 @@
-/* Global styles */
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  width: 100%;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  color: #032540;
-  font-size: 12vw; /* Set a base font size */
-  line-height: 1.2vh; /* Base line height */
-}
-  .container-fluid{
-    height: 100vh;
-  }
-/*sidenav styles*/
 
-.col-md-2{
-  justify-content: space-between;
-  
-}
-
-.avtr{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  margin-top: 4vh;
-  margin-bottom: 3vh;
-  color: #032540;
-}
-#user-avatar {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: transparent;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-}
-
-.dashicon-class{
-  width: 1.5vw;
-  height: 2.6vh;
-}
-
-.FAQ-class{
-  width: 1.5vw;
-  height: 2.6vh;
-}
-
-.sidenav #name {
-  font-size: 1.5vw; /* Adjust the font size as needed */
-}
-
-.sidenav {
-  position: fixed;
-  display: flex;
-  flex-direction: column;
-  margin-right: 3vw;
-  background-color: transparent;
-  height: 100vh;
-  width: 15%;
-  overflow: hidden;
-  padding: 0;
-  gap: 2.4vh;
-  box-shadow: 0 2px 4px rgba(204, 202, 202, 0.1);
-}
-
-.sidenav a {
-  padding: 1vw 1vh;
-  font-size: 1.3vw;
-  font-weight: 400;
-  justify-content: space-between;
-  color: #032540;
-  text-decoration: none;
-  border-radius: 30px; 
-  transition: border-color 0.3s ease-in-out;
-}
-
-.sidenav a:hover {
-  background-color: #ffffff;
-  border: 2px solid #02AEEE;
-  border-radius: 30px; 
-}
-
-.active {
-  background-color: #ffffff;
-  border-radius: 30px; 
-  border: 2px solid #02AEEE; /* Blue border for active state */
-}
-
-
-@media screen and (max-width: 500px) {
-  .sidenav a {
-    float: none;
-    display: block;
-  }
-}  
-/*sidenav styles*/
   .row{
     height: 100%;
+    display: flex;
+    flex: 1;
   }
+  
 
   .col-md-2, .col-md-7, .col-md-3 {
     height: 100%;
     overflow: hidden;
 
 }
-  
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  width: 100%;
-  font-family: Verdana, sans-serif;
-}
 
 .main-content{
   display: flex;
+  flex: 1;
   flex-direction: column;
-  justify-content: space-around;
-  margin-top: 25px;
+  line-height: 1.8vh;
+  margin-top: 7vh;
   width: 100%;
   height: 100vh;
 }
@@ -139,14 +36,14 @@ header .bi-person-plus:hover {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  max-height: 50%;
+  height: 40%;
   gap: 20px;
   width: 100%;
 }
 
 .stats, .notifications {
   flex: 1;
-  margin-bottom: 10px;
+  margin-bottom: 1vh;
   padding: 0;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -193,7 +90,11 @@ header .bi-person-plus:hover {
 .statscard-row {
   display: flex;
   align-items: center;
-  margin-bottom: 15px;
+  flex: 1;
+}
+
+.statscard-row,.statscard-row2{
+flex: 1;
 }
 
 .graphimage {
@@ -231,7 +132,9 @@ header .bi-person-plus:hover {
 .statscard-row2{
   display: flex;
   justify-content: space-between;
-  font-size: small;
+  align-content: baseline;
+  margin-bottom: 2vh;
+  flex: 1;
 }
 
 .stats-col{
@@ -312,6 +215,7 @@ header h5{
 .new-students {
   font-size: small;
   overflow-y: auto;
+  height: 50%;
 }
 
 .active-dot {
@@ -344,15 +248,6 @@ header h5{
   font-size: 2vw;
 }
 
-.statscard-row{
-display: flex;
-flex-direction: row;
-width: 100%;
-height: 60%;
-/*object-fit: contain;*/
-
-}
-
 .graphimage {
   display: flex;
   justify-content: space-around;
@@ -365,8 +260,13 @@ height: 60%;
     justify-content: center;
     align-content: baseline;
     color: #032540;
-    font-size: 30px;
     font-weight: 300;
+}
+.statscard-body {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  height: 100%;
 }
 
 .card-textnum{
@@ -465,6 +365,36 @@ body {font-family: Verdana, sans-serif;}
   text-decoration: none;
 }
 
+/*search bar*/
+.searchbar{
+  display: flex;
+  height: 30px;
+  background-color: #ffffff;
+  border-radius: 20px;
+  color: rgba(3, 37, 64);
+  align-items: center;
+}
+
+.searchbar i{
+  color: #032540;
+}
+
+.searchbar:hover input{
+  width: 100px;
+  border: 1px solid #02AEEE;
+  border-radius: 50px;
+  color: #032540;
+}
+
+.searchbar input{
+  width: 0;
+  outline: none;
+  border: none;
+  transition: 0.5s;
+  background: transparent;
+}
+/*search bar*/
+
 /* col-md-3*/
 .col-md-3{
   justify-content: space-between;
@@ -476,16 +406,18 @@ body {font-family: Verdana, sans-serif;}
 }
 
 .main-sessions, .todays-schedule {
-  margin-bottom: 20px;
+  margin-bottom: 2vh;
+  flex: 1;
 }
-
+.todays-schedule h6 {
+  position: sticky;}
 .todays-schedule ul {
   max-height: 300px; /* Adjust the maximum height as needed */
   overflow-y: auto;
 }
 
 h2 {
-  font-size: 18px;
+  font-size: 2vw;
   font-weight: bold;
 }
 
@@ -503,7 +435,7 @@ li {
 
 time {
   font-weight: 400;
-  margin-right: 5px;
+  margin-right: 2vw;
 }
 
 .bi-chevron-right {
@@ -570,3 +502,24 @@ justify-content: flex-start;
 .table td {
   font-size: 16px;
 }*/
+
+@media (max-width: 768px) {
+  .first-row {
+    flex-direction: column; /* Stack elements vertically on smaller screens */
+  }
+
+  .main-content {
+    margin-top: 10vh;
+  }
+
+  .new-students, .stats, .notifications {
+    height: auto; /* Avoid fixed heights */
+  }
+}
+
+
+.col-md-10{
+  display: flex;
+  width: 83.33%;
+  margin-left: 16.67%;
+}

@@ -1,75 +1,212 @@
-.col-md-10 {
-    width: 80%;
-    position: relative;
-    /*max-width: 400px;  Assuming mobile view */
+html, body {
     margin: 0;
-    padding-left: 0
-}
-
-.header-container{
-  margin-top: 10px;
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-}
-
-.header-container .col.d-flex.justify-content-end i {
-  cursor: pointer;
-  margin-left: 30px; /* Adjust the value as needed */
-}
-
-/* Add margin to the first icon to ensure it's not too close to the edge */
-.header-container .col.d-flex.justify-content-end i:first-child {
-  margin-left: 0; 
-}
-
-.header-container .col.d-flex.justify-content-end i:hover {
-color: #02AEEE; /* Change icon color on hover */
-transform: scale(1.2); /* Slightly increase the size on hover */
-transition: transform 0.2s, color 0.2s; /* Smooth transition for the effects */
-}
-
-.schedule-item {
-    width: 100%;
-    display: flex;
-    align-items: flex-start; /* Align items at the start to avoid shifting */
-    font-size: small;
     padding: 0;
-    margin-bottom: 10px;
-}
-
-.schedule-item .data-time p {
-    margin: 0;
-    text-align: center;
-}
-
-.content-row {
-    display: flex;
-    flex-wrap: nowrap; /* Ensure that the content doesn't wrap */
-}
-
-#activity-location {
-    font-size: xx-small;
-    color: #02AEEE;
-}
-
-.Title {
+    height: 100vh;
+    width: 100%;
+    color: #032540;
     font-size: small;
-}
+    background-color: #ffffff;
+  }
+  
+  .row{
+    width: 100%;
+  }
 
-.description {
-    font-size: x-small;
-    margin-top: 5px; /* Add margin to provide space between Title and description */
-}
+  .container-fluid {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    }
 
-footer a i {
-    color: #02AEEE;
-    gap: 15px;
-}
-
-.data-time {
+  .col-md-2{
+    display: flex;
+    height: 100vh;
+  }
+  
+  .avtr{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    color: #032540;
+  }
+  #user-avatar {
     display: flex;
     justify-content: center;
-    align-items: center; /* Center the content vertically */
-    width: 100%; /* Ensure the time section takes the full width */
-}
+    align-items: center;
+    background-color: transparent;
+    margin-top: 10px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
+  
+  .dashicon-class{
+    width: 15px;
+    height: 15px;
+  }
+  
+  .FAQ-class{
+    width: 15px;
+    height: 15px;
+  }
+  
+  .sidenav {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    margin-top: 10px;
+    margin-left: 5px;
+    height: 100vh;
+    overflow: hidden;
+    padding: 0;
+    border-radius: 8px;
+    gap: 10px;
+  }
+  
+  .sidenav a {
+    padding: 8px;
+    font-size: small;
+    justify-content: space-between;
+    color: #032540;
+    text-decoration: none;
+    border-radius: 20px;
+    transition: border-color 0.3s ease-in-out;
+  }
+  
+  .sidenav a:hover {
+    background-color: #ffffff;
+    border: 2px solid #02AEEE; /* Blue border */
+    border-radius: 20px; /* Curved border radius */
+  }
+  
+  .active {
+    background-color: #ffffff;
+    border-radius: 20px;
+    border: 2px solid #02AEEE; /* Blue border for active state */
+  }
+  
+  /* Desktop */
+  @media (min-width:960px) {
+  
+    .tester {
+        width:100%;
+        height:500px;
+    }   
+  
+  }
+  
+  .col-md-2, .col-md-10 {
+    height: 100%;
+    overflow: hidden;
+  
+  }
+  
+  .col-md-10 {
+    display: flex;
+    flex-direction: column;
+      /*max-width: 400px;  Assuming mobile view */
+      margin: 0;
+      padding-left: 0
+      
+  }
+  
+  .col-md-10{
+    width: 83.33%;
+    margin-left: 16.67%;
+  }
+  
+  .header-container{
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 8vh;
+  }
+  
+  .header-container .col.d-flex.justify-content-end i {
+    cursor: pointer;
+    margin-left: 30px; /* Adjust the value as needed */
+  }
+  
+  /* Add margin to the first icon to ensure it's not too close to the edge */
+  .header-container .col.d-flex.justify-content-end i:first-child {
+    margin-left: 0; 
+  }
+  
+  .header-container .col.d-flex.justify-content-end i:hover {
+  color: #02AEEE; /* Change icon color on hover */
+  transform: scale(1.2); /* Slightly increase the size on hover */
+  transition: transform 0.2s, color 0.2s; /* Smooth transition for the effects */
+  }
+  
+  .schedule-item {
+      width: 100%;
+      display: flex;
+      align-items: flex-start; /* Align items at the start to avoid shifting */
+      font-size: small;
+      padding: 0;
+      margin-bottom: 7px;
+  }
+  
+  .schedule-item .data-time p {
+      margin: 0;
+      text-align: center;
+  }
+  
+  .content-row {
+      display: flex;
+      flex-wrap: nowrap; /* Ensure that the content doesn't wrap */
+  }
+  
+  #activity-location {
+      font-size: xx-small;
+      color: #02AEEE;
+  }
+  
+  .Title {
+      font-size: small;
+  }
+  
+  .description {
+      font-size: x-small;
+      margin-top: 5px; /* Add margin to provide space between Title and description */
+  }
+  
+  .data-time {
+    display: flex;
+    justify-content: start;
+    max-width: 10vw; /* Adjust as needed */
+    height: 10vh;
+    border-right: 2px solid #02AEEE;
+    padding-right: 1vw; /* Add some padding for spacing */
+  }
+  
+  .activity-row {
+    font-size: xx-small;
+  }
+  
+  .activity-location h6,
+  .Title h6 {
+    font-size: xx-small;
+  }
+  
+  .activity-location h6 {
+    color: #02AEEE;
+  }
+  
+  
+  footer a i {
+      color: #02AEEE;
+      gap: 15px;
+  }
+  
+  .data-time {
+      display: flex;
+      justify-content: center;
+      align-items: center; /* Center the content vertically */
+      width: 100%; /* Ensure the time section takes the full width */
+  }

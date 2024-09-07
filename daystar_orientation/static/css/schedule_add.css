@@ -1,3 +1,67 @@
+/* Global styles */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  color: #032540;
+  overflow-x: hidden;
+  overflow-y: auto;
+  font-size: 1rem; /* Set a base font size */
+  line-height: 1.2vh; /* Base line height */
+}  
+.container-fluid {
+  margin: 0;
+  padding: 0;
+}
+
+.row {
+  width: 100%;
+}
+
+.col-md-2 {
+  display: flex;
+  flex-direction: column;
+  width: 16.67%;
+  height: 100%;
+  background-color: #f8f9fa; /* Add sidebar background if needed */
+}
+
+.col-md-10 {
+  display: flex;
+  flex-direction: column;
+  width: 83.33%;
+  margin-left: 16.67%;
+  padding: 20px;
+}
+
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.input-field {
+  flex: 1 1 30%; /* Adjusts for three columns */
+  max-width: 30%; /* Each input field takes up about 1/3 of the row */
+}
+
+textarea#activity-description {
+  width: 100%;
+  min-width: 100%;
+  max-width: 100%;
+}
+
+form{
+  display: flex;
+}
+
+.form-row{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 .schedule-header {
     text-align: center;
     margin-bottom: 20px;
@@ -15,6 +79,7 @@
 
   .form-control::placeholder {
     justify-content: center;
+      margin-bottom: 8px;
   }
 
   
