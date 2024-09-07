@@ -1,7 +1,5 @@
 .col-md-10{
   display: flex;
-  width: 83.33%; 
-  margin-left: 16.67%;
 }
 
 
@@ -35,8 +33,6 @@
 }
 
 .btn-primary {
-  margin-top: 10px;
-  margin-bottom: 10px;
   background-color: #ffffff;
   width: 150px;
   color: #02AEEE;
@@ -50,10 +46,10 @@
   border: 1px solid #ffffff;
 }
 
-.fields {
-  display: flex;  /* Ensures horizontal layout */
-  justify-content: space-between; /* Distributes space evenly between elements */
-  margin-bottom: 15px; /* Add some space between each field group */
+.form-row .fields{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 form{
@@ -61,10 +57,6 @@ form{
   justify-content: center;
   flex-direction: column;
   width: inherit;
-}
-
-.form-row{
-  width: 100%;
 }
 
 .fields {
@@ -81,7 +73,7 @@ form{
 
 .input-field .form-label{
 margin-top: 10px;
-margin-bottom: 20px;
+margin-bottom: 10px;
 }
 
 
@@ -96,7 +88,7 @@ input[type='radio']:after {
   content: '';
   display: inline-block;
   visibility: visible;
-  border: 2px solid #e8e6e6;
+  border: 2px solid #f8f8f8;
 }
 
 input[type='radio']:checked:after {
@@ -111,53 +103,4 @@ input[type='radio']:checked:after {
   display: inline-block;
   visibility: visible;
   border: 2px solid #ffffff;
-}
-
-/* Ensure the content is properly spaced and aligned */
-.container-fluid {
-    padding: 0 20px;  /* Add padding to ensure the content doesn't touch the edges */
-}
-
-.col-md-10.offset-md-2 {
-    padding: 20px; /* Add padding to avoid content squeezing */
-    background-color: #ffffff; /* Set a background to separate content visually */
-    border-radius: 10px; /* Add some rounding for a polished look */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for depth */
-}
-
-.form-row .fields {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 15px; /* Add some space between rows */
-}
-
-.form-control, .form-select {
-    max-width: 100%; /* Ensure form controls do not overflow their container */
-}
-
-.btn-container {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 20px; /* Add space above the button */
-}
-
-.btn-primary {
-    width: 150px;
-    color: #02AEEE;
-    background-color: #ffffff;
-    border: 1px solid #02AEEE;
-    border-radius: 20px;
-}
-
-.btn-primary:hover {
-    background-color: #02AEEE;
-    color: #ffffff;
-    border: 1px solid #ffffff;
-}
-
-h4.d-flex.justify-content-center {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    font-weight: bold;
 }

@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Add Notification{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/notification_add.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="col-md-10" style="display: flex; justify-content: flex-start; flex-direction: column; width: 100vw; height: 100vh; margin-left: 16.67vw; ">
+        <h1 class="text-center mt-3">Notifications</h1>
+
+        {% if messages %}
+            <div>
+                {% for message in messages %}
+                <div class="{% if message.tags %}alert {{ message.tags }}{% endif %}">
+                    {{ message }}
+                </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <form method="POST" style="display: flex; flex-direction: column; justify-content: flex-start;">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="notificationTitle" class="form-label">Notification Title</label>
+                <input type="text" class="form-control" id="notificationTitle" name="notificationTitle" placeholder="Enter title" style="width: 60vw;">
+            </div>
+
+            <div class="mb-3">
+                <label for="notificationDescription" class="form-label">Description</label>
+                <textarea class="form-control" id="notificationDescription" name="notificationDescription" rows="5" placeholder="Description" style="width: 60vw;"></textarea>
+            </div>
+
+            <div class="drop-container">
+                <div class="dropdown">
+                    <span class="dropdown-label">Who can see?</span>
+                     <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                          </a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                        <li><input type="checkbox" id="students" name="students"> <label for="students">Students</label></li>
+                        <li><input type="checkbox" id="instructors" name="instructors"> <label for="instructors">Instructors</label></li>
+                        <li><input type="checkbox" id="admins" name="admins"> <label for="admins">Admins</label></li>
+                    </ul>
+                </div>
+
+            <!-- Submit Button -->
+            <div class="d-flex justify-content-end">
+                <button type="submit" class="btn btn-primary">Add Notification</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'js/initialicons.js' %}"></script>
+{% endblock %}

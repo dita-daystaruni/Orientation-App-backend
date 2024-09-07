@@ -1,93 +1,140 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    {% load static %}
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Details</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/students_add.css' %}">
-</head>
-<body>
-    <div class="container">
-        <nav class="col-md-2">
-            <div class="avtr">
-                <img src="{% static 'images/avatar.png' %}" alt="Avatar" id="user-avatar">
-                <div id="name">{{ request.user.first_name }} {{ request.user.last_name }}</div> 
-            </div>
-            <nav class="sidenav">
-                <a class="active" href="#"><i><img src="{% static 'images/dashicon.png' %}" alt="dashicon" class="dashicon-class"></i> Dashboard</a> 
-                <a href="schedule.html"><i class="bi bi-calendar2-week"></i> Schedule</a> 
-                <a href="notifications.html"><i class="bi bi-bell"></i> Notifications</a> 
-                <a href="students.html"><i class="bi bi-people"></i> Students</a> 
-                <a href="faq.html"><i><img src="{% static 'images/FAQ.png' %}" alt="dashicon" class="FAQ-class"></i> FAQ</a>
-                <br>
-                <a href="#"><i class="bi bi-box-arrow-right"></i> Log out</a> 
-            </nav>
-        </nav>
-        <div class="col-md-10">
-            <h5>Student Details</h5>
-            <form method="POST" action="{% url 'students_add' %}">
-                {% csrf_token %}
-                {% if messages %}
-                    {% for message in messages %}
-                        <div class="alert alert-danger">{{ message }}</div>
-                    {% endfor %}
-                {% endif %}
-                <div class="form-row">
-                    <div class="col">
-                        <label for="firstName">Name</label>
-                        <input type="text" id="firstName" name="firstName" placeholder="First Name" required>
-                    </div>
-                    <div class="col">
-                        <input type="text" id="lastName" name="lastName" placeholder="Last Name" required>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="col"> 
-                        <label for="gender">Gender:</label>
-                        <div class="gender-container">
-                            <input type="radio" id="male" name="gender" value="Male" required> Male
-                            <input type="radio" id="female" name="gender" value="Female"> Female
-                        </div>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="col">
-                        <label for="admissionNumber">Admission Number</label>
-                        <input type="text" id="admissionNumber" name="admissionNumber" placeholder="eg. 24-0000" required>
-                    </div>
-                    <div class="col">
-                        <label for="courseName">Course Name</label>
-                        <input type="text" id="courseName" name="courseName" placeholder="eg. Computer Science" required>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="col">
-                        <label for="phoneNumber">Phone Number</label>
-                        <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="254700000000" required>
-                    </div>
-                    <div class="col">
-                        <label for="accomodation">Accommodation</label>
-                        <input type="text" id="accomodation" name="accomodation" placeholder="Dayscholar/Boarder" required>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="col"> 
-                        <label for="campus">Campus</label>
-                        <div class="gender-container">
-                            <input type="radio" id="athi" name="campus" value="Athi river" required> Athi River
-                            <input type="radio" id="vroad" name="campus" value="Nairobi"> Nairobi
-                        </div>
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-primary">Update</button>
-            </form>
-        </div>
-    </div>
+{% extends 'base.html' %}
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-</body>
-</html>
+{% load static %}
+
+{% block title %}Add Student{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/students_add.css' %}">
+{% endblock %}
+
+{% block content %}
+
+    <div class="col-md-10 offset-md-2" style="margin-top: 20px;">
+        <!-- {% if messages %}
+        <div>
+            {% for message in messages %}
+            <div class="{% if message.tags %}alert {{ message.tags }}{% endif %}">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %} -->
+        
+        <!-- Adjusted the form style to ensure proper alignment and spacing -->
+        <form method="POST" action="{% url 'students_add' %}" style="padding: 20px;">
+            {% csrf_token %}
+            <h4 class="d-flex justify-content-center" style="margin-bottom: 20px;">Student Details</h4>
+            <div class="form-row">
+                <!-- Reduced width of input fields to ensure they fit within the layout -->
+                <div class="fields" style="display: flex; justify-content: space-between;">
+                    <div class="input-field">
+                        <label for="firstName" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="firstName" name="firstName" placeholder="First Name" style="width: 30vw;">
+                    </div>
+                    <div class="input-field">
+                        <label for="lastName" class="form-label"></label>
+                        <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Last Name" style="width: 30vw;">
+                    </div>
+                </div>
+
+                <div class="fields" style="display: flex; flex-direction: row; justify-content: space-between;">
+                    <div class="input-field">
+                        <label for="gender" class="form-label">Gender</label><br>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" id="female" name="gender" value="Female" class="form-check-input">
+                            <label for="female" class="form-check-label">Female</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" id="male" name="gender" value="Male" class="form-check-input">
+                            <label for="male" class="form-check-label">Male</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="fields" style="display: flex; flex-direction: row; justify-content: space-between;">
+                    <div class="input-field">
+                        <label for="admissionNumber" class="form-label">Admission Number</label>
+                        <input type="text" class="form-control" id="admissionNumber" name="admissionNumber" placeholder="eg. 24-0001" style="width: 30vw;">
+                    </div>
+                    <div class="input-field">
+                        <label for="course" class="form-label">Course</label>
+                        <select class="form-select" id="course" name="course" style="width: 30vw;">
+                            {% for course in courses %}
+                            <option value="{{ course.name }}">{{ course.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+
+                <div class="fields" style="display: flex; flex-direction: row; justify-content: space-between;">
+                    <div class="input-field">
+                        <label for="phoneNumber" class="form-label">Phone Number</label>
+                        <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" placeholder="eg. +2547 12 345 678" style="width: 30vw;">
+                    </div>
+                    <div class="input-field">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="name@gmail.com" style="width: 30vw;">
+                    </div>
+                </div>
+
+                <div class="fields" style="display: flex; flex-direction: row; justify-content: space-between;">
+                    <div class="input-field">
+                        <label for="parentName" class="form-label">Parent</label>
+                        <select class="form-select" id="parentName" name="parentName" style="width: 30vw;">
+                            {% for parent in parents %}
+                            <option value="{{ parent.id }}">{{ parent.first_name }} {{ parent.last_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+
+                <div class="fields">
+                    <div class="input-field">
+                        <label for="campus" class="form-label">Campus</label><br>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" id="athi-campus" name="campus" value="Athi river" class="form-check-input">
+                            <label for="athi-campus" class="form-check-label">Athi River</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" id="nbo-campus" name="campus" value="Nairobi" class="form-check-input">
+                            <label for="nbo-campus" class="form-check-label">Nairobi</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="fields">
+                    <div class="input-field">
+                        <label for="accomodation" class="form-label">Accommodation</label><br>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" id="dayScholar" name="accomodation" value="Dayscholar" class="form-check-input">
+                            <label for="dayScholar" class="form-check-label">Dayscholar</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" id="boarder" name="accomodation" value="Boarder" class="form-check-input">
+                            <label for="boarder" class="form-check-label">Boarder</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="fields">
+                    <div class="input-field">
+                        <label for="checkedin" class="form-label">Checked-in Status</label><br>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" id="checkedIn" name="checkedin" value="True" class="form-check-input">
+                            <label for="checkedIn" class="form-check-label">Yes</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" id="notCheckedIn" name="checkedin" value="False" class="form-check-input">
+                            <label for="notCheckedIn" class="form-check-label">No</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="btn-container">
+                    <button type="submit" class="btn btn-primary">Create Student</button>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}

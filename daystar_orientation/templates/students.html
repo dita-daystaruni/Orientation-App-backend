@@ -4,15 +4,27 @@
 
 {% block title %}Student Details{% endblock %}
 
-{% block extra_css %}
+{% block extra_head %}
 <link rel="stylesheet" href="{% static 'css/students.css' %}">
 {% endblock %}
 
 {% block content %}
-    <div class="header-container">
+<div class="col-md-10" style="width: 83.33%; margin-left: 16.67%; ">
+    <div class="header-container" style="margin-bottom: 2vh; margin-top: 3vh;">
         <div class="col d-flex justify-content-start">
             <h4>Student details</h4>
         </div>
+        {% comment %}
+         {% if messages %}
+            <div>
+                {% for message in messages %}
+                <div class="{% if message.tags %}alert {{ message.tags }}{% endif %}">
+                    {{ message }}
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+            {% endcomment %}
         <div class="col d-flex justify-content-end">                                
             <div class="searchbar" style="margin-right: 20px;">
                 <input type="text" placeholder="&nbsp; Search">
@@ -20,7 +32,7 @@
                 <a href="#"><i class="bi bi-search"></i></a>
             </div>
             <a href="{% url 'students_add' %}"><i class="bi bi-person-plus"></i></a>
-            <a><img src="{% static 'images/paper-add.png' %}" alt="add-icon" class="add-icon"></a>
+            <a href="{% url 'data_upload' %}"><img src="{% static 'images/paper-add.png' %}" alt="add-icon" class="add-icon"></a>
             <a href="{% url 'courses_details' %}" style="margin-left: 20px;">View courses</a>
         </div>
     </div>
@@ -41,7 +53,7 @@
             </tr>
         </thead>
         <tbody>
-            {% for student in students %}
+            {% for student in page_obj %}
             <tr>
                 <td>{{ student.campus }}</td>
                 <td>{{ student.admission_number }}</td>
@@ -53,16 +65,17 @@
                 <td>{{ student.email }}</td>
                 <td>{{ student.parent.first_name }}</td>
                 <td>
-                    <i class="bi bi-pencil"></i>
-                    <i class="bi bi-trash"></i>
+                    <a href="{% url 'students_edit' student.id %}"><i class="bi bi-pencil"></i></a>
+                    <a href="{% url 'students_delete' student.id %}" onclick="return confirm('Are you sure you want to delete this student?');"><i class="bi bi-trash"></i></a>
                 </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
+
+    </div> 
 {% endblock %}
 
 {% block extra_js %}
     <script src="{% static 'js/search.js' %}"></script>
 {% endblock %}
-

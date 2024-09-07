@@ -14,8 +14,13 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseForbidden
 from django.utils.cache import add_never_cache_headers
 from rest_framework.views import APIView
-from hods.models import HOD
+from hods.models import HOD, Course
 from hods.serializers import ContactsSerializer
+from .forms import StudentForm 
+from django.core.paginator import Paginator
+from notifications.models import Notification
+from activities.models import Activity
+from django.utils import timezone
 
 class FirstTimeUserPasswordChangeView(generics.GenericAPIView):
     serializer_class = PasswordChangeSerializer
@@ -245,7 +250,7 @@ def login_view(request):
             login(request, user)
             token, created = Token.objects.get_or_create(user=user)
             request.session['auth_token'] = token.key
-            return redirect('students_details')
+            return redirect('dashboard')
         else:
             messages.error(request, 'Invalid admission number or password.')
             return render(request, 'signin.html')
@@ -262,47 +267,191 @@ def studentsadd_view(request):
         return HttpResponseForbidden("You are not authorized to view this page.")
     
     if request.method == 'POST':
-        first_name = request.POST.get('firstName')
-        last_name = request.POST.get('lastName')
-        gender = request.POST.get('gender')
-        admission_number = request.POST.get('admissionNumber')
-        course = request.POST.get('courseName')
-        phone_number = request.POST.get('phoneNumber')
-        accomodation = request.POST.get('accomodation')
-        campus = request.POST.get('campus')
+        try:
+            # Handle form submission
+            first_name = request.POST.get('firstName')
+            last_name = request.POST.get('lastName')
+            gender = request.POST.get('gender')
+            admission_number = request.POST.get('admissionNumber')
+            course_name = request.POST['course']  
+            phone_number = request.POST.get('phoneNumber')
+            email = request.POST.get('email')
+            parent_id = request.POST.get('parentName')
+            campus = request.POST.get('campus')
+            accomodation = request.POST.get('accomodation')
+            checked_in = request.POST.get('checked_in', False) 
 
-        if not (first_name and last_name and gender and admission_number and course and phone_number and accomodation and campus):
-            messages.error(request, 'All fields are required.')
-            return render(request, 'students_add.html')
+            course = Course.objects.get(name=course_name) if course_name else None
+            parent = Account.objects.get(pk=parent_id) if parent_id else None
 
-        if Account.objects.filter(admission_number=admission_number).exists():
-            messages.error(request, "Admission number already exists.")
-            return render(request, 'students_add.html')
+            new_student = Account.objects.create_user(
+                user_type='regular',
+                first_name=first_name,
+                last_name=last_name,
+                gender=gender,
+                admission_number=admission_number,
+                course=course,
+                phone_number=phone_number,
+                email=email,
+                parent=parent,
+                campus=campus,
+                accomodation=accomodation,
+                checked_in=checked_in,
+                username=None
+            )
+            new_student.save()
 
-        Account.objects.create(
-            first_name=first_name,
-            last_name=last_name,
-            gender=gender,
-            admission_number=admission_number,
-            course=course,
-            phone_number=phone_number,
-            accomodation=accomodation,
-            campus=campus
-        )
+            messages.success(request, 'Student added successfully.')
+            return redirect('students_details')
 
-        messages.success(request, 'Student details added successfully!')
-        return redirect('students_add')
+        except Exception as e:
+            messages.error(request, f'Error adding student: {e}')
+            return redirect('students_add')
 
-    return render(request, 'students_add.html')
+    courses = Course.objects.all()
+    parents = Account.objects.filter(user_type='parent')
+
+    return render(request, 'students_add.html', {
+        'courses': courses,
+        'parents': parents
+    })
+
+@login_required
+def studentedit_view(request, student_id):
+    student = get_object_or_404(Account, id=student_id)
+    
+    if request.method == 'POST':
+        form = StudentForm(request.POST, instance=student)
+        if form.is_valid():
+            try:
+                form.save()
+                messages.success(request, 'Student details updated successfully.')
+                return redirect('students_details')
+            except Exception as e:
+                messages.error(request, f'Error occurred: {str(e)}')
+        else:
+            messages.error(request, 'There was an error with your form submission.')
+    
+    else:
+        form = StudentForm(instance=student)
+    
+    context = {
+        'form': form,
+        'student': student,
+        'courses': Course.objects.all()
+    }
+    return render(request, 'students_edit.html', context)
+
+
+@login_required
+def delete_student(request, student_id):
+    student = get_object_or_404(Account, id=student_id)
+    
+    try:
+        student.delete()
+        messages.success(request, 'Student has been deleted successfully.')
+    except Exception as e:
+        messages.error(request, f'Error occurred: {str(e)}')
+    
+    return redirect('students_details')
+
 
 @login_required
 def studentsdetails_view(request):
     if request.user.user_type != 'admin':
         return HttpResponseForbidden("You are not authorized to view this page.")
     
-    students = Account.objects.filter(user_type='regular')
-    return render(request, 'students.html', {'students': students})
+    student_list = Account.objects.filter(user_type='regular').order_by('admission_number')
+    paginator = Paginator(student_list, 15) 
+    
+    page_number = request.GET.get('page') 
+    page_obj = paginator.get_page(page_number)
+    
+    return render(request, 'students.html', {'page_obj': page_obj})
+
+def G9_view(request):
+    if request.method == 'POST':
+        user_type = request.POST['user_type']
+        first_name = request.POST['first_name']
+        last_name = request.POST['last_name']
+        gender = request.POST['gender']
+        admission_number = request.POST['admission_number']
+        course_name = request.POST['course']
+        password = request.POST['password'] 
+        phone_number = request.POST['phone_number']
+        email = request.POST['email']
+        campus = request.POST['campus']
+        
+        try:
+            course = Course.objects.get(name=course_name)
+            
+            Account.objects.create_user(
+                user_type=user_type,
+                first_name=first_name,
+                last_name=last_name,
+                gender=gender,
+                admission_number=admission_number,
+                course=course,
+                password=password,
+                phone_number=phone_number,
+                email=email,
+                campus=campus,
+                checked_in=True,
+                username=None
+            )
+            
+            messages.success(request, 'Account successfully created.')
+            return redirect('admin_add')
+        
+        except Course.DoesNotExist:
+            messages.error(request, f"The course '{course_name}' does not exist.")
+            return redirect('admin_add')
+        
+        except Exception as e:
+            messages.error(request, f"An error occurred: {e}")
+            return redirect('admin_add')
+
+    courses = Course.objects.all()
+    context = {
+        'courses': courses
+    }
+    return render(request, 'admin_parent.html', context)
+
 
 @login_required
 def dashboard_view(request):
-    return render(request, 'dashboard.html')
+    new_students_count = Account.objects.filter(user_type='regular').count()
+    checked_in_count = Account.objects.filter(user_type='regular', checked_in=True).count()
+    not_checked_in_count = Account.objects.filter(user_type='regular', checked_in=False).count()
+
+    # Recent Notifications
+    recent_notifications = Notification.objects.filter(is_admin_viewer=True).order_by('-created_at')[:4]
+    if not recent_notifications:
+        messages.info(request, 'No recent notifications available.')
+
+    # New Students List
+    new_students = Account.objects.filter(user_type='regular').order_by('-id')[:3]
+    if not new_students:
+        messages.info(request, 'No new students registered.')
+
+    # Main Sessions
+    today = timezone.now().date()
+    main_sessions = Activity.objects.filter(is_session=True, date=today).order_by('start_time')[:3]
+    if not main_sessions:
+        messages.info(request, 'No main sessions scheduled for today.')
+
+    # Today's Schedule
+    todays_schedule = Activity.objects.filter(is_session=False, date=today).order_by('start_time')[:3]
+    if not todays_schedule:
+        messages.info(request, 'No activities scheduled for today.')
+
+    context = {
+        'new_students_count': new_students_count,
+        'checked_in_count': checked_in_count,
+        'not_checked_in_count': not_checked_in_count,
+        'recent_notifications': recent_notifications,
+        'new_students': new_students,
+        'main_sessions': main_sessions,
+        'todays_schedule': todays_schedule,
+    }
+    return render(request, 'dashboard.html', context)

@@ -1,6 +1,6 @@
 # Daystar University Orientation App Backend
 
-This repository contains the backend for the Daystar University's Orientation application. The application allows users to view events, activities, and FAQs, and also allows administrators to manage these resources.
+This repository contains the backend for the Daystar University's Orientation application. The application allows users to view HODs, notifications, orientations, activities, and FAQs, and also allows administrators to manage these resources.
 
 ## Installation
 
@@ -23,7 +23,7 @@ This repository contains the backend for the Daystar University's Orientation ap
 
 3. Run the following command to create the database:
     ```bash
-    python manage.py makemigrations account activities events faqs notifications orientation hods
+    python manage.py makemigrations account activities faqs notifications orientation hods
     python manage.py migrate
     ```
 
