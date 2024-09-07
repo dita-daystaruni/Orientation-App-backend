@@ -11,7 +11,7 @@
 {% block content %}
 <div class="row">
     <!-- FAQ List Column -->
-    {% if messages %}
+    <!-- {% if messages %}
     <div>
         {% for message in messages %}
         <div class="{% if message.tags %}alert {{ message.tags }}{% endif %}">
@@ -19,7 +19,8 @@
         </div>
         {% endfor %}
     </div>
-    {% endif %}
+    {% endif %} -->
+    <div class="col-md-10" style=" width: 83.33%; margin-left: 16.67%;">
     <div class="col-md-5">
         <header class="d-flex">
             <h3>Frequently Asked Questions</h3>
@@ -75,19 +76,19 @@
         <div class="row h-100">
             <!-- Image Section -->
             <div class="col-md-12 mb-3 d-flex justify-content-center align-items-center" style="height: 40%;">
-                <img src="{% static 'images/faqs.png' %}" alt="Bubble Gum Man" class="bbgman">
+                <img src="{% static 'images/faqs.png' %}" alt="Bubble Gum Man" class="bbgman" style="height: 140%;">
             </div>
 
             <!-- Form Section -->
-            <div class="col-md-12" style="height: 80%;">
-                <h4 class="text-center">Any new question?</h4>
+            <div class="col-md-12" style="height: 60%;">
+                <h4 class="text-center" style="margin-top: 3vh;">Any new question?</h4>
                 <form method="POST" action="{% if faq %}{% url 'edit_faq' faq.id %}{% else %}{% url 'add_faq' %}{% endif %}">
                     {% csrf_token %}
                     <div class="mb-3">
-                        <input type="text" name="question" class="form-control" placeholder="Add a new question here" value="{% if faq %}{{ faq.question }}{% endif %}">
+                        <input type="text" name="question" class="form-control" placeholder="Add a new question here" style="width: 400px; height: 6vh;" value="{% if faq %}{{ faq.question }}{% endif %}">
                     </div>
                     <div class="mb-3">
-                        <textarea class="form-control" name="answer" rows="3" placeholder="Add answer">{% if faq %}{{ faq.answer }}{% endif %}</textarea>
+                        <textarea class="form-control" name="answer" rows="4" placeholder="Add answer" style="width: 400px;">{% if faq %}{{ faq.answer }}{% endif %}</textarea>
                     </div>
                     <div class="d-flex justify-content-center">
                        <button type="submit" class="btn btn-primary" style="background-color: #ffffff; color: #02AEEE;width: 250px; border-radius: 20px;border: 1px solid #02AEEE; margin-top: 20px;">{% if faq %}Edit{% else %}Upload{% endif %}</button>
@@ -96,6 +97,7 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 {% endblock %}
 

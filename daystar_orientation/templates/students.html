@@ -9,10 +9,12 @@
 {% endblock %}
 
 {% block content %}
-    <div class="header-container">
+<div class="col-md-10" style="width: 83.33%; margin-left: 16.67%; ">
+    <div class="header-container" style="margin-bottom: 2vh; margin-top: 3vh;">
         <div class="col d-flex justify-content-start">
             <h4>Student details</h4>
         </div>
+        {% comment %}
          {% if messages %}
             <div>
                 {% for message in messages %}
@@ -22,6 +24,7 @@
                 {% endfor %}
             </div>
             {% endif %}
+            {% endcomment %}
         <div class="col d-flex justify-content-end">                                
             <div class="searchbar" style="margin-right: 20px;">
                 <input type="text" placeholder="&nbsp; Search">
@@ -70,20 +73,7 @@
         </tbody>
     </table>
 
-    <!-- Pagination controls -->
-    <div class="pagination">
-            <span class="page-links">
-                {% if page_obj.has_previous %}
-                    <a href="?page=1">&laquo; first</a>
-                    <a href="?page={{ page_obj.previous_page_number }}">previous</a>
-                {% endif %}
-                <span class="current">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
-                {% if page_obj.has_next %}
-                    <a href="?page={{ page_obj.next_page_number }}">next</a>
-                    <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
-                {% endif %}
-            </span>
-        </div>
+    </div> 
 {% endblock %}
 
 {% block extra_js %}

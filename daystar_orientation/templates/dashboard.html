@@ -9,11 +9,12 @@
 {% endblock %}
 
 {% block content %}
-<div class="col-md-10"> 
+<div class="col-md-10">
+<div class="col-md-7"> 
     <div class="main-content">
         <header>
-            <h5>Greetings {{ request.user.first_name }} </h5>
-            <p style=" color: #032540;">Add parent/g9 &nbsp;&nbsp;
+            <h6 style="font-size: 1.5rem;">Greetings {{ request.user.first_name }} </h6>
+            <p style=" color: #032540; font-size: 1rem;">Add parent/g9 &nbsp;&nbsp;
                 <a href="{% url 'admin_add' %}">
                     <i class="bi bi-person-plus" style="color: #032540; transform: scale(1.2); color: #02AEEE;" 
                        onmouseover="this.style.transform='scale(1.2)'; this.style.color='#02AEEE'" 
@@ -22,38 +23,42 @@
                 </a>
             </p>
         </header>
-         {% if messages %}
-            <div>
-                {% for message in messages %}
-                <div class="{% if message.tags %}alert {{ message.tags }}{% endif %}">
-                    {{ message }}
-                </div>
-                {% endfor %}
-            </div>
-            {% endif %}
+
+        {% comment %}
+                    {% if messages %}
+                <div>
+                        {% for message in messages %}
+                        <div class="{% if message.tags %}alert {{ message.tags }}{% endif %}">
+                            {{ message }}
+                        </div>
+                        {% endfor %}
+                        </div>
+                    {% endif %}
+                    {% endcomment %}
+
         <div class="first-row">
             <div class="stats">
                 <div class="statscard-body">
                     <div class="statscard-row">
                         <img src="{% static 'images/ascendinggraph.png' %}" alt="left image" class="graphimage">
                         <div class="statscard-title">
-                            <a href="{% url 'courses_stats' %}">
-                                <h5 style="font-size: medium;">Statistics</h5>
+                            <a href="{% url 'courses_stats' %}"style="text-decoration: none;">
+                                <h5 style="font-size: 2rem;">Statistics</h5>
                             </a>
                         </div> 
                     </div>
-                    <div class="statscard-row2">
+                    <div class="statscard-row2" style="margin-top: 2vh;">
                         <div class="stats-col">
-                            <p id="new-textnum" style="font-size: large;">{{ new_students_count }}</p>
-                            <p class="card-textdes" style="font-size: x-small;">New students</p>
+                            <p id="new-textnum" style="font-size: x-large;">{{ new_students_count }}</p>
+                            <p class="card-textdes" style="font-size: small;">New students</p>
                         </div>
                         <div class="stats-col">
-                            <p id="checkedin-textnum" style="font-size: large;">{{ checked_in_count }}</p>
-                            <p class="card-textdes" style="font-size: x-small;">Checked In</p>
+                            <p id="checkedin-textnum" style="font-size: x-large;">{{ checked_in_count }}</p>
+                            <p class="card-textdes" style="font-size: small;">Checked In</p>
                         </div>
                         <div class="stats-col">
-                            <p id="notcheckedin-textnum" style="font-size: large;">{{ not_checked_in_count }}</p>
-                            <p class="card-textdes" style="font-size: x-small;">Not Checked In</p>
+                            <p id="notcheckedin-textnum" style="font-size: x-large;">{{ not_checked_in_count }}</p>
+                            <p class="card-textdes" style="font-size: small;">Not Checked In</p>
                         </div>
                     </div>
                 </div>
@@ -89,9 +94,13 @@
                     <h5>New students progress</h5>
                 </div>
                 <div class="icon-prog" style="display: flex; justify-content: flex-end;">
-                    <i class="bi-search"></i>
+                    <div class="searchbar" >
+                        <input type="text" placeholder="&nbsp; Search">
+                        &nbsp;
+                        <a href="#" style="vertical-align: middle;"><i class="bi bi-search"></i></a>
+                </div>
                     <a href="{% url 'students_add' %}">
-                    <i class="bi bi-person-plus" style="color: #032540; transform: scale(1.2); color: #02AEEE;" 
+                    <i class="bi bi-person-plus" style="color: #032540; margin-top: 0.25vh; transform: scale(1.2);" 
                        onmouseover="this.style.transform='scale(1.2)'; this.style.color='#02AEEE'" 
                        onmouseout="this.style.transform='scale(2)'; this.style.color='#032540'">
                     </i>
@@ -99,8 +108,7 @@
                 </div>
             </div>
             <table class="table">
-                <thead>
-                    <tr>
+                <thead>                    <tr>
                         <th>Admission Number</th>
                         <th>Full Name</th>
                         <th>Account Status</th>
@@ -126,7 +134,7 @@
 
 <div class="col-md-3">
     <div class="main-sessions">
-        <p id="current-date" class="d-flex justify-content-center"></p>
+        <p id="current-date" class="d-flex justify-content-center" style="font-size: 1.1vw;"></p>
         <h6 class="d-flex justify-content-center" style="font-size: medium;">Main Sessions</h6>
         <ul>
             {% for session in main_sessions %}
@@ -162,6 +170,7 @@
         </ul>
     </div>
 </div>
+</div> 
 {% endblock %}
 {% block extra_js %}
     <script src="{% static 'js/dashtime.js' %}"></script>

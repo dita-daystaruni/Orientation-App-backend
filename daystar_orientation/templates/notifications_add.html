@@ -9,8 +9,7 @@
 {% endblock %}
 
 {% block content %}
-<div class="container-fluid d-flex">
-    <div class="col-md-10 notification-content">
+    <div class="col-md-10" style="display: flex; justify-content: flex-start; flex-direction: column; width: 100vw; height: 100vh; margin-left: 16.67vw; ">
         <h1 class="text-center mt-3">Notifications</h1>
 
         {% if messages %}
@@ -23,16 +22,16 @@
             </div>
         {% endif %}
 
-        <form method="POST">
+        <form method="POST" style="display: flex; flex-direction: column; justify-content: flex-start;">
             {% csrf_token %}
             <div class="mb-3">
                 <label for="notificationTitle" class="form-label">Notification Title</label>
-                <input type="text" class="form-control" id="notificationTitle" name="notificationTitle" placeholder="Enter title" style="width: 100%;">
+                <input type="text" class="form-control" id="notificationTitle" name="notificationTitle" placeholder="Enter title" style="width: 60vw;">
             </div>
 
             <div class="mb-3">
                 <label for="notificationDescription" class="form-label">Description</label>
-                <textarea class="form-control" id="notificationDescription" name="notificationDescription" rows="5" placeholder="Description" style="width: 100%;"></textarea>
+                <textarea class="form-control" id="notificationDescription" name="notificationDescription" rows="5" placeholder="Description" style="width: 60vw;"></textarea>
             </div>
 
             <div class="drop-container">
@@ -53,7 +52,6 @@
             </div>
         </form>
     </div>
-</div>
 {% endblock %}
 
 {% block extra_js %}

@@ -4,76 +4,87 @@
 
 {% block title %} Schedule Addition {% endblock %}
 
-{% block extra_css %}
+{% block extra_head %}
 <link rel="stylesheet" href="{% static 'css/schedule_add.css' %}">
 {% endblock %}
 
 {% block content %}
- <div class="col-md-10">
-      <div class="schedule-header">
+<div class="col-md-10" style="
+display: flex;
+flex-direction: column;
+width: 83.33%;
+margin-left: 16.67%;
+padding: 20px;">
+    <div class="schedule-header">
         <h2>Schedule</h2>
-      </div>
-       {% if messages %}
-            <div>
-                {% for message in messages %}
-                <div class="{% if message.tags %}alert {{ message.tags }}{% endif %}">
-                    {{ message }}
-                </div>
-                {% endfor %}
+    </div>
+
+    {% if messages %}
+    <div>
+        {% for message in messages %}
+        <div class="{% if message.tags %}alert {{ message.tags }}{% endif %}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <form method="POST" action="{% url 'activities_add' %}" style="display: flex; flex-direction: column; margin-bottom: 10vh;" >
+        {% csrf_token %}
+        
+        <!-- First row: Date, Time, Duration -->
+        <div class="form-row"style="margin-bottom:18vh;">
+            <div class="input-field">
+                <label for="activity-date" class="form-label">Date</label>
+                <input type="date" class="form-control" id="activity-date" name="date" required>
             </div>
-            {% endif %}
-     <form method="POST" action="{% url 'activities_add' %}">
-    {% csrf_token %}
-    <div class="form-row">
-        <!-- Date -->
-        <div class="input-field">
-            <label for="activity-date" class="form-label">Date</label>
-            <input type="date" class="form-control" id="activity-date" name="date" required>
+            <div class="input-field">
+                <label for="activity-time" class="form-label">Time</label>
+                <input type="time" class="form-control" id="activity-time" name="start_time" required>
+            </div>
+            <div class="input-field">
+                <label for="activity-duration" class="form-label">Duration</label>
+                <input type="number" class="form-control" id="activity-duration" name="duration" placeholder="1 hour" required>
+            </div>
         </div>
-        <!-- Time -->
-        <div class="input-field">
-            <label for="activity-time" class="form-label">Time</label>
-            <input type="time" class="form-control" id="activity-time" name="start_time" required>
+        
+        <!-- Second row: Event type, Name, Location -->
+        <div class="form-row" style="margin-bottom:18vh;">
+            <div class="input-field">
+                <label class="form-label">Type</label><br>
+                <div class="form-check form-check-inline">
+                    <input type="radio" id="activity" name="event_type" value="activity" class="form-check-input" checked>
+                    <label for="activity" class="form-check-label">Activity</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input type="radio" id="session" name="event_type" value="session" class="form-check-input">
+                    <label for="session" class="form-check-label">Session</label>
+                </div>
+            </div>
+            <div class="input-field">
+                <label for="activity-name" class="form-label">Event/Session Name</label>
+                <input type="text" class="form-control" id="activity-name" name="title" placeholder="Title/event Name" required>
+            </div>
+            <div class="input-field">
+                <label for="activity-location" class="form-label">Location</label>
+                <input type="text" class="form-control" id="activity-location" name="location" placeholder="Location" required>
+            </div>
         </div>
-        <!-- Duration -->
-        <div class="input-field">
-            <label for="activity-duration" class="form-label">Duration</label>
-            <input type="number" class="form-control" id="activity-duration" name="duration" placeholder="1 hour" required>
+        
+        <!-- Third row: Description (full row) -->
+        <div class="form-row"style="margin-bottom:8vh;">
+            <div class="col-md-12">
+                <label for="activity-description" class="form-label">Description</label>
+                <textarea class="form-control" id="activity-description" name="description" rows="3" placeholder="Description" required></textarea>
+            </div>
         </div>
-    </div>
-    <!-- Activity/Session Radio Buttons -->
-    <div class="input-field">
-        <label class="form-label">Type</label><br>
-        <div class="form-check form-check-inline">
-            <input type="radio" id="activity" name="event_type" value="activity" class="form-check-input" checked>
-            <label for="activity" class="form-check-label">Activity</label>
+        
+        <!-- Submit Button -->
+        <div class="btn-container" style="display: flex; justify-content: flex-end;">
+            <button type="submit" class="btn btn-primary" style="background-color: #ffffff; color: #02AEEE; width: 150px; border-radius: 20px; border: 1px solid #02AEEE;">Add</button>
         </div>
-        <div class="form-check form-check-inline">
-            <input type="radio" id="session" name="event_type" value="session" class="form-check-input">
-            <label for="session" class="form-check-label">Session</label>
-        </div>
-    </div>
-    <!-- Title -->
-    <div class="input-field">
-        <label for="activity-name" class="form-label">Event/Session Name</label>
-        <input type="text" class="form-control" id="activity-name" name="title" placeholder="Title/event Name" required>
-    </div>
-    <!-- Location -->
-    <div class="input-field">
-        <label for="activity-location" class="form-label">Location</label>
-        <input type="text" class="form-control" id="activity-location" name="location" placeholder="Location" required>
-    </div>
-    <!-- Description -->
-    <div class="mb-3">
-        <label for="activity-description" class="form-label">Description</label>
-        <textarea class="form-control" id="activity-description" name="description" rows="3" placeholder="Description" required></textarea>
-    </div>
-    <!-- Submit Button -->
-    <div class="btn-container" style="display: flex; justify-content: flex-end;">
-        <button type="submit" class="btn btn-primary" style="background-color: #ffffff; color: #02AEEE;width: 150px; border-radius: 20px;border: 1px solid #02AEEE;">Add</button>
-    </div>
-</form>
-  </div>
+    </form>
+</div>
 {% endblock %}
 
 {% block extra_js %}

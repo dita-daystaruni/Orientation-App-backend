@@ -4,15 +4,14 @@
 
 {% block title %}Add Student{% endblock %}
 
-{% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/student_add.css' %}">
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/students_add.css' %}">
 {% endblock %}
 
 {% block content %}
 
-<div class="container-fluid">
     <div class="col-md-10 offset-md-2" style="margin-top: 20px;">
-        {% if messages %}
+        <!-- {% if messages %}
         <div>
             {% for message in messages %}
             <div class="{% if message.tags %}alert {{ message.tags }}{% endif %}">
@@ -20,26 +19,26 @@
             </div>
             {% endfor %}
         </div>
-        {% endif %}
+        {% endif %} -->
         
         <!-- Adjusted the form style to ensure proper alignment and spacing -->
-        <form method="POST" action="{% url 'students_add' %}" style="padding: 20px; background-color: #f9f9f9; border-radius: 8px;">
+        <form method="POST" action="{% url 'students_add' %}" style="padding: 20px;">
             {% csrf_token %}
             <h4 class="d-flex justify-content-center" style="margin-bottom: 20px;">Student Details</h4>
             <div class="form-row">
                 <!-- Reduced width of input fields to ensure they fit within the layout -->
-                <div class="fields">
+                <div class="fields" style="display: flex; justify-content: space-between;">
                     <div class="input-field">
-                        <label for="firstName" class="form-label">First Name</label>
-                        <input type="text" class="form-control" id="firstName" name="firstName" placeholder="First Name" style="width: 100%;">
+                        <label for="firstName" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="firstName" name="firstName" placeholder="First Name" style="width: 30vw;">
                     </div>
                     <div class="input-field">
-                        <label for="lastName" class="form-label">Last Name</label>
-                        <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Last Name" style="width: 100%;">
+                        <label for="lastName" class="form-label"></label>
+                        <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Last Name" style="width: 30vw;">
                     </div>
                 </div>
 
-                <div class="fields">
+                <div class="fields" style="display: flex; flex-direction: row; justify-content: space-between;">
                     <div class="input-field">
                         <label for="gender" class="form-label">Gender</label><br>
                         <div class="form-check form-check-inline">
@@ -53,14 +52,14 @@
                     </div>
                 </div>
 
-                <div class="fields">
+                <div class="fields" style="display: flex; flex-direction: row; justify-content: space-between;">
                     <div class="input-field">
                         <label for="admissionNumber" class="form-label">Admission Number</label>
-                        <input type="text" class="form-control" id="admissionNumber" name="admissionNumber" placeholder="eg. 24-0001" style="width: 100%;">
+                        <input type="text" class="form-control" id="admissionNumber" name="admissionNumber" placeholder="eg. 24-0001" style="width: 30vw;">
                     </div>
                     <div class="input-field">
                         <label for="course" class="form-label">Course</label>
-                        <select class="form-select" id="course" name="course" style="width: 100%;">
+                        <select class="form-select" id="course" name="course" style="width: 30vw;">
                             {% for course in courses %}
                             <option value="{{ course.name }}">{{ course.name }}</option>
                             {% endfor %}
@@ -68,21 +67,21 @@
                     </div>
                 </div>
 
-                <div class="fields">
+                <div class="fields" style="display: flex; flex-direction: row; justify-content: space-between;">
                     <div class="input-field">
                         <label for="phoneNumber" class="form-label">Phone Number</label>
-                        <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" placeholder="eg. +2547 12 345 678" style="width: 100%;">
+                        <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" placeholder="eg. +2547 12 345 678" style="width: 30vw;">
                     </div>
                     <div class="input-field">
                         <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="name@gmail.com" style="width: 100%;">
+                        <input type="email" class="form-control" id="email" name="email" placeholder="name@gmail.com" style="width: 30vw;">
                     </div>
                 </div>
 
-                <div class="fields">
+                <div class="fields" style="display: flex; flex-direction: row; justify-content: space-between;">
                     <div class="input-field">
                         <label for="parentName" class="form-label">Parent</label>
-                        <select class="form-select" id="parentName" name="parentName" style="width: 100%;">
+                        <select class="form-select" id="parentName" name="parentName" style="width: 30vw;">
                             {% for parent in parents %}
                             <option value="{{ parent.id }}">{{ parent.first_name }} {{ parent.last_name }}</option>
                             {% endfor %}
@@ -138,5 +137,4 @@
             </div>
         </form>
     </div>
-</div>
 {% endblock %}
