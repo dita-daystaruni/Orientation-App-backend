@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Course Details{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/courses.css' %}">
+{% endblock %}
+
+{% block content %}
+ <div class="col-md-10">
+    <div class="course-content">
+    <div class="header-container">
+        <div class="col d-flex justify-content-start">
+            <h4>Course details</h4>
+        </div>
+         {% if messages %}
+            <div>
+                {% for message in messages %}
+                <div class="{% if message.tags %}alert {{ message.tags }}{% endif %}">
+                    {{ message }}
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+        <div class="col d-flex justify-content-end">                                
+            <div class="searchbar" style="margin-right: 20px;">
+                <input type="text" id="search-input" placeholder="&nbsp; Search">
+                &nbsp;
+                <a href="#"><i class="bi bi-search"></i></a>
+            </div>
+            <a href="{% url 'courses_details_add' %}"><i class="bi bi-person-plus"></i></a>
+            <a href="{% url 'data_upload' %}"><img src="{% static 'images/paper-add.png' %}" alt="add-icon" class="add-icon"></a>
+        </div>
+    </div>
+    </div>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Full Name</th>
+                <th scope="col">Title</th>
+                <th scope="col">Phone No.</th>
+                <th scope="col">Email</th>
+                <th scope="col">Course</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for hod in hods %}
+            <tr>
+                <td>{{ hod.first_name }} {{ hod.last_name }}</td>
+                <td>{{ hod.title }}</td>
+                <td>{{ hod.phone_number }}</td>
+                <td>{{ hod.email }}</td>
+                <td>{{ hod.course.name }}</td>
+                <td>
+                    <a href="{% url 'courses_details_edit' hod.pk %}"><i class="bi bi-pencil"></i></a>
+                    <a href="{% url 'courses_details_delete' hod.pk %}" onclick="return confirm('Are you sure you want to delete this HOD?');"><i class="bi bi-trash"></i></a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Pagination Controls -->
+            <nav>
+                <ul class="pagination justify-content-center">
+                    {% if page_obj.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    {% endif %}
+                    {% if page_obj.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'js/search.js' %}"></script>
+{% endblock %}

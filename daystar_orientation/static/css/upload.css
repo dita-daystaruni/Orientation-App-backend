@@ -1,0 +1,53 @@
+.col-md-10{
+    display: flex;
+    flex-direction: column;
+    width: 83.33%;
+    margin-left: 16.67%;
+    align-content: center;
+    justify-content: center;
+}
+
+/* General styling for the upload form */
+
+
+form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 5px;
+  }
+  
+  /* Styling for the file input field */
+  input[type="file"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  /* Styling for the upload button */
+  button[type="submit"] {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  /* Styling for the alert messages */
+  .alert {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .alert-success {
+    background-color: #d4edda;
+    border-color: #c2e0c6;
+  }
+  
+  .alert-danger {
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+  }

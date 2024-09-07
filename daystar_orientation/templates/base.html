@@ -16,32 +16,29 @@
     <div class="container-fluid">
         <div class="row">
             <!-- Sidebar -->
-            <nav class="col-md-2">
-                <div class="avtr">
-                    <img src="{% static 'images/avatar.png' %}" alt="Avatar" id="user-avatar">
-                    <div id="name">{{ request.user.first_name }} {{ request.user.last_name }}</div> 
-                </div>
-                <nav class="sidenav">
-                    <a href="{% url 'dashboard' %}"><i><img src="{% static 'images/dashicon.png' %}" alt="dashicon" class="dashicon-class"></i> Dashboard</a> 
-                    <a href="schedule.html"><i class="bi bi-calendar2-week"></i> Schedule</a> 
-                    <a href="notifications.html"><i class="bi bi-bell"></i> Notifications</a> 
-                    <a href="{% url 'students_details' %}"><i><img src="{% static 'images/actv-students.png' %}" alt="FAQ icon" class="FAQ-class"></i> Students</a> 
-                    <a href="faq.html"><i><img src="{% static 'images/FAQ.png' %}" alt="dashicon" class="FAQ-class"></i> FAQ</a>
+                    <div class="col-md-2">
+                        <nav class="sidenav">
+                        <div class="avtr">
+                            <img src="{% static 'images/avatar.png' %}" alt="Avatar" id="user-avatar">
+                            <div id="name">{{ request.user.first_name }} {{ request.user.last_name }}</div> 
+                        </div>
+                    <a href="{% url 'dashboard' %}" class="{% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}"><i><img src="{% static 'images/bl-dashicon.png' %}" alt="dashicon" class="dashicon-class"></i> Dashboard</a> 
+                    <a href="{% url 'activities' %}" class="{% if request.resolver_match.url_name == 'activities' %}active{% endif %}"><i class="bi bi-calendar2-week"></i> Schedule</a> 
+                    <a href="{% url 'notifications' %}" class="{% if request.resolver_match.url_name == 'notifications' %}active{% endif %}"><i class="bi bi-bell"></i> Notifications</a> 
+                    <a href="{% url 'students_details' %}" class="{% if request.resolver_match.url_name == 'students_details' %}active{% endif %}"><i class="bi bi-people"></i> Students</a> 
+                    <a href="{% url 'faqs' %}" class="{% if request.resolver_match.url_name == 'faqs' %}active{% endif %}"><i><img src="{% static 'images/FAQ.png' %}" alt="dashicon" class="FAQ-class"></i> FAQ</a>
                     <br>
                     <a href="{% url 'logout' %}"><i class="bi bi-box-arrow-right"></i> Log out</a> 
                 </nav>
-            </nav>
+            </div>
 
             <!-- Main Content -->
-            <main class="col-md-10 ms-sm-auto col-lg-10 px-md-4">
                 {% block content %}
                 <!-- body that will change in different pages -->
                 {% endblock %}
-            </main>
         </div>
     </div>
 
-    <script src="{% static 'js/search.js' %}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     {% block extra_js %}
     {% endblock %}

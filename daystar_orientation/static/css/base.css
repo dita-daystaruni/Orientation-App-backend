@@ -1,27 +1,15 @@
  body {
     margin: 0;
     padding-top: 30px;
-    padding-bottom: 30px;
+    padding-bottom: 10px;
     font-family: 'Inter', sans-serif;
     color: #032540;
   }
  
- .container-fluid {
-    margin: 0;
-    display: flex;
-    min-height: 100vh;
-    min-width: 100vh;
-    margin-right: 50px;
-    margin-left: 50px;
-}
-.navbar {
-    padding: 10px 15px;
-    width: 100%;
-}
 
   .col-md-2{
     justify-content: space-between;
-    padding-right: 22px;
+    margin-right: 2vw;
   }
 
   .avtr{
@@ -30,74 +18,114 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    margin-top: 35px;
-    margin-bottom: 35px;
+    margin-top: 4vh;
+    margin-bottom: 3vh;
     color: #032540;
   }
-
   #user-avatar {
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: transparent;
-    margin-left: 50px;
-    margin-bottom: 16px;
-    width: 100px;
-    height: 100px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
   }
 
   #name{
-    font-size: 24px;
-    padding-left: 55px;
-    padding-bottom: 60px;
+    margin-top: 2vh;
   }
 
   .dashicon-class{
-    width: 32px;
-    height: 32px;
+    width: 1.5vw;
+    height: 2.6vh;
   }
-  
 
   .FAQ-class{
-    width: 32px;
-    height: 32px;
+    width: 1.5vw;
+    height: 2.6vh;
+  }
+
+  .sidenav #name {
+    font-size: 1vw;
   }
   
   .sidenav {
+    position: fixed;
     display: flex;
     flex-direction: column;
-    padding: 4px;
-    margin-top: 20px;
-    background-color: #ffffff;
-    height: 65vh;
+    margin-right: 3vw;
+    background-color: transparent;
+    height: 100vh;
+    width: 15%;
     overflow: hidden;
-    border-radius: 20px;
-    gap: 35px;
-    box-shadow: 0 3px 5px #cccaca1a;
+    padding: 0;
+    gap: 2.4vh;
+    box-shadow: 0 2px 4px rgba(204, 202, 202, 0.1);
   }
   
   .sidenav a {
-    padding: 8px;
-    font-size: 21px;
-    padding: 10px;
+    padding: 1vw 1vh;
+    font-size: 1.3vw;
+    font-weight: 400;
     justify-content: space-between;
+    margin-right: 1vw;margin-left: 1vw;
     color: #032540;
     text-decoration: none;
-    border-radius: 20px;
+    border-radius: 30px; 
     transition: border-color 0.3s ease-in-out;
   }
   
   .sidenav a:hover {
     background-color: #ffffff;
-    border: 3px solid #02AEEE; /* Blue border */
-    color: #02AEEE;
-    border-radius: 21px; /* Curved border radius */
+    border: 2px solid #02AEEE;
+    border-radius: 30px; 
   }
   
   .active {
     background-color: #ffffff;
-    color: #02AEEE;
-    border-radius: 20px;
-    border: 2px solid #02AEEE; 
+    border-radius: 30px; 
+    border: 2px solid #02AEEE; /* Blue border for active state */
   }
+
+main {
+    margin-left: 20px;
+}
+
+
+main.col-md-10 {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.col-md-10{
+  display: flex;
+  justify-content: space-between;
+}
+
+  /* Message for success and alert  */
+.message-container {
+    margin-bottom: 20px;
+}
+
+.alert {
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    margin-top: 15px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    color: #fff;
+    font-size: 1em;
+}
+
+.alert.success {
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    color: #155724;
+}
+
+.alert.error {
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    color: #721c24;
+}

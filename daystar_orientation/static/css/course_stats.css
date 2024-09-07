@@ -1,0 +1,53 @@
+.container-fluid {
+    padding: 15px;
+    background-color: #ffffff;
+    min-height: 100vh;
+}
+
+.course-stats-header {
+    margin-bottom: 70px;
+}
+
+.course-stats-header h5 {
+    margin-right: 10px;
+}
+
+.course-stats-content {
+    margin-top: 20px;
+}
+
+.list-group-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: #f9f9f9;
+    border: 1px solid rgba(3, 37, 64, 0.1);
+    color: #032540;
+    font-size: 1rem;
+}
+
+.list-group-item span {
+    font-weight: bold;
+    color: rgba(3, 37, 64, 0.8);
+}
+
+.print-btn {
+    font-size: 5.5rem;
+    color: #032540;
+}
+
+@media (max-width: 768px) {
+    .course-stats-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .list-group-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .list-group-item span {
+        margin-top: 5px;
+    }
+}

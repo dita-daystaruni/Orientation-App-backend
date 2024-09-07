@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Course Details Edit{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/courses_edit.css' %}">
+{% endblock %}
+
+{% block content %}
+  <div class="col-md-10">
+                <h1 class="text-center mt-3">Edit HOD Details</h1>
+                 {% if messages %}
+                <div>
+                {% for message in messages %}
+                <div class="{% if message.tags %}alert {{ message.tags }}{% endif %}">
+                    {{ message }}
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <div class="btn-container">
+                        <button type="submit" class="btn-primary">Update</button>
+                    </div>
+                </form>
+            </div>
+{% endblock %}

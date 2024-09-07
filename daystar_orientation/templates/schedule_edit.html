@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} Schedule Edit {% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/schedule_edit.css' %}">
+{% endblock %}
+
+{% block content %}
+ <div class="col-md-10">
+    <div class="schedule-header">
+      <h2>Edit Schedule</h2>
+    </div>
+     {% if messages %}
+            <div>
+                {% for message in messages %}
+                <div class="{% if message.tags %}alert {{ message.tags }}{% endif %}">
+                    {{ message }}
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+    <form method="POST" action="{% url 'activities_edit' activity.id %}">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <div class="btn-container" style="display: flex; justify-content: flex-end;">
+        <button type="submit" class="btn btn-primary" style="background-color: #ffffff; color: #02AEEE;width: 150px; border-radius: 20px;border: 1px solid #02AEEE;">Update</button>
+      </div>
+    </form>
+  </div>
+{% endblock %}
+
+{% block extra_js %}
+  <script src="{% static 'js/scheduletime.js' %}"></script>
+{% endblock %}

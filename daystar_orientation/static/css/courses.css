@@ -1,77 +1,234 @@
-.course-content .header-container{
-    padding-top: 90px;
-    padding-bottom: 90px;
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-}
-
-.course-content .header-container .col.d-flex.justify-content-end i {
-    cursor: pointer;
-    margin-left: 30px; 
-}
-
-.course-content .header-container.add-icon{
-  height: 24px;
-}
-
-.course-content .header-container .col.d-flex.justify-content-end i:first-child {
-    margin-left: 30px; 
-}
-
-.course-content .header-container .col.d-flex.justify-content-end i:hover {
-  color: #02AEEE;
-  transform: scale(1.2); 
-  transition: transform 0.2s, color 0.2s;
-}
-
-.course-content h5 {
-    margin-top: 15px;
-    margin-bottom: 5px;
-    border-bottom: 1px solid #ccc; 
-    font-size: 36px;
-    font-weight: bolder;
-}
-
-/* Main content table styling */
-.course-content .table-hover tbody tr:hover {
-    background-color: rgba(3, 37, 64, 0.6);
-}
-
-.course-content .col-md-10{
-  overflow-y: auto;
-  overflow-x: hidden;
-}
-
-.course-content .header-container a {
+/* Global styles */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
   color: #032540;
-  transition: color 0.3s ease; 
+  overflow-x: hidden;
+  overflow-y: auto;
+  font-size: 1rem; /* Set a base font size */
+  line-height: 1.0vh; /* Base line height */
 }
 
-.course-content .header-container a:hover {
-  color: #02AEEE;
+.col-md-10 {
+  display: flex;
+  flex-direction: column;
+    /*max-width: 400px;  Assuming mobile view */
+    margin: 0;
+    padding-left: 0
+    
 }
 
-.course-content .table th{
-  color: rgba(3, 37, 64, 0.6);
+.col-md-10{
+  width: 83.33%;
+  margin-left: 16.67%;
+}
+
+.row{
+  width: 100%;
+height: 100%;
+}
+
+
+/*sidenav styles*/
+.avtr{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: 4vh;
+  margin-bottom: 3vh;
+  color: #032540;
+}
+#user-avatar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.dashicon-class{
+  width: 1.5vw;
+  height: 2.6vh;
+}
+
+.FAQ-class{
+  width: 1.5vw;
+  height: 2.6vh;
+}
+
+.sidenav #name {
+  font-size: 1.5vw; /* Adjust the font size as needed */
+}
+
+.sidenav {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  margin-right: 3vw;
+  background-color: transparent;
+  width: 100%;
+  height: 100vh;
+  width: 15%;
+  overflow: hidden;
+  padding: 0;
+  gap: 2.4vh;
+  box-shadow: 0 2px 4px rgba(204, 202, 202, 0.1);
+}
+
+.sidenav a {
+  padding: 1vw 1vh;
+  font-size: 1.3vw;
   font-weight: 400;
-  font-size: 24px;
+  justify-content: space-between;
+  color: #032540;
+  text-decoration: none;
+  border-radius: 30px; 
+  transition: border-color 0.3s ease-in-out;
 }
 
-.course-content .table td {
-  font-size: 18px; 
+.sidenav a:hover {
+  background-color: #ffffff;
+  border: 2px solid #02AEEE;
+  border-radius: 30px; 
 }
 
-.course-content .table th, .course-content .table td {
-    vertical-align: middle;
+.active {
+  background-color: #ffffff;
+  border-radius: 30px; 
+  border: 2px solid #02AEEE; /* Blue border for active state */
 }
 
-.course-content .bi-pencil, .course-content .bi-trash {
-    cursor: pointer;
-    margin-right: 10px;
-    color: rgba(3, 37, 64, 0.6);
+
+@media screen and (max-width: 500px) {
+  .sidenav a {
+    float: none;
+    display: block;
+  }
+}  
+/*sidenav styles*/
+  .row{
+    height: 100%;
+  }
+  
+@media screen and (max-width: 500px) {
+  .sidenav a {
+    float: none;
+    display: block;
+  }
 }
 
-.course-content .bi-pencil:hover, .course-content .bi-trash:hover {
-    color: #02AEEE;
+.course-content{
+  display: flex;
 }
+header {
+  text-align: center;
+  padding: 20px;
+}
+
+
+.header-container{
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 10vh;
+}
+
+.header-container .col.d-flex.justify-content-end i {
+  cursor: pointer;
+  margin-left: 20px; /* Adjust the value as needed */
+}
+
+/* Add margin to the first icon to ensure it's not too close to the edge */
+.header-container .col.d-flex.justify-content-end i:first-child {
+  margin-left: 0; /* No margin for the first icon */
+}
+
+.header-container .col.d-flex.justify-content-end i:hover {
+color: #02AEEE; /* Change icon color on hover */
+transform: scale(1.2); /* Slightly increase the size on hover */
+transition: transform 0.2s, color 0.2s; /* Smooth transition for the effects */
+}
+/*search bar*/
+.searchbar{
+display: flex;
+height: 20px;
+background-color: #ffffff;
+border-radius: 20px;
+color: rgba(3, 37, 64);
+align-items: center;
+}
+
+.searchbar i{
+color: #032540;
+}
+
+.searchbar:hover input{
+width: 150px;
+border: 1px solid #02AEEE;
+border-radius: 50px;
+color: #032540;
+}
+
+.searchbar input{
+width: 0;
+outline: none;
+border: none;
+transition: 0.5s;
+background: transparent;
+}
+/*search bar*/
+/*
+main {
+  margin: 20px;
+}
+*/
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 1.5vw;
+}
+
+th, td {
+  padding: 8px;
+  text-align: left;
+}
+
+td i {
+color: rgba(0, 37, 64, 0.6);
+transition: color 0.3s ease; /* Smooth transition for color change */
+}
+
+td i:hover {
+color: #02AEEE;
+}
+
+
+
+th {
+  font-weight: 500;
+  color: rgba(3, 37, 64, 0.6); /* 0.6 represents 60% opacity */
+}
+.table th {
+color:rgba(0, 37, 64, 0.6); 
+}
+
+.table {
+border-collapse: collapse; /* Ensures borders are drawn between cells */
+}
+
+.table tbody tr {
+border-bottom: 1px solid #ccc; /* Gray 1px bottom border */
+}
+
+.table:hover tbody tr {
+background-color: #eee; /* Hover effect with light gray background */
+}
+
+

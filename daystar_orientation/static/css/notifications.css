@@ -1,64 +1,43 @@
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f9f9f9;
+/* Global styles */
+html, body {
     margin: 0;
     padding: 0;
-}
-
-.container{
-    display: flex;
-    margin: 0;
-    height: 100vh;
-    justify-content: space-between;
-}
-
-.sidebar{
-    background-color: #ffffff;
-    width: 20%;
-}
-
-.sidenav {
+    height: 100%;
+    width: 100%;
+    color: #032540;
+    overflow-x: hidden;
+    overflow-y: auto;
+    font-size: 1rem; /* Set a base font size */
+    line-height: 1.2vh; /* Base line height */
+  }  
+  .col-md-10 {
     display: flex;
     flex-direction: column;
-    padding: 10px;
-    margin-top: 10px;
-    height: 100vh;
-    overflow: hidden;
-    padding: 0;
-    border-radius: 8px;
-    gap: 10px;
-    box-shadow: 0 2px 4px rgba(204, 202, 202, 0.1);
-  }
-  .sidenav a {
-    padding: 8px;
-    font-size: small;
-    justify-content: space-between;
-    color: #032540;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: border-color 0.3s ease-in-out;
+      /*max-width: 400px;  Assuming mobile view */
+      margin: 0;
+      padding-left: 0
+      
   }
   
-  .sidenav a:hover {
-    background-color: #f8f8f8;
-    border: 2px solid #02AEEE; /* Blue border */
-    border-radius: 5px; /* Curved border radius */
+  .col-md-10{
+    width: 83.33%;
+    margin-left: 16.67%;
   }
-
-  .active {
-    background-color: #f8f8f8;
-    border-radius: 5px;
-    border: 2px solid #02AEEE; /* Blue border for active state */
-  }
-
+  
+  .row{
+    width: 100%;
+  height: 100%;
+}
+  /*sidenav styles*/
+  
   .avtr{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    margin-top: 25px;
-    margin-bottom: 25px;
+    margin-top: 4vh;
+    margin-bottom: 3vh;
     color: #032540;
   }
   #user-avatar {
@@ -66,34 +45,77 @@ body {
     justify-content: center;
     align-items: center;
     background-color: transparent;
-    margin-top: 10px;
     width: 50px;
     height: 50px;
     border-radius: 50%;
   }
-
-.dashicon-class{
-    width: 15px;
-    height: 15px;
+  
+  .dashicon-class{
+    width: 1.5vw;
+    height: 2.6vh;
   }
-
-  .notf-class{
-    width: 15px;
-    height: 15px;
+  
+  .FAQ-class{
+    width: 1.5vw;
+    height: 2.6vh;
   }
-
-.FAQ-class{
-    width: 15px;
-    height: 15px;
+  
+  .sidenav #name {
+    font-size: 1.5vw; /* Adjust the font size as needed */
   }
-
-.notification-page-main {
+  
+  .sidenav {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    margin-right: 3vw;
+    background-color: transparent;
     width: 100%;
-    /*max-width: 400px;  Assuming mobile view */
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    height: 100vh;
+    width: 15%;
+    overflow: hidden;
+    padding: 0;
+    gap: 2.4vh;
+    box-shadow: 0 2px 4px rgba(204, 202, 202, 0.1);
+  }
+    
+  
+  .sidenav a:hover {
+    background-color: #ffffff;
+    border: 2px solid #02AEEE;
+    border-radius: 30px; 
+  }
+  
+  .active {
+    background-color: #ffffff;
+    border-radius: 30px; 
+    border: 2px solid #02AEEE; /* Blue border for active state */
+  }
+  
+  /*sidenav styles*/
+
+.header-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between; /* Evenly space header contents */
+    width: 100%;
+    height: 3vh;
+}
+
+/* Ensuring consistent spacing and hover effects for icons */
+.header-container .col.d-flex.justify-content-end i {
+    cursor: pointer;
+    margin-right: 10px; 
+}
+
+.header-container .col.d-flex.justify-content-end i:hover {
+    color: #02AEEE; 
+    transform: scale(1.2);
+    transition: transform 0.2s, color 0.2s;
+}
+
+.col.d-flex.justify-content-end a {
+    margin-left: 10px;
 }
 
 .notification-item {
@@ -104,14 +126,22 @@ body {
     border-bottom: 1px solid #ccc;
 }
 
-.notification-icon {
-    width: 40px; /* Example size */
-    height: auto;
-    margin-right: 10px;
-}
-
 .notification-content {
     flex-grow: 1;
+    padding-left: 15px; /* Creates space between icon and content */
+}
+
+/* Initials Icon Styling */
+.initials-icon {
+    background-color: #099bdd; /* Default color */
+    color: white;
+    font-weight: bold;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    flex-shrink: 0;
 }
 
 .notification-title {
@@ -129,31 +159,43 @@ body {
 .notification-time {
     font-size: 12px;
     color: #999;
+    margin-top: auto; /* Pushes it to the bottom of the container */
 }
-  
+
+.masr {
+    color: #02AEEE;
+}
+
+.masr:hover {
+    color: #032540;
+}
+
+.nof-ttl {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Align title and name in a row */
+    gap: 10px;
+}
+
+/* Mobile adjustments */
 @media screen and (max-width: 500px) {
     .sidenav a {
-      float: none;
-      display: block;
+        float: none;
+        display: block;
     }
+}
+
+.notification-items-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%; /* Adjust the height as needed */
   }
-
-.initials-icon {
-    background-color: #099bdd; /* Default color if JS doesn't work */
-    color: white;
-    opacity: 1;
-    display: inline-block;
-    font-weight: bold;
-    border-radius: 50%;
-    vertical-align: middle;
-    margin-right: 0.5em;
-    width: 50px;
-    height: 50px;
-    line-height: 50px;
-    text-align: center;
-}
-
-[data-initials]:before {
-    content: attr(data-initials); 
-}
-
+  
+  .notification-items {
+    flex: 1; /* Allow the notification items to take up most of the space */
+  }
+  
+  .pagination {
+    align-self: flex-end; /* Position pagination at the flex end */
+  }

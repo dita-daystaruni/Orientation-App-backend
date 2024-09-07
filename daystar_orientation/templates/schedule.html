@@ -1,92 +1,85 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Form</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="schedule.css">
-</head>
-<body>
-    <div class="container">
-        <nav class="col-md-3">
-            <div class="profile">
-                <img src="images/avatar.png" alt="Profile" class="profile-img">
-                <p class="profile-name">Name</p>
-            </div>
-            <ul class="menu">
-                <li><a href="dashboard.html"><i><img src="images/bl-dashicon.png" alt="dashicon" class="dashicon-class"></i> Dashboard</a></li>
-                <li><a href="#" class="active"><i><img src="images/actv-scheduleicon.png" alt="actv-scheduleicon" class="dashicon-class"></i> Schedule</a></li>
-                <li><a href="notifications.html"><i class="bi bi-bell"></i> Notifications</a></li>
-                <li><a href="students.html"><i class="bi bi-people"></i> Students</a></li>
-                <li><a href="faq.html"><i><img src="images/FAQ.png" alt="dashicon" class="FAQ-class"></i> FAQ</a></li>
-                <br>
-                <li><a href="#"><i class="bi bi-box-arrow-right"></i> Log out</a></li>
-            </ul>   
-         </nav>
-        
-        <div class="col-md-4">
-                <!-- Left column: Calendar -->
-                <div class="column calendar-column">
-                    <div class="calendar">
-                        <div class="calendar-header">
-                            <button id="prevMonth">Previous</button>
-                            <h5 id="monthYear"></h5>
-                            <button id="nextMonth">Next</button>
-                        </div>
-                        <div class="calendar-days" id="calendarDays"></div>
-                    </div>
-                </div>
-                
-                    <div class="activities">
-                        <div class="tab">
-                            <h6>Past Activities</h6>
-                            <ul>
-                                <li>Activity 1 - Completed on July 15, 2024</li>
-                                <li>Activity 2 - Completed on August 5, 2024</li>
-                                <li>Activity 3 - Completed on August 10, 2024</li>
-                            </ul>
-                        </div>
-                
-                        <div class="tab">
-                            <h6>Main Activities</h6>
-                            <ul>
-                                <li>Activity 1 - Scheduled for August 20, 2024</li>
-                                <li>Activity 2 - Scheduled for September 1, 2024</li>
-                                <li>Activity 3 - Scheduled for September 15, 2024</li>
-                            </ul>
-                        </div>
-                    </div>
-            </div>
-    
-                <!-- Right column: Upcoming Events -->
-                <div class="col-md-5">
-                    <h2>Upcoming</h2>
-                    <h6 id="current-day">Wednesday 20 September 2024</h6>
-                    <ul class="events-list">
-                        <li>
-                            <span class="time">12:00 PM</span>
-                            <div class="event-details">
-                                <p><strong>Freshman Orientation</strong></p>
-                                <span>Details about the event go here</span>
-                            </div>
-                        </li>
-                        <li>
-                            <span class="time">3:00 PM</span>
-                            <div class="event-details">
-                                <p><strong>Workshop: Intro to Programming</strong></p>
-                                <span>Details about the event go here</span>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-    </div>
+{% extends 'base.html' %}
 
-    <script src="js/calendar.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Font Awesome CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <!-- bootstrap icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-</body>
-</html>
+{% load static %}
+
+{% block title %} Schedule {% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/schedule.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="col-md-10">
+  <div class="header-container">
+    <div class="col d-flex justify-content-start">
+      <h4>Today's Schedule</h4>
+    </div>
+     {% if messages %}
+            <div>
+                {% for message in messages %}
+                <div class="{% if message.tags %}alert {{ message.tags }}{% endif %}">
+                    {{ message }}
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+    <div class="col d-flex justify-content-center">
+      <p id="current-date"></p>
+    </div>
+    <div class="col d-flex justify-content-end">
+      <div class="csv-icon">
+        <a href="{% url 'data_upload' %}"><img src="{% static 'images/paper-add.png' %}" alt="add-icon" class="add-icon"></a>
+      </div>
+      <div>
+        <a href="{% url 'activities_add' %}" style="margin-left: 2vw;"><i class="bi bi-person-plus"></i></a>
+      </div>
+    </div>
+  </div>
+  {% for activity in activities %}
+  <div class="schedule-item">
+    <div class="content-row row">
+      <div class="col-2">
+        <div class="data-time d-flex justify-content-start">
+          <p id="activity-time">{{ activity.start_time|date:"g:i A" }}</p>
+        </div>
+      </div>
+      <div class="col-10">
+        <div class="activity-row">
+          <div class="activity-location">
+            <h6>{{ activity.location }}</h6>
+          </div>
+          <div class="Title">
+            <h6>{{ activity.title }}</h6>
+          </div>
+          <div class="description">
+            <p>{{ activity.description }}</p>
+            <!-- Edit and Delete Icons -->
+            <div class="action-icons" style="float: right;">
+              <a href="{% url 'activities_edit' activity.id %}"><i class="bi bi-pencil" style="margin-left: 15px;"></i></a>
+              <a href="{% url 'activities_delete' activity.id %}" onclick="return confirm('Are you sure you want to delete this activity?');"><i class="bi bi-trash"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% empty %}
+    <p>No activities scheduled for today.</p>
+  {% endfor %}
+</div>
+<div class="footer-container">
+  <footer class="d-flex justify-content-center align-items-center py-3">
+    {% if activities.has_previous %}
+    <a href="?page={{ activities.previous_page_number }}"><i class="bi bi-chevron-left" style="color: #02AEEE;"></i></a>
+    {% endif %}
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    {% if activities.has_next %}
+    <a href="?page={{ activities.next_page_number }}"><i class="bi bi-chevron-right" style="color: #02AEEE;"></i></a>
+    {% endif %}
+  </footer>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+  <script src="{% static 'js/scheduletime.js' %}"></script>
+{% endblock %}

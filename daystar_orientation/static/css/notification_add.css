@@ -1,0 +1,62 @@
+/* Ensuring the main content stays in place and doesn't overlap */ 
+
+.notification-content h1 {
+    margin-bottom: 30px;
+    font-weight: bold;
+    font-size: 3rem;
+}
+
+/* Notification form adjustments */
+
+
+form .form-control {
+    width: 100%; /* Full width for form elements */
+    padding: 10px;
+    margin-top: 8px;
+    margin-bottom: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.drop-container {
+    margin-top: 20px;
+}
+
+.dropdown-label {
+    font-weight: bold;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.dropdown-toggle {
+    cursor: pointer;
+    color: #02AEEE;
+    text-decoration: none;
+}
+
+.dropdown-menu {
+    display: block;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    list-style: none;
+}
+
+.dropdown-menu li {
+    padding: 5px 0;
+}
+
+.btn-primary {
+    margin-top: 20px;
+    padding: 10px 20px;
+    border: 2px solid #02AEEE;
+    color: #02AEEE;
+    background-color: transparent;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #02AEEE;
+    color: white;
+}

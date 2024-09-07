@@ -4,12 +4,16 @@ from .models import Notification
 from .serializers import NotificationSerializer
 from .permissions import IsAdminOrReadOnly, IsAuthenticatedReadOnly
 from django.db.models import Q
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect
 from fcm_django.models import FCMDevice
 from firebase_admin.messaging import Message
 from firebase_admin.messaging import Notification as Nots
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from django.core.paginator import Paginator
+from django.contrib import messages
 
 class NotificationList(generics.ListCreateAPIView):
     serializer_class = NotificationSerializer
@@ -160,4 +164,40 @@ class RegisterDevice(APIView):
             return Response({'message': 'Device registered successfully'}, status=status.HTTP_201_CREATED)
         else:
             return Response({'message': 'Device already registered'}, status=status.HTTP_200_OK)
+    
+# Web views.
+@login_required
+def notifications_view(request):
+    notifications = Notification.objects.filter(is_admin_viewer=True).order_by('-created_at')
+    
+    paginator = Paginator(notifications, 7) 
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    
+    return render(request, 'notifications.html', {'page_obj': page_obj})
 
+@login_required
+def notificationadd_view(request):
+    if request.method == 'POST':
+        title = request.POST.get('notificationTitle')
+        description = request.POST.get('notificationDescription')
+        is_admin_viewer = 'admins' in request.POST
+        is_parent_viewer = 'instructors' in request.POST
+        is_regular_viewer = 'students' in request.POST
+
+        try:
+            Notification.objects.create(
+                title=title,
+                description=description,
+                created_by=request.user,
+                is_admin_viewer=is_admin_viewer,
+                is_parent_viewer=is_parent_viewer,
+                is_regular_viewer=is_regular_viewer
+            )
+            messages.success(request, 'Notification created successfully.')
+            return redirect('notifications')
+        except Exception as e:
+            messages.error(request, f"An error occurred: {str(e)}")
+            return render(request, 'notifications_add.html')
+
+    return render(request, 'notifications_add.html')

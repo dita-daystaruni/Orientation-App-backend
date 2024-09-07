@@ -1,113 +1,106 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FAQs</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-<div class="container-fluid">
-    <div class="row">
-        <!-- Sidebar -->
-        <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
-            <div class="sidebar-sticky">
-                <div class="text-center py-4">
-                    <img src="images/avatar.png" alt="Avatar" class="rounded-circle img-fluid mb-2" style="width: 80px;">
-                    <div class="user-name">Name</div>
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} FAQS {% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/faqs.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <!-- FAQ List Column -->
+    <!-- {% if messages %}
+    <div>
+        {% for message in messages %}
+        <div class="{% if message.tags %}alert {{ message.tags }}{% endif %}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %} -->
+    <div class="col-md-10" style=" width: 83.33%; margin-left: 16.67%;">
+    <div class="col-md-5">
+        <header class="d-flex">
+            <h3>Frequently Asked Questions</h3>
+            <a href="{% url 'data_upload' %}"><i class="bi bi-file-earmark-plus add-icon"></i></a>
+        </header>
+        <div class="faq-list">
+            <!-- FAQ Item Loop -->
+            {% for faq in page_obj %}
+            <div class="faq-item card mb-3 p-3">
+                <div class="d-flex align-items-center question" data-bs-toggle="collapse" data-bs-target="#answer-{{ faq.id }}">
+                    <img  src="{% static 'images/question-mark.png' %}"alt="Question Mark" style="width: 10%; height: 10%;">
+                    <p class="mb-0 flex-grow-1">Question: {{ faq.question }}</p>
+                    <i class="bi bi-chevron-right question-toggle"></i>
                 </div>
-                <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link" href="dashboard.html">
-                            <i class="bi bi-speedometer2"></i> Dashboard
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="schedule.html">
-                            <i class="bi bi-calendar2-week"></i> Schedule
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="notifications.html">
-                            <i class="bi bi-bell"></i> Notifications
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="students.html">
-                            <i class="bi bi-people"></i> Students
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="faq.html">
-                            <i class="bi bi-question-circle"></i> FAQ
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" onclick="handleLogout()">
-                            <i class="bi bi-box-arrow-right"></i> Log out
-                        </a>
-
-                    </li>
-                </ul>
-            </div>
-        </nav>
-
-        <!-- FAQ Section -->
-        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-            <h4 class="my-4">Frequently Asked Questions</h4>
-
-            <!-- FAQ List -->
-            <div class="faq-item">
-                <div class="question">
-                    <i class="bi bi-question-circle-fill"></i> Question: Lorem ipsum dolor sit amet
-                    <i class="bi bi-chevron-right float-end"></i>
-                </div>
-                <div class="answer">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc faucibus rhoncus dui, eget scelerisque sapien varius et...</p>
-                    <div class="icons">
-                        <i class="bi bi-pencil"></i>
-                        <i class="bi bi-trash"></i>
+                <div id="answer-{{ faq.id }}" class="collapse answer mt-3 p-3">
+                    <h6 class="mb-3">Answer:</h6>
+                    <p>{{ faq.answer }}</p>
+                    <div class="d-flex justify-content-end mt-3">
+                        <a href="{% url 'edit_faq' faq.id %}" class="me-2"><i class="bi bi-pencil"></i></a>
+                        <a href="{% url 'delete_faq' faq.id %}" onclick="return confirm('Are you sure you want to delete this faq?');"><i class="bi bi-trash"></i></a>
                     </div>
+                    <i class="bi bi-chevron-up float-end question-toggle mt-2" data-bs-toggle="collapse" data-bs-target="#answer-{{ faq.id }}"></i>
                 </div>
+            </div>
+            {% empty %}
+            <p>No FAQs found.</p>
+            {% endfor %}
+        </div>
+
+        <!-- Pagination Controls -->
+        <nav>
+            <ul class="pagination justify-content-center">
+                {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                        <span aria-hidden="true">&lsaquo;</span> <!-- Left chevron -->
+                    </a>
+                </li>
+                {% endif %}
+                {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                        <span aria-hidden="true">&rsaquo;</span> <!-- Right chevron -->
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Right Side Column (Image and Form) -->
+    <div class="col-md-5 offset-md-1">
+        <div class="row h-100">
+            <!-- Image Section -->
+            <div class="col-md-12 mb-3 d-flex justify-content-center align-items-center" style="height: 40%;">
+                <img src="{% static 'images/faqs.png' %}" alt="Bubble Gum Man" class="bbgman" style="height: 140%;">
             </div>
 
-            <!-- Repeat FAQ Items as needed -->
-            <div class="faq-item">
-                <div class="question">
-                    <i class="bi bi-question-circle-fill"></i> Question: Lorem ipsum dolor sit amet
-                    <i class="bi bi-chevron-right float-end"></i>
-                </div>
-                <!-- Add more FAQ items as necessary -->
+            <!-- Form Section -->
+            <div class="col-md-12" style="height: 60%;">
+                <h4 class="text-center" style="margin-top: 3vh;">Any new question?</h4>
+                <form method="POST" action="{% if faq %}{% url 'edit_faq' faq.id %}{% else %}{% url 'add_faq' %}{% endif %}">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <input type="text" name="question" class="form-control" placeholder="Add a new question here" style="width: 400px; height: 6vh;" value="{% if faq %}{{ faq.question }}{% endif %}">
+                    </div>
+                    <div class="mb-3">
+                        <textarea class="form-control" name="answer" rows="4" placeholder="Add answer" style="width: 400px;">{% if faq %}{{ faq.answer }}{% endif %}</textarea>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                       <button type="submit" class="btn btn-primary" style="background-color: #ffffff; color: #02AEEE;width: 250px; border-radius: 20px;border: 1px solid #02AEEE; margin-top: 20px;">{% if faq %}Edit{% else %}Upload{% endif %}</button>
+                    </div>
+                </form>
             </div>
-
-            <!-- Right side - New Question Form and Image -->
-            <div class="row">
-                <div class="col-md-6">
-                    <img src="images/faqs.png" alt="Bubble Gum Man" class="img-fluid">
-                </div>
-                <div class="col-md-6">
-                    <h4>Any new question?</h4>
-                    <form>
-                        <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="Add a new question here">
-                        </div>
-                        <div class="mb-3">
-                            <textarea class="form-control" rows="3" placeholder="Add answer"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Upload</button>
-                    </form>
-                </div>
-            </div>
-        </main>
+        </div>
     </div>
 </div>
+</div>
+{% endblock %}
 
-<script src="js/logout.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<!-- Font Awesome CSS -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<!-- bootstrap icons -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-</body>
-</html>
+{% block extra_js %}
+<script src="{% static 'js/toggle.js' %}"></script>
+{% endblock %}
