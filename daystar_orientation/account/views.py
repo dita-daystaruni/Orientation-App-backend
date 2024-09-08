@@ -42,6 +42,33 @@ class FirstTimeUserPasswordChangeView(generics.GenericAPIView):
         user.is_first_time_user = False
         user.save()
         return Response({'message': 'Password changed successfully.'}, status=status.HTTP_200_OK)
+    
+class ResetPasswordView(APIView):
+    """
+    View To Change Users Password
+    """
+    def post(self, request, *args, **kwargs):
+        """
+        Changes A User Password
+        """
+        admission_number = request.data.get('admission_number')
+        password = request.data.get('password')
+        try:
+            user = Account.objects.get(admission_number=admission_number)
+            if user.user_type == 'regular':
+                user.set_password("freshman")
+                user.is_first_time_user = True
+                user.save()
+                return Response({'message': 'Password changed successfully.'}, status=status.HTTP_200_OK)
+            else:
+                if password is None:
+                    return Response({'message': 'Password Is Required'}, status=status.HTTP_400_BAD_REQUEST)
+                else:
+                    user.set_password(password)
+                    user.save()
+                    return Response({'message': 'Password changed successfully.'}, status=status.HTTP_200_OK)        
+        except Account.DoesNotExist:
+            return Response({'message': 'Invalid admission number or Admission Number'}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class CustomAuthToken(ObtainAuthToken):
@@ -54,7 +81,6 @@ class CustomAuthToken(ObtainAuthToken):
             return Response({'message': 'Admission number and password are required.'}, status=status.HTTP_400_BAD_REQUEST)
 
         user = authenticate(request, admission_number=admission_number, password=password)
-
 
         if user is not None:
             if user.user_type == 'regular' and user.is_first_time_user:

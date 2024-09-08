@@ -1,9 +1,11 @@
 from django.urls import path
 from .views import AccountList, AccountDetail, CustomAuthToken, FirstTimeUserPasswordChangeView, Contacts, StatsView, StatsData, DocumentUploadView, DocumentListView, DocumentDetailView, login_view, dashboard_view, studentsadd_view, studentedit_view, studentsdetails_view, delete_student, logout_view, G9_view
+from .views import ResetPasswordView
 
 
 urlpatterns = [
     path('accounts/', AccountList.as_view(), name='account-list'),
+    path('password-change/', ResetPasswordView.as_view(), name="resetpassword"),
     path('accounts/<int:pk>/', AccountDetail.as_view(), name='account-detail'),
     path('login/', CustomAuthToken.as_view(), name='login'),
     path('first-password-change/', FirstTimeUserPasswordChangeView.as_view(), name='first-password-change'),

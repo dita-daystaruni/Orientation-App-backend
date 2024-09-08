@@ -25,11 +25,17 @@ class AccountManager(BaseUserManager):
             raise ValueError('Users must have a first name')
         if not last_name:
             raise ValueError('Users must have a last name')
-        if not phone_number:
+        if not phone_number and user_type != "regular":
             raise ValueError('Users must have a phone number')
         
+        if not phone_number and user_type == "regular":
+            phone_number = ""
+    
+        if username is None or username == "":
+            username = first_name + last_name
+        
         if password is None:
-            password = self.generate_password(admission_number)
+            password = "freshman"
 
         if user_type not in Account.USER_TYPE_CHOICES_DICT:
             raise ValueError(f'Invalid user type: {user_type}. Must be one of {list(Account.USER_TYPE_CHOICES_DICT.keys())}.')
