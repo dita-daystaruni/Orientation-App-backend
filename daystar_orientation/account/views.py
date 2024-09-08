@@ -21,6 +21,7 @@ from django.core.paginator import Paginator
 from notifications.models import Notification
 from activities.models import Activity
 from django.utils import timezone
+from .parser_fresh import extract_freshman_info
 
 class FirstTimeUserPasswordChangeView(generics.GenericAPIView):
     serializer_class = PasswordChangeSerializer
@@ -118,6 +119,49 @@ class CustomAuthToken(ObtainAuthToken):
             })
         else:
             return Response({'message': 'Invalid admission number or password.'}, status=status.HTTP_401_UNAUTHORIZED)
+        
+class ParseFreshMen(APIView):
+    """
+    Parses Freshmen Data
+    """
+    def post(self, request, *args, **kwargs):
+        """
+        Parses Freshmen data
+        """
+        file = request.data.get("file")
+
+        if not file:
+            return Response({'message': 'File Is Required'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        
+        freshman_info = extract_freshman_info(file)
+
+        # clean the data
+        for data in freshman_info:
+            # check if there is more than one name
+            if len(data["first_name"].split(" ")) > 0:
+                data["first_name"] = data["first_name"].split(" ")[0]
+            if len(data["last_name"].split(" ")) > 0:
+                data["last_name"] = data["last_name"].split(" ")[-1]
+
+            # change casing of first and last name to a common one
+            data["first_name"] = data["first_name"].capitalize()
+            data["last_name"] = data["last_name"].capitalize()
+            # get course object
+            data["course"] = Course.objects.get(name=data["course"])
+            data["username"] = data["first_name"] +  data["last_name"]\
+                  + data["admission_number"]
+            data["phone_number"] = "00000000000"
+            data["email"] = None
+
+        # create the accounts
+        for freshman in freshman_info:
+            try:
+                freshman_account = Account(**freshman)
+                freshman_account.save()
+            except Exception as e:
+                raise e
+        return Response("LGTM")
 
 class AccountList(generics.ListCreateAPIView):
     queryset = Account.objects.all()

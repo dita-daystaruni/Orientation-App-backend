@@ -1,74 +1,173 @@
-International Relations
-Theology
-Human Resource Management
-Business Administration & Management
-Entrepreneurship
-Purchasing & Business Logistics
-Marketing
-Music
-Counseling
-Community Development
-Information Communication Technology (ICT)
-Peace & International Relations
-Counselling Psychology
-Media Studies
-Graded Certificate Course in Music (GCCMN)
-Bachelor of Arts in Peace & Conflict Transformation
-Bachelor of Arts in International Relations & Security Studies (IRSS)
-Bachelor of Education in Mathematics/Business Studies
-Bachelor of Education in Computer Science/Business Studies
-Bachelor of Theology
-Bachelor of Commerce (BCom) in Accounting
-Bachelor of Commerce (BCom) in Business Administration & Management
 Bachelor of Commerce (BCom) in Marketing
-Bachelor of Commerce (BCom) in Purchasing & Business Logistics
-Bachelor of Commerce (BCom) in Management Information Systems
-Bachelor of Science in Economics
-Bachelor of Arts in Human Communication
-Bachelor of Arts in English and Music
-Bachelor of Arts in Psychology & Counseling
-Bachelor of Arts in Community Development (Integrated Option)
-Bachelor of Arts in Social Work
-Bachelor of Education in English/Literature
-Bachelor of Education in Kiswahili/Christian Religious Education (Bible)
-Bachelor of Education in Kiswahili/Music
-Bachelor of Education in Kiswahili/Business Studies
-Bachelor of Education in Christian Religious Education (Bible)/Business Studies
-Bachelor of Education in Early Childhood Development & Education (ECDE)
-Bachelor of Education in Mathematics & Physics
-Bachelor of Education in Mathematics/Computer Science
-Bachelor of Education in Physics/Chemistry
-Bachelor of Education in Physics/Computer Science
-Bachelor of Laws (LL.B)
-Bachelor of Science in Nursing (Direct Entry)
-Bachelor of Science in Nursing (Diploma to BSc.N)
-Bachelor of Science in Applied Computer Science
-Bachelor of Science in Environmental Health
-Bachelor of Science in Actuarial Science
+B Com Business Administration & Management
 Bachelor of Science in Biomedical Science
-Master of Science in Economics
-Master of Business Administration (MBA) in Strategic Management
-Master of Business Administration (MBA) in Human Resource Management
-Master of Business Administration (MBA) in Finance
-Master of Business Administration (MBA) in Marketing
-Master of Business Administration (MBA) in Project Management
-Master of Business Administration (MBA) in Supply Chain Management
-PhD in Business Administration (Strategic Management & Innovation)
-PhD in Business Administration (Human Resource Management)
-PhD in Business Administration (Finance)
-PhD in Business Administration (Marketing)
-PhD in Business Administration (Entrepreneurship)
-Master of Arts in Communication (Media Studies)
-Master of Arts in Communication (Development Communication)
-Master of Arts in Communication (Corporate Communication)
-PhD in Communication (Media Studies)
-PhD in Communication (Development Communication)
-PhD in Communication (Corporate Communication)
-Master of Arts in Counseling Psychology
-Master of Arts in Community Development
-Master of Arts in Monitoring & Evaluation
-Master of Arts in Child Development (with concentrations in Integrated Studies, Family Studies, and Child Therapy)
-Master of Clinical Psychology
+B Com Purchasing and Business Logistics
+Bachelor of Education in Kiswahili/Christian Religious Education (Bible)
 PhD in Clinical Psychology
-Master of Laws (LLM)
+PHD in Business Admin. in Strategic Mgmt & Innovation
+CERTIFIED INVESTEMENT AND FINANCIAL ANALYSIS
+Bachelor of Science in Actuarial Science
+B Ed Kiswahili & Computer Science
+Bachelor of Education in Kiswahili/Music
+Diploma in Marketing
+PhD in Business Administration (Finance)
+Project Management Certification
+PHD Clinical Psychology
+PHD in Development Studies (Leadership & Governance)
+Diploma in Counseling Psychology
+B Ed Christian Religious Education & Kiswahili
+BSc Economics
+Diploma in ICT
+Diploma in Human Resource
+Bachelor of Laws (LLB)
+Certified Secretaries
+Master of Business Administration (MBA) in Strategic Management
+Masters in Clinical Psychology
+MBA Human Resource Management
+PHD in Business Administration in Finance
+BA Music
+Bachelor of Arts in Psychology & Counseling
+Certificate in Counseling Psychology
+BA Social Work
+BA Communication (Advertising)
+MA Counselling Psychology
+MBA Project Management
 Master of Science in Nursing Education
+Media Studies
+BA in Public Relations
+Entrepreneurship
+Bachelor of Science in Economics
+Purchasing & Business Logistics
+Bachelor of Arts in Peace & Conflict Transformation
+B Ed Computer Science and Mathematics
+Diploma in Communication (Print Media)
+MA Child Development (Intergrated Studies)
+Bachelor of Education in Early Childhood Development & Education (ECDE)
+ACCOUNTING TECHNICIANS DIPLOMA
+Bachelor of Education in Physics/Computer Science
+Master of Business Administration (MBA) in Marketing
+PhD in Business Administration (Marketing)
+Master of Clinical Psychology
+BA Monitoring and Evaluation
+MBA Entrepreneurship
+Bachelor of Commerce (BCom) in Management Information Systems
+MBA Strategic Management
+PHD in Business Administration in Marketing
+MSc Economics
+Certificate in Peace Studies & International Relations
+Bachelor of Education in Kiswahili/Business Studies
+PhD in Communication (Corporate Communication)
+BSc Actuarial Science
+MBA in Logistics and Supply Chain Management
+PhD in Business Administration (Strategic Management & Innovation)
+B Com Marketing
+Diploma in Communication (Electronic Media)
+BA English
+Diploma in International Relations
+PhD in Communication (Media Studies)
+BA Peace & Conflict Transformation
+Master of Laws (LLM)
+Chartered Institute of Procurement & Supply
+CERTIFICATE IN ACCOUNTING AND MANAGEMENT SKILLS
+B Ed Early Childhood
+Bachelor of Education in Physics/Chemistry
+MA Child Development (Family Studies)
+BA Psychology and Counselling
+Information Communication Technology (ICT)
+Master of Business Administration (MBA) in Finance
+BA Community Development
+Diploma in Theology
+Master of Business Administration (MBA) in Project Management
+MA Child Development (Child Therapy)
+Bachelor of Commerce (BCom) in Accounting
+Bachelor of Arts in Human Communication
+Master of Arts in Communication (Corporate Communication)
+BA Communication (Electronic Media)
+Music
+Business Administration & Management
+Bachelor of Education in English/Literature
+Bachelor of Science in Applied Computer Science
+Master of Arts in Monitoring & Evaluation
+PHD in Business Administration in Human Resource Management
+Certified Public Accountants
+B Ed Christian Religious Education & Computer Science
+PhD Communication
+Peace & International Relations
+BSc Environmental Health
+Diploma in Purchasing and Logistics
+B Ed Physics and Mathematics
+Bachelor of Commerce (BCom) in Business Administration & Management
+B Ed Mathematics & Kiswahili
+Theology
+Diploma in Community development
+Certificate in Media Studies
+Bachelor of Education in Mathematics & Physics
+Diploma in Business Administration
+International Relations
+Bachelor of Theology
+B Ed English & Literature
+Bachelor of Arts in Community Development (Integrated Option)
+Bachelor of Science in Environmental Health
+Counselling Psychology
+Master of Business Administration (MBA) in Supply Chain Management
+MSc Nursing Education
+Counseling
+Bachelor of Education in Mathematics/Business Studies
+BA Communication (Print Media)
+BSc Biomedical Science
+Master of Arts in Communication (Media Studies)
+PHD in Development Studies(Disaster Mngt & Sustainable Devt.)
+BA Kiswahili
+PhD in Business Administration (Entrepreneurship)
+Master of Arts in Communication (Development Communication)
+Community Development
+PhD in Business Administration (Human Resource Management)
+B Com Management Information Systems
+Bachelor of Arts in English and Music
+Master of Arts in Counseling Psychology
+M.A. in Diplomacy, Development & International Security
+MA Monitoring & Evaluation
+PhD in Communication (Development Communication)
+BSc Nursing (Undergraduate)
+Master of Education in Leadership and Policy Studies
+Certificate in Information Communication Technology
+MBA Finance
+Bachelor of Science in Nursing (Diploma to BSc.N)
+Diploma in Disability Studies
+BA French
+Bachelor of Arts in International Relations & Security Studies (IRSS)
+BA Technical and Professional Communication
+PHD in Development Studies(Community Development)
+MA Communication (Media Studies)
+B Ed Mathematics & Chemistry
+BSc Applied Computer Science
+Bachelor of Education in Christian Religious Education (Bible)/Business Studies
+Bachelor of Laws (LL.B)
+Master of Business Administration (MBA) in Human Resource Management
+Diploma in Entrepreneurship
+B Com Accounting
+Master of Science in Economics
+PHD in Development Studies (Gender & Development)
+Bachelor of Commerce (BCom) in Purchasing & Business Logistics
+Master of Arts in Community Development
+MA Communication (Corporate Communication)
+Bachelor of Education in Mathematics/Computer Science
+Bachelor of Arts in Social Work
+Master of Arts in Child Development (with concentrations in Integrated Studies, Family Studies, and Child Therapy)
+Certificate in Business Management
+Bachelor of Science in Nursing (Direct Entry)
+B Ed Business & Kiswahili
+MA Community Development
+Graded Certificate Course in Music (GCCMN)
+B Ed Christian Religious Education & Business
+BA in International Relations & Security Studies
+MA Communication (Development Communication)
+Human Resource Management
+Marketing
+BTh Theology
+MBA Marketing
+B Ed Business & Mathematics
+BSc Nursing (Upgrading from Diploma)
+Diploma in Agriculture
+Bachelor of Education in Computer Science/Business Studies
+Post Graduate Diploma Education
