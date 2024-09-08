@@ -66,8 +66,7 @@ class ResetPasswordView(APIView):
                 else:
                     user.set_password(password)
                     user.save()
-                    return Response({'message': 'Password changed successfully.'}, status=status.HTTP_200_OK)
-                
+                    return Response({'message': 'Password changed successfully.'}, status=status.HTTP_200_OK)        
         except Account.DoesNotExist:
             return Response({'message': 'Invalid admission number or Admission Number'}, status=status.HTTP_400_BAD_REQUEST)
 
