@@ -14,24 +14,24 @@
         <div class="col d-flex justify-content-start">
             <h4>Student details</h4>
         </div>
-        {% comment %}
-         {% if messages %}
-            <div>
-                {% for message in messages %}
-                <div class="{% if message.tags %}alert {{ message.tags }}{% endif %}">
-                    {{ message }}
-                </div>
-                {% endfor %}
+        {% if messages %}
+        <div>
+            {% for message in messages %}
+            <div class="{% if message.tags %}alert {{ message.tags }}{% endif %}">
+                {{ message }}
             </div>
-            {% endif %}
-            {% endcomment %}
+            {% endfor %}
+        </div>
+        {% endif %}
         <div class="col d-flex justify-content-end">                                
-            <div class="searchbar" style="margin-right: 20px;">
-                <input type="text" placeholder="&nbsp; Search">
-                &nbsp;
-                <a href="#"><i class="bi bi-search"></i></a>
-            </div>
-            <a href="{% url 'students_add' %}"><i class="bi bi-person-plus"style="margin-right: 20px;"></i></a>
+            <form method="get" action="{% url 'students_details' %}">
+                <div class="searchbar" style="margin-right: 20px;">
+                    <input type="text" name="search" placeholder="&nbsp; Search by Admission Number" value="{{ search_query }}">
+                    &nbsp;
+                    <button type="submit"><i class="bi bi-search"></i></button>
+                </div>
+            </form>
+            <a href="{% url 'students_add' %}"><i class="bi bi-person-plus" style="margin-right: 20px;"></i></a>
             <a href="{% url 'data_upload' %}"><i class="bi bi-file-earmark-plus add-icon"></i></a>
             <a href="{% url 'courses_details' %}" style="margin-left: 20px;">View courses</a>
         </div>
@@ -73,9 +73,28 @@
         </tbody>
     </table>
 
-    </div> 
+    <!-- Pagination Controls -->
+    <nav>
+        <ul class="pagination justify-content-center">
+            {% if page_obj.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.previous_page_number }}{% if search_query %}&search={{ search_query }}{% endif %}" aria-label="Previous">
+                    <span aria-hidden="true">Previous</span>
+                </a>
+            </li>
+            {% endif %}
+            {% if page_obj.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.next_page_number }}{% if search_query %}&search={{ search_query }}{% endif %}" aria-label="Next">
+                    <span aria-hidden="true">Next</span>
+                </a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+</div>
 {% endblock %}
 
 {% block extra_js %}
-    <script src="{% static 'js/search.js' %}"></script>
+    <script src="{% static 'js/hod-search.js' %}"></script>
 {% endblock %}

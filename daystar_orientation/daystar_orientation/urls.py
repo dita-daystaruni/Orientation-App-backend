@@ -20,9 +20,10 @@ urlpatterns = [
     path('faqs/', include('faqs.urls')),
     path('activities/', include('activities.urls')),
     path('notifications/', include('notifications.urls')),
-    path("", lambda r: flutter_redirect(r, "index.html")),
+    path('hods/', include('hods.urls')),   
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + [
+    path("pwa/", lambda r: flutter_redirect(r, "index.html")),
     path("<path:resource>", flutter_redirect),
-    path('hods/', include('hods.urls')),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS[0])

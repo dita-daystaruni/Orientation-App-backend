@@ -268,18 +268,17 @@ def studentsadd_view(request):
     
     if request.method == 'POST':
         try:
-            # Handle form submission
             first_name = request.POST.get('firstName')
             last_name = request.POST.get('lastName')
             gender = request.POST.get('gender')
             admission_number = request.POST.get('admissionNumber')
-            course_name = request.POST['course']  
+            course_name = request.POST.get('course')
             phone_number = request.POST.get('phoneNumber')
             email = request.POST.get('email')
             parent_id = request.POST.get('parentName')
             campus = request.POST.get('campus')
             accomodation = request.POST.get('accomodation')
-            checked_in = request.POST.get('checked_in', False) 
+            checked_in = request.POST.get('checkedin') == 'True'
 
             course = Course.objects.get(name=course_name) if course_name else None
             parent = Account.objects.get(pk=parent_id) if parent_id else None
@@ -356,18 +355,31 @@ def delete_student(request, student_id):
     return redirect('students_details')
 
 
+
 @login_required
 def studentsdetails_view(request):
     if request.user.user_type != 'admin':
         return HttpResponseForbidden("You are not authorized to view this page.")
     
-    student_list = Account.objects.filter(user_type='regular').order_by('admission_number')
-    paginator = Paginator(student_list, 15) 
-    
-    page_number = request.GET.get('page') 
+    # Retrieve the search query from GET parameters
+    search_query = request.GET.get('search', '')
+
+    # Filter students based on the search query
+    if search_query:
+        student_list = Account.objects.filter(admission_number__icontains=search_query, user_type='regular').order_by('admission_number')
+    else:
+        student_list = Account.objects.filter(user_type='regular').order_by('admission_number')
+
+    # Set up pagination
+    paginator = Paginator(student_list, 16)  # Show 16 students per page
+    page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     
-    return render(request, 'students.html', {'page_obj': page_obj})
+    # Pass the search query to the template for pre-filling the search box
+    return render(request, 'students.html', {
+        'page_obj': page_obj,
+        'search_query': search_query
+    })
 
 def G9_view(request):
     if request.method == 'POST':
@@ -420,6 +432,13 @@ def G9_view(request):
 
 @login_required
 def dashboard_view(request):
+    search_query = request.GET.get('search', '')
+
+    if search_query:
+        new_students = Account.objects.filter(user_type='regular', admission_number__icontains=search_query).order_by('-id')[:12]
+    else:
+        new_students = Account.objects.filter(user_type='regular').order_by('-id')[:12]
+
     new_students_count = Account.objects.filter(user_type='regular').count()
     checked_in_count = Account.objects.filter(user_type='regular', checked_in=True).count()
     not_checked_in_count = Account.objects.filter(user_type='regular', checked_in=False).count()
@@ -429,19 +448,14 @@ def dashboard_view(request):
     if not recent_notifications:
         messages.info(request, 'No recent notifications available.')
 
-    # New Students List
-    new_students = Account.objects.filter(user_type='regular').order_by('-id')[:3]
-    if not new_students:
-        messages.info(request, 'No new students registered.')
-
     # Main Sessions
     today = timezone.now().date()
-    main_sessions = Activity.objects.filter(is_session=True, date=today).order_by('start_time')[:3]
+    main_sessions = Activity.objects.filter(is_session=True, date=today).order_by('start_time')[:5]
     if not main_sessions:
         messages.info(request, 'No main sessions scheduled for today.')
 
     # Today's Schedule
-    todays_schedule = Activity.objects.filter(is_session=False, date=today).order_by('start_time')[:3]
+    todays_schedule = Activity.objects.filter(is_session=False, date=today).order_by('start_time')[:5]
     if not todays_schedule:
         messages.info(request, 'No activities scheduled for today.')
 
@@ -453,5 +467,6 @@ def dashboard_view(request):
         'new_students': new_students,
         'main_sessions': main_sessions,
         'todays_schedule': todays_schedule,
+        'search_query': search_query 
     }
     return render(request, 'dashboard.html', context)

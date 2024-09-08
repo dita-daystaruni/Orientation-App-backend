@@ -40,6 +40,10 @@
     border: none;
   }
 
+  .list-group-item li {
+   font-size: 18px;
+  }
+
 .print-btn {
     font-size: 2.5rem;
     color: #032540;

@@ -10,31 +10,34 @@
 
 {% block content %}
 
-    <div class="col-md-10 offset-md-2" style="margin-top: 20px;">
-        <!-- {% if messages %}
-        <div>
-            {% for message in messages %}
-            <div class="{% if message.tags %}alert {{ message.tags }}{% endif %}">
-                {{ message }}
-            </div>
-            {% endfor %}
-        </div>
-        {% endif %} -->
-        
-        <!-- Adjusted the form style to ensure proper alignment and spacing -->
-        <form method="POST" action="{% url 'students_add' %}" style="padding: 20px;">
+     <div class="col-md-10 offset-md-2" style="margin-top: 20px;">
+        <!-- Form with validation -->
+        <form method="POST" action="{% url 'students_add' %}" id="studentForm" style="padding: 20px;">
             {% csrf_token %}
             <h4 class="d-flex justify-content-center" style="margin-bottom: 20px;">Student Details</h4>
+
+            <!-- Validation Messages from Backend -->
+            {% if messages %}
+            <div>
+                {% for message in messages %}
+                <div class="{% if message.tags %}alert {{ message.tags }}{% endif %}">
+                    {{ message }}
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+
             <div class="form-row">
-                <!-- Reduced width of input fields to ensure they fit within the layout -->
                 <div class="fields" style="display: flex; justify-content: space-between;">
                     <div class="input-field">
-                        <label for="firstName" class="form-label">Name</label>
+                        <label for="firstName" class="form-label">First Name</label>
                         <input type="text" class="form-control" id="firstName" name="firstName" placeholder="First Name" style="width: 30vw;">
+                        <small class="error-message" style="color: red; display: none;">First Name is required.</small> <!-- Error message -->
                     </div>
                     <div class="input-field">
-                        <label for="lastName" class="form-label"></label>
+                        <label for="lastName" class="form-label">Last Name</label>
                         <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Last Name" style="width: 30vw;">
+                        <small class="error-message" style="color: red; display: none;">Last Name is required.</small>
                     </div>
                 </div>
 
@@ -56,6 +59,7 @@
                     <div class="input-field">
                         <label for="admissionNumber" class="form-label">Admission Number</label>
                         <input type="text" class="form-control" id="admissionNumber" name="admissionNumber" placeholder="eg. 24-0001" style="width: 30vw;">
+                        <small class="error-message" style="color: red; display: none;">Admission Number is required.</small>
                     </div>
                     <div class="input-field">
                         <label for="course" class="form-label">Course</label>
@@ -71,10 +75,12 @@
                     <div class="input-field">
                         <label for="phoneNumber" class="form-label">Phone Number</label>
                         <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" placeholder="eg. +2547 12 345 678" style="width: 30vw;">
+                        <small class="error-message" style="color: red; display: none;">Phone Number is required.</small>
                     </div>
                     <div class="input-field">
                         <label for="email" class="form-label">Email</label>
                         <input type="email" class="form-control" id="email" name="email" placeholder="name@gmail.com" style="width: 30vw;">
+                        <small class="error-message" style="color: red; display: none;">Email field is required to proceed.</small>
                     </div>
                 </div>
 
@@ -118,18 +124,19 @@
                 </div>
 
                 <div class="fields">
-                    <div class="input-field">
-                        <label for="checkedin" class="form-label">Checked-in Status</label><br>
-                        <div class="form-check form-check-inline">
-                            <input type="radio" id="checkedIn" name="checkedin" value="True" class="form-check-input">
-                            <label for="checkedIn" class="form-check-label">Yes</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input type="radio" id="notCheckedIn" name="checkedin" value="False" class="form-check-input">
-                            <label for="notCheckedIn" class="form-check-label">No</label>
-                        </div>
+                <div class="input-field">
+                    <label for="checkedin" class="form-label">Checked-in Status</label><br>
+                    <div class="form-check form-check-inline">
+                        <input type="radio" id="checkedIn" name="checkedin" value="True" class="form-check-input">
+                        <label for="checkedIn" class="form-check-label">Yes</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input type="radio" id="notCheckedIn" name="checkedin" value="False" class="form-check-input">
+                        <label for="notCheckedIn" class="form-check-label">No</label>
                     </div>
                 </div>
+               </div>
+
 
                 <div class="btn-container">
                     <button type="submit" class="btn btn-primary">Create Student</button>
@@ -137,4 +144,8 @@
             </div>
         </form>
     </div>
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'js/students.js' %}"></script>
 {% endblock %}
