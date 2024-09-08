@@ -14,17 +14,17 @@
     <div class="col d-flex justify-content-start">
       <h4>Today's Schedule</h4>
     </div>
-     {% if messages %}
-            <div>
-                {% for message in messages %}
-                <div class="{% if message.tags %}alert {{ message.tags }}{% endif %}">
-                    {{ message }}
-                </div>
-                {% endfor %}
-            </div>
-            {% endif %}
     <div class="col d-flex justify-content-center">
       <p id="current-date"></p>
+         {% if messages %}
+        <div>
+            {% for message in messages %}
+            <div class="{% if message.tags %}alert {{ message.tags }}{% endif %}">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
     </div>
     <div class="col d-flex justify-content-end">
       <div class="csv-icon">
@@ -46,13 +46,13 @@
       <div class="col-10">
         <div class="activity-row">
           <div class="activity-location">
-            <h6>{{ activity.location }}</h6>
+            <h6>Location: {{ activity.location }}</h6>
           </div>
           <div class="Title">
             <h6>{{ activity.title }}</h6>
           </div>
           <div class="description">
-            <p>{{ activity.description }}</p>
+            <p>Description: {{ activity.description }}</p>
             <!-- Edit and Delete Icons -->
             <div class="action-icons" style="float: right;">
               <a href="{% url 'activities_edit' activity.id %}"><i class="bi bi-pencil" style="margin-left: 15px;"></i></a>
@@ -66,17 +66,18 @@
   {% empty %}
     <p>No activities scheduled for today.</p>
   {% endfor %}
-</div>
-<div class="footer-container">
+  <!-- Pagination controls -->
+    <div class="footer-container">
   <footer class="d-flex justify-content-center align-items-center py-3">
     {% if activities.has_previous %}
-    <a href="?page={{ activities.previous_page_number }}"><i class="bi bi-chevron-left" style="color: #02AEEE;"></i></a>
+    <a href="?page={{ activities.previous_page_number }}"><i class="bi bi-chevron-left" style="color: blue;font-size: 35px;"></i></a>
     {% endif %}
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     {% if activities.has_next %}
-    <a href="?page={{ activities.next_page_number }}"><i class="bi bi-chevron-right" style="color: #02AEEE;"></i></a>
+    <a href="?page={{ activities.next_page_number }}"><i class="bi bi-chevron-right" style="color: blue;font-size: 35px;"></i></a>
     {% endif %}
   </footer>
+</div>
 </div>
 {% endblock %}
 

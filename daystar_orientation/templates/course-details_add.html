@@ -29,7 +29,7 @@
     <h4 style="text-align: center; margin-top: 3vh;">Course Name</h4>
     <h5 style="text-align: flex-start;">Add a member</h5>
     <div class="form-row">
-        <div class="fields"style="margin-bottom: 8vh;">
+        <div class="fields" style="margin-bottom: 8vh;">
             <div class="input-field">
                 <label for="firstName" class="form-label">Name</label>
                 <input type="text" class="form-control" id="firstName" name="first_name" placeholder="First Name" style="width: 300px;">
@@ -39,7 +39,7 @@
                 <input type="text" class="form-control" id="lastName" name="last_name" placeholder="Last Name" style="width: 300px;">
             </div>
         </div>
-        <div class="fields"style="margin-bottom: 8vh;">
+        <div class="fields" style="margin-bottom: 8vh;">
             <div class="input-field">
                 <label for="position" class="form-label">Title/Position</label>
                 <input type="text" class="form-control" id="position" name="title" placeholder="eg. HOD" style="width: 300px;">
@@ -53,7 +53,7 @@
                 </select>
             </div>
         </div>
-        <div class="fields"style="margin-bottom: 8vh;">
+        <div class="fields" style="margin-bottom: 8vh;">
             <div class="input-field">
                 <label for="phoneNumber" class="form-label">Phone Number</label>
                 <input type="text" class="form-control" id="phoneNumber" name="phone_number" placeholder="eg. +2547 12 345 678" style="width: 300px;">
@@ -68,6 +68,9 @@
         <button type="submit" class="btn-primary">Add HOD</button>
     </div>
 </form>
+</div>
+{% endblock %}
 
-            </div>
+{% block extra_js %}
+<script src="{% static 'js/courses.js' %}"></script>
 {% endblock %}
