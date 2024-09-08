@@ -19,7 +19,7 @@ class AccountManager(BaseUserManager):
         '''Create a regular user'''
         if not admission_number:
             raise ValueError('Users must have an admission number')
-        if not email:
+        if not email and user_type != "regular":
             raise ValueError('Users must have an email address')
         if not first_name:
             raise ValueError('Users must have a first name')
@@ -27,6 +27,9 @@ class AccountManager(BaseUserManager):
             raise ValueError('Users must have a last name')
         if not phone_number and user_type != "regular":
             raise ValueError('Users must have a phone number')
+        
+        if not email and user_type == "regular":
+            email = ''
         
         if not phone_number and user_type == "regular":
             phone_number = ""

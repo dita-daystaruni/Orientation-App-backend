@@ -18,6 +18,17 @@ class AccountSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         user = Account.objects.create_user(**validated_data)
         return user
+    
+    def to_representation(self, instance):
+        """
+        Appends request host on the images urls        
+        """
+        representation = super().to_representation(instance)
+        if representation['email'] is None:
+            representation['email'] = ''
+        if representation['phone_number'] == "00000000000":
+            representation['phone_number'] = ''
+        return representation
 
 class ContactSerializer(serializers.ModelSerializer):
     class Meta:
