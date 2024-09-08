@@ -25,8 +25,14 @@ class AccountManager(BaseUserManager):
             raise ValueError('Users must have a first name')
         if not last_name:
             raise ValueError('Users must have a last name')
-        if not phone_number:
+        if not phone_number and user_type != "regular":
             raise ValueError('Users must have a phone number')
+        
+        if not phone_number and user_type == "regular":
+            phone_number = ""
+    
+        if username is None or username == "":
+            username = first_name + last_name
         
         if password is None:
             password = "freshman"
