@@ -58,12 +58,21 @@ class CourseDetail(generics.RetrieveUpdateDestroyAPIView):
 # Web views.
 @login_required
 def hodsdetails_view(request):
-    hods_list = HOD.objects.all().order_by('id')
-    paginator = Paginator(hods_list, 10)
+    search_query = request.GET.get('search', '')
+
+    if search_query:
+        hods_list = HOD.objects.filter(course__name__icontains=search_query).order_by('id')
+    else:
+        hods_list = HOD.objects.all().order_by('id')
+
+    paginator = Paginator(hods_list, 10)  
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
-    return render(request, 'courses-details.html', {'hods': page_obj})
+    return render(request, 'courses-details.html', {
+        'hods': page_obj,
+        'search_query': search_query
+    })
 
 @login_required
 def hodsadd_view(request):

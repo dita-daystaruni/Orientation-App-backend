@@ -9,7 +9,7 @@
 {% endblock %}
 
 {% block content %}
-    <div class="col-md-10" style="display: flex; justify-content: flex-start; flex-direction: column; width: 100vw; height: 100vh; margin-left: 16.67vw; ">
+    <div class="col-md-10" style="display: flex; justify-content: flex-start; flex-direction: column; width: 100vw; height: 100vh; margin-left: 16.67vw;">
         <h1 class="text-center mt-3">Notifications</h1>
 
         {% if messages %}
@@ -37,17 +37,19 @@
             <div class="drop-container">
                 <div class="dropdown">
                     <span class="dropdown-label">Who can see?</span>
-                     <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                          </a>
+                    <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"></a>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
                         <li><input type="checkbox" id="students" name="students"> <label for="students">Students</label></li>
                         <li><input type="checkbox" id="instructors" name="instructors"> <label for="instructors">Instructors</label></li>
                         <li><input type="checkbox" id="admins" name="admins"> <label for="admins">Admins</label></li>
                     </ul>
                 </div>
+                <!-- Error message placeholder -->
+                <div id="error-message" style="color: red; display: none;"></div>
+            </div>
 
             <!-- Submit Button -->
-            <div class="d-flex justify-content-end">
+            <div class="d-flex justify-content-center">
                 <button type="submit" class="btn btn-primary">Add Notification</button>
             </div>
         </form>
@@ -57,4 +59,5 @@
 {% block extra_js %}
     <script src="{% static 'js/initialicons.js' %}"></script>
     <script src="{% static 'js/customdropdown.js' %}"></script>
+    <script src="{% static 'js/notification.js' %}"></script>
 {% endblock %}

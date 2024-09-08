@@ -7,8 +7,12 @@
 }
 
 .col-md-10{
-  width: 83.33%;
+    width: 83.33%;
   margin-left: 16.67%;
+  display: flex ;
+  flex-direction: column;
+  margin-left: 16.67%;
+  overflow-y: auto;
 }
 
 .row{
@@ -89,7 +93,7 @@ main {
 table {
   border-collapse: collapse;
   width: 100%;
-  font-size: 1.5vw;
+  font-size: 1.0vw;
 }
 
 th, td {

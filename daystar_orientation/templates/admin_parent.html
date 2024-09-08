@@ -6,31 +6,34 @@
 
 {% block extra_head %}
 <link rel="stylesheet" href="{% static 'css/admin_parent.css' %}">
+<script src="{% static 'js/form-validation.js' %}" defer></script>
 {% endblock %}
 
 {% block content %}
- <div class="col-md-10">
-     <!-- {% if messages %}
-            <div>
-                {% for message in messages %}
-                <div class="{% if message.tags %}alert {{ message.tags }}{% endif %}">
-                    {{ message }}
-                </div>
-                {% endfor %}
-            </div>
-            {% endif %} -->
-    <form method="POST" action="{% url 'admin_add' %}">
+<div class="col-md-10">
+    <form method="POST" action="{% url 'admin_add' %}" id="studentForm">
         {% csrf_token %}
         <h4 class="d-flex justify-content-center">Parent/G9 Details</h4>
+         {% if messages %}
+        <div>
+            {% for message in messages %}
+            <div class="{% if message.tags %}alert {{ message.tags }}{% endif %}">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+    {% endif %}
         <div class="form-row">
             <div class="fields">
                 <div class="input-field">
-                    <label for="firstName" class="form-label"> Name</label>
+                    <label for="firstName" class="form-label">Name</label>
                     <input type="text" class="form-control" id="firstName" name="first_name" placeholder="First Name" style="width: 300px;">
+                    <small class="error-message" style="color: red; display: none;">First Name is required.</small>
                 </div>
                 <div class="input-field">
                     <label for="lastName" class="form-label">&nbsp;</label>
                     <input type="text" class="form-control" id="lastName" name="last_name" placeholder="Last Name" style="width: 300px;">
+                    <small class="error-message" style="color: red; display: none;">Last Name is required.</small>
                 </div>
             </div>
 
@@ -45,28 +48,31 @@
                         <input type="radio" id="male" name="gender" value="Male" class="form-check-input">
                         <label for="male" class="form-check-label">Male</label>
                     </div>
+                    <small class="error-message" style="color: red; display: none;">Please select a gender.</small>
                 </div>
             </div>
 
             <div class="fields">
-                 <div class="input-field">
+                <div class="input-field">
                     <label for="admissionNumber" class="form-label">Admission Number</label>
                     <input type="text" class="form-control" id="admissionNumber" name="admission_number" placeholder="eg. 24-0001" style="width: 300px;">
-                 </div>
-                 <div class="input-field">
+                    <small class="error-message" style="color: red; display: none;">Admission Number is required.</small>
+                </div>
+                <div class="input-field">
                     <label for="course" class="form-label">Course</label>
                     <select class="form-select" id="course" name="course" style="width: 300px;">
                         {% for course in courses %}
                             <option value="{{ course.name }}">{{ course.name }}</option>
                         {% endfor %}
                     </select>
-                 </div>
+                </div>
             </div>
 
-             <div class="fields">
+            <div class="fields">
                 <div class="input-field">
                     <label for="password" class="form-label">Password</label>
                     <input type="text" class="form-control" id="password" name="password" placeholder="Securepassword254" style="width: 300px;">
+                    <small class="error-message" style="color: red; display: none;">Password is required.</small>
                 </div>
             </div>
 
@@ -74,10 +80,12 @@
                 <div class="input-field">
                     <label for="phoneNumber" class="form-label">Phone Number</label>
                     <input type="text" class="form-control" id="phoneNumber" name="phone_number" placeholder="eg. +2547 12 345 678" style="width: 300px;">
+                    <small class="error-message" style="color: red; display: none;">Phone Number is required.</small>
                 </div>
                 <div class="input-field">
                     <label for="email" class="form-label">Email</label>
                     <input type="email" class="form-control" id="email" name="email" placeholder="name@gmail.com" style="width: 300px;">
+                    <small class="error-message" style="color: red; display: none;">Email field is required.</small>
                 </div>
             </div>
             
@@ -88,22 +96,24 @@
                         <option value="parent">Parent (Orientation Lead)</option>
                         <option value="admin">Admin (G9)</option>
                     </select>
+                    <small class="error-message" style="color: red; display: none;">Please select a user type.</small>
                 </div>
             </div>
 
-             <div class="fields">
-            <div class="input-field">
-                <label for="campus" class="form-label">Campus</label><br>
-                <div class="form-check form-check-inline">
-                    <input type="radio" id="athi-campus" name="campus" value="Athi river" class="form-check-input">
-                    <label for="athi-campus" class="form-check-label">Athi River</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input type="radio" id="nbo-campus" name="campus" value="Nairobi" class="form-check-input">
-                    <label for="nbo-campus" class="form-check-label">Nairobi</label>
+            <div class="fields">
+                <div class="input-field">
+                    <label for="campus" class="form-label">Campus</label><br>
+                    <div class="form-check form-check-inline">
+                        <input type="radio" id="athi-campus" name="campus" value="Athi river" class="form-check-input">
+                        <label for="athi-campus" class="form-check-label">Athi River</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input type="radio" id="nbo-campus" name="campus" value="Nairobi" class="form-check-input">
+                        <label for="nbo-campus" class="form-check-label">Nairobi</label>
+                    </div>
+                    <small class="error-message" style="color: red; display: none;">Please select a campus.</small>
                 </div>
             </div>
-        </div>
         </div>
 
         <div class="btn-container">
@@ -111,4 +121,8 @@
         </div>
     </form>
 </div>
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'js/admin-parent.js' %}"></script>
 {% endblock %}

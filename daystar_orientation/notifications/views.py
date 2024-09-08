@@ -170,7 +170,7 @@ class RegisterDevice(APIView):
 def notifications_view(request):
     notifications = Notification.objects.filter(is_admin_viewer=True).order_by('-created_at')
     
-    paginator = Paginator(notifications, 7) 
+    paginator = Paginator(notifications, 6) 
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     

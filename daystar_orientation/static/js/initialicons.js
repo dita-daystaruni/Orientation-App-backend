@@ -1,5 +1,5 @@
 function getRandomColor() {
-    const colors = ['#D19955', '#317D89'];
+    const colors = ['#D19955', '#317D89', '#6C757D', '#F85A40', '#17A2B8'];
     return colors[Math.floor(Math.random() * colors.length)];
 }
 
@@ -19,8 +19,8 @@ function setInitialsAndColor(notificationItem, name) {
     initialsIcon.style.backgroundColor = getRandomColor();
 }
 
-// Example usage: This will be tied to the Django rendered elements
+// Iterate over all notifications and set initials for each
 document.querySelectorAll('.notification-item').forEach((item) => {
-    const username = item.querySelector('.sender-name').innerText;
+    const username = item.querySelector('.sender-name').textContent;  // Pulling name from backend
     setInitialsAndColor(item, username);
 });

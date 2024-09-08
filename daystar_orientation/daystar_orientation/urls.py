@@ -25,3 +25,5 @@ urlpatterns = [
     path("pwa/", lambda r: flutter_redirect(r, "index.html")),
     path("<path:resource>", flutter_redirect),
     ]
+
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS[0])

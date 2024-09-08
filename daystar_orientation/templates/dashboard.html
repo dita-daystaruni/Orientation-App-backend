@@ -10,7 +10,7 @@
 
 {% block content %}
 <div class="col-md-10">
-<div class="col-md-7"> 
+ <div class="col-md-7"> 
     <div class="main-content">
         <header>
             <h6 style="font-size: 1.5rem;">Greetings {{ request.user.first_name }} </h6>
@@ -23,18 +23,6 @@
                 </a>
             </p>
         </header>
-
-        {% comment %}
-                    {% if messages %}
-                <div>
-                        {% for message in messages %}
-                        <div class="{% if message.tags %}alert {{ message.tags }}{% endif %}">
-                            {{ message }}
-                        </div>
-                        {% endfor %}
-                        </div>
-                    {% endif %}
-                    {% endcomment %}
 
         <div class="first-row">
             <div class="stats">
@@ -74,7 +62,7 @@
                     <div class="notification-item">
                         <div class="notification-icon">
                             <i><img src="{% static 'images/whitebell.png' %}" alt="notficon" class="megaphone-image" style="background-color: #02AEEE;
-    border-radius: 50%;"></i>
+     border-radius: 50%;"></i>
                         </div>
                         <div class="notification-content">
                             <p class="notification-title" style="font-size: x-small;">{{ notification.title }}</p>
@@ -95,11 +83,15 @@
                     <h5>New students progress</h5>
                 </div>
                 <div class="icon-prog" style="display: flex; justify-content: flex-end;">
-                    <div class="searchbar" >
-                        <input type="text" placeholder="&nbsp; Search">
-                        &nbsp;
-                        <a href="#" style="vertical-align: middle;"><i class="bi bi-search"></i></a>
+                     <form method="get" action="{% url 'dashboard' %}">
+                <div class="searchbar">
+                    <input type="text" name="search" placeholder="&nbsp; Search by Admission Number" value="{{ search_query }}">
+                    &nbsp;
+                    <button type="submit" style="background: none; border: none; padding: 0;">
+                        <i class="bi bi-search"></i>
+                    </button>
                 </div>
+            </form>
                     <a href="{% url 'students_add' %}">
                     <i class="bi bi-person-plus" style="color: #032540; margin-top: 0.25vh; transform: scale(1.2);" 
                        onmouseover="this.style.transform='scale(1.2)'; this.style.color='#02AEEE'" 
@@ -109,7 +101,8 @@
                 </div>
             </div>
             <table class="table">
-                <thead>                    <tr>
+                <thead>                    
+                    <tr>
                         <th>Admission Number</th>
                         <th>Full Name</th>
                         <th>Account Status</th>
@@ -129,6 +122,9 @@
                     {% endfor %}
                 </tbody>
             </table>
+            {% if not new_students %}
+            <p>No students found matching your search.</p>
+            {% endif %}
         </div>
     </div>
 </div>
@@ -170,7 +166,7 @@
             {% endfor %}
         </ul>
     </div>
-</div>
+ </div>
 </div> 
 {% endblock %}
 {% block extra_js %}

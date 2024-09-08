@@ -38,7 +38,7 @@ def activities_view(request):
 
     activities = Activity.objects.filter(date=today).order_by('start_time')
 
-    paginator = Paginator(activities, 7)
+    paginator = Paginator(activities, 6)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
@@ -76,7 +76,7 @@ def activitiesadd_view(request):
             new_activity.save()
 
             messages.success(request, 'Activity added successfully.')
-            return redirect('activities')
+            return redirect('activities_add')
         
         except Exception as e:
             messages.error(request, f'An error occurred: {str(e)}')

@@ -79,6 +79,7 @@
   
   .schedule-item .data-time p {
       margin: 0;
+      font-size: 20px;
       text-align: center;
   }
   
@@ -88,7 +89,7 @@
   }
   
   #activity-location {
-      font-size: xx-small;
+      font-size: 18px;
       color: #02AEEE;
   }
   
@@ -99,6 +100,11 @@
   .description {
       font-size: x-small;
       margin-top: 5px; /* Add margin to provide space between Title and description */
+  }
+
+  .description p {
+      font-size: 14px;
+      font-weight: 500;
   }
   
   .data-time {
@@ -114,19 +120,24 @@
     font-size: xx-small;
   }
   
-  .activity-location h6,
-  .Title h6 {
-    font-size: xx-small;
+ .Title h6 {
+    font-size: 16px;
+    font-weight: bold;
   }
   
   .activity-location h6 {
     color: #02AEEE;
+    font-size: 18px;
   }
   
   
   footer a i {
       color: #02AEEE;
       gap: 15px;
+  }
+
+  a{
+    font-size: 15px;
   }
   
   .data-time {
