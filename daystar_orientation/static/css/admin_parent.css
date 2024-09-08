@@ -1,5 +1,7 @@
 .col-md-10{
   display: flex;
+  width: 83.33%;
+  margin-left: 16.67%;
 }
 
 
@@ -57,6 +59,11 @@ form{
   justify-content: center;
   flex-direction: column;
   width: inherit;
+}
+
+.form-row{
+  display: flex;
+  flex-direction: column;
 }
 
 .fields {

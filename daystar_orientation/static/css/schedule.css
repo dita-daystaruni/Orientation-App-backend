@@ -1,13 +1,4 @@
-html, body {
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    width: 100%;
-    color: #032540;
-    font-size: small;
-    background-color: #ffffff;
-  }
-  
+
   .row{
     width: 100%;
   }
@@ -21,74 +12,8 @@ html, body {
   .col-md-2{
     display: flex;
     height: 100vh;
-  }
-  
-  .avtr{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    margin-top: 25px;
-    margin-bottom: 25px;
-    color: #032540;
-  }
-  #user-avatar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: transparent;
-    margin-top: 10px;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-  }
-  
-  .dashicon-class{
-    width: 15px;
-    height: 15px;
-  }
-  
-  .FAQ-class{
-    width: 15px;
-    height: 15px;
-  }
-  
-  .sidenav {
-    display: flex;
-    flex-direction: column;
-    padding: 10px;
-    margin-top: 10px;
-    margin-left: 5px;
-    height: 100vh;
-    overflow: hidden;
-    padding: 0;
-    border-radius: 8px;
-    gap: 10px;
-  }
-  
-  .sidenav a {
-    padding: 8px;
-    font-size: small;
-    justify-content: space-between;
-    color: #032540;
-    text-decoration: none;
-    border-radius: 20px;
-    transition: border-color 0.3s ease-in-out;
-  }
-  
-  .sidenav a:hover {
-    background-color: #ffffff;
-    border: 2px solid #02AEEE; /* Blue border */
-    border-radius: 20px; /* Curved border radius */
-  }
-  
-  .active {
-    background-color: #ffffff;
-    border-radius: 20px;
-    border: 2px solid #02AEEE; /* Blue border for active state */
-  }
-  
+  }  
+ 
   /* Desktop */
   @media (min-width:960px) {
   
