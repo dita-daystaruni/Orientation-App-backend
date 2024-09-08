@@ -73,7 +73,8 @@
                     {% for notification in recent_notifications %}
                     <div class="notification-item">
                         <div class="notification-icon">
-                            <i><img src="{% static 'images/whitebell.png' %}" alt="notficon" class="megaphone-image" style="background-color: #02AEEE;"></i>
+                            <i><img src="{% static 'images/whitebell.png' %}" alt="notficon" class="megaphone-image" style="background-color: #02AEEE;
+    border-radius: 50%;"></i>
                         </div>
                         <div class="notification-content">
                             <p class="notification-title" style="font-size: x-small;">{{ notification.title }}</p>
