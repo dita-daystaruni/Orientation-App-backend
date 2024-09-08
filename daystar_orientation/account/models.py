@@ -29,7 +29,7 @@ class AccountManager(BaseUserManager):
             raise ValueError('Users must have a phone number')
         
         if password is None:
-            password = self.generate_password(admission_number)
+            password = "freshman"
 
         if user_type not in Account.USER_TYPE_CHOICES_DICT:
             raise ValueError(f'Invalid user type: {user_type}. Must be one of {list(Account.USER_TYPE_CHOICES_DICT.keys())}.')

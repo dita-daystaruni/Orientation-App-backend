@@ -55,7 +55,6 @@ class CustomAuthToken(ObtainAuthToken):
 
         user = authenticate(request, admission_number=admission_number, password=password)
 
-
         if user is not None:
             if user.user_type == 'regular' and user.is_first_time_user:
                 return Response({'message': 'First time user, please change your password.'}, status=status.HTTP_412_PRECONDITION_FAILED)
