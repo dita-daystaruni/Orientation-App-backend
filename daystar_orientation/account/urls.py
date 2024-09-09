@@ -1,11 +1,12 @@
 from django.urls import path
 from .views import AccountList, AccountDetail, CustomAuthToken, FirstTimeUserPasswordChangeView, Contacts, StatsView, StatsData, DocumentUploadView, DocumentListView, DocumentDetailView, login_view, dashboard_view, studentsadd_view, studentedit_view, studentsdetails_view, delete_student, logout_view, G9_view
-from .views import ResetPasswordView, ParseFreshMen
+from .views import ResetPasswordView, ParseFreshMen, ResetAllFreshmenPassword
 
 
 urlpatterns = [
     path('accounts/', AccountList.as_view(), name='account-list'),
     path('password-change/', ResetPasswordView.as_view(), name="resetpassword"),
+    path('password-reset-freshmen/', ResetAllFreshmenPassword.as_view(), name="freshmenresetpassword"),
     path('parse-freshmen/', ParseFreshMen.as_view(), name="parse_freshmen"),
     path('accounts/<int:pk>/', AccountDetail.as_view(), name='account-detail'),
     path('login/', CustomAuthToken.as_view(), name='login'),
