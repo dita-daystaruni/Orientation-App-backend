@@ -70,6 +70,21 @@ class ResetPasswordView(APIView):
                     return Response({'message': 'Password changed successfully.'}, status=status.HTTP_200_OK)        
         except Account.DoesNotExist:
             return Response({'message': 'Invalid admission number or Admission Number'}, status=status.HTTP_400_BAD_REQUEST)
+        
+class ResetAllFreshmenPassword(APIView):
+    """
+    View Reset a list of userspassword
+    """
+    def put(self, request, *args, **kwargs):
+        """
+        Resets All Freshmen Password
+        """
+        freshmen = Account.objects.filter(user_type="regular")
+        for freshman in freshmen:
+            freshman.set_password("freshman")
+            freshman.is_first_time_user = True
+            freshman.save()
+        return Response({'message': 'Reset Of All Passwords Was Successful'}, status=status.HTTP_200_OK)  
 
 
 class CustomAuthToken(ObtainAuthToken):
